@@ -11,10 +11,12 @@ namespace Bradley.AlienArk
         float jumpFprce = 6, fallMultiplyer = 3, lowJumpMultiplyer = 2;
         int numBait = 5;
         bool crouching = false;
+        bool climbing = false;
 
         protected override void init()
         {
             base.init();
+            bait = Resources.Load<GameObject>("Prefabs/bait");
         }
 
         // Use this for initialization
@@ -26,18 +28,23 @@ namespace Bradley.AlienArk
         // Update is called once per frame
         void Update()
         {
+            DropBait();
             Jump();
             Crouch();
+            Climb();
             Move(Input.GetAxis("Horizontal"), !crouching);
         }
 
-        //===============================================================================================================================================================================
+//===============================================================================================================================================================================
         private void Jump()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && m_grounded)
+            Debug.Log("grounded: " + m_grounded + "/nClimbing: " + climbing);
+            if (Input.GetKeyDown(KeyCode.Space) && (m_grounded || climbing))
             {
+                m_rigidbody.gravityScale = 1;
                 m_rigidbody.velocity += Vector2.up * jumpFprce;
                 m_grounded = false;
+                climbing = false;
             }
 
             if (!m_grounded && m_rigidbody.velocity.y < 0)
@@ -55,7 +62,7 @@ namespace Bradley.AlienArk
         {
             if (Input.GetAxis("Crouch") > 0)
             {
-                if (!crouching)
+                if (!crouching && m_grounded && !climbing)
                 {
                     GetComponent<BoxCollider2D>().enabled = false;
                     GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Player_Crouched");
@@ -70,6 +77,34 @@ namespace Bradley.AlienArk
                     GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Player_Standard");
                     crouching = false;
                 }
+            }
+        }
+
+//================================================================================================================================================================================
+        private void Climb()
+        {
+            if (climbing && !crouching)
+            {
+                float input = Input.GetAxis("Climb");
+                if (input != 0)
+                {
+                    m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, Mathf.Clamp(input, 0, 1) * m_runSpeed);
+                }
+                else
+                {
+                    m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, m_rigidbody.velocity.y * (1 - 10 * Time.deltaTime));
+                }
+            }
+        }
+
+//================================================================================================================================================================================
+        private void DropBait()
+        {
+            if (numBait > 0 && Input.GetKeyDown(KeyCode.F))
+            {
+                CircleCollider2D collider = GetComponent<CircleCollider2D>();
+                Instantiate(bait, (Vector2)transform.position + collider.offset + new Vector2(collider.radius, -collider.radius - 0.1f), Quaternion.identity, null);
+                numBait--;
             }
         }
 
@@ -91,11 +126,33 @@ namespace Bradley.AlienArk
             }
         }
 
+//===============================================================================================================================================================================
         protected override bool IsGrounded()
         {
             CircleCollider2D boxCollider = GetComponent<CircleCollider2D>();
             return Physics2D.Raycast((Vector2)transform.position + boxCollider.offset - new Vector2(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground")) ||
                 Physics2D.Raycast((Vector2)transform.position + boxCollider.offset - new Vector2(-boxCollider.bounds.extents.x, boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         }
+
+//===============================================================================================================================================================================
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Climbable"))
+            {
+                m_rigidbody.gravityScale = 0;
+                climbing = true;
+            }
+        }
+
+//===============================================================================================================================================================================
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Climbable"))
+            {
+                m_rigidbody.gravityScale = 1;
+                climbing = false;
+            }
+        }
     }
+
 }

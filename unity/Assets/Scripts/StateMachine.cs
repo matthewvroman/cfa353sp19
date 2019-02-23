@@ -15,6 +15,14 @@ namespace Bradley.AlienArk
 			}
 		}
 
+        T m_controller;
+        public T controller
+        {
+            get
+            {
+                return m_controller;
+            }
+        }
 
 		public void SetState(State<T> newState)
 		{
