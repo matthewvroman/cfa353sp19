@@ -35,14 +35,13 @@ namespace Bradley.AlienArk
 			}
 			else
 			{
-				GetTarget().collider.GetComponent<Bait>().EatBait(m_stateMachine.controller.baitEatingSpeed * Time.deltaTime);
+				GetTarget().GetComponent<Bait>().EatBait(m_stateMachine.controller.baitEatingSpeed * Time.deltaTime);
 			}
 		}
 
-		private RaycastHit2D GetTarget()
+		private Collider2D GetTarget()
 		{
-			return Physics2D.CircleCast(m_stateMachine.controller.transform.position, m_stateMachine.controller.NEAR_PATROL_POINT, 
-				m_stateMachine.controller.GetTargetDirection(), m_stateMachine.controller.NEAR_PATROL_POINT, LayerMask.GetMask("Bait"));
+			return Physics2D.OverlapCircle(m_stateMachine.controller.transform.position, m_stateMachine.controller.NEAR_PATROL_POINT, LayerMask.GetMask("Bait"));
 		}
 	}
 }

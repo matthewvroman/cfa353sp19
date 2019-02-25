@@ -33,7 +33,6 @@ namespace Bradley.AlienArk
 		{
 			levelLength = Mathf.Abs(endOfLevel.position.x - startOfLevel.position.x);
 			miniMapLength = transform.Find("Map Background").GetComponent<RectTransform>().sizeDelta.x - player.sizeDelta.x;
-			Debug.Log("minimapLength is " + miniMapLength + ", Level length is " + levelLength);
 		}
 
 		private void UpdatePlayerPosition(Vector3 pos)

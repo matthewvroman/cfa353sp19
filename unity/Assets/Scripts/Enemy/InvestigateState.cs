@@ -26,6 +26,7 @@ namespace Bradley.AlienArk
 		{
 			if (m_stateMachine.controller.IsNearPoint(searchPoint))
 			{
+				Debug.Log("Entering Search State");
 				m_stateMachine.SetState(new SearchState(m_stateMachine, searchPoint));
 			}
 			else

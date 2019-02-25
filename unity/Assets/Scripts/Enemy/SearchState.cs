@@ -6,12 +6,12 @@ namespace Bradley.AlienArk
 {
 	public class SearchState : State<Enemy>
 	{
-		static float SearchDuration = 5;
+		static float SearchDuration = 8;
 		float searchTimer;
 		Vector3 searchPoint;
 		Vector3 patrolPoint;
 		float paceDistance = 3;
-		int moveDir;
+		int moveDir = 1;
 
 
 		public SearchState(StateMachine<Enemy> machine, Vector3 target): base (machine) 
@@ -45,13 +45,15 @@ namespace Bradley.AlienArk
 				}
 				else
 				{
-					m_stateMachine.controller.Move(moveDir, true);
+					Debug.Log("Moving towards search Point");
+					m_stateMachine.controller.Move(moveDir, false);
 				}
 			}
 		}
 
 		private void RandomSearchPoint()
 		{
+			Debug.Log("Seting up random search point");
 			moveDir *= -1;
 			patrolPoint = searchPoint + new Vector3(Random.Range(0,moveDir*paceDistance),0,0);
 		}
