@@ -47,12 +47,10 @@ namespace Bradley.AlienArk
             m_sight = GetComponentInChildren<EnemySightDetection>();
             NearPatrolPoint += m_boxCollider.bounds.extents.x;
             attackRange += m_boxCollider.bounds.extents.x;
-            Debug.Log("Near Patrol Point: " + NearPatrolPoint);
         }
 
         public virtual void TargetSpotted(Transform Target)
         {
-            Debug.Log("Enemy has spotted target");
             EnemyTarget possibleTarget = Target.GetComponent<EnemyTarget>();
             if (m_target == null || (possibleTarget != null && possibleTarget.GetPriority() > m_target.GetComponent<EnemyTarget>().GetPriority()))
             {
@@ -89,6 +87,14 @@ namespace Bradley.AlienArk
         {
             Vector3 dir = targetPosition - transform.position;
             return !Physics2D.Raycast(transform.position, dir, dir.magnitude, LayerMask.GetMask("Ground"));
+        }
+
+        public void AlertEnemy(Vector3 searchPoint)
+        {
+            if (m_stateMachine.currentState.CompareState("PatrolState") || m_stateMachine.currentState.CompareState("InvestigateState"))
+            {
+                m_stateMachine.SetState(new InvestigateState(m_stateMachine, searchPoint));
+            }
         }
 
     }

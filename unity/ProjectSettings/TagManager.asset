@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Climbable
+  - Hideable
   layers:
   - Default
   - TransparentFX
@@ -16,12 +17,12 @@ TagManager:
   - 
   - 
   - Player
+  - Physics
   - Ground
   - Bait
   - Enemy
+  - Enemy Detection
   - Juvinile
-  - 
-  - 
   - 
   - 
   - 
@@ -42,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 118109851
     locked: 0

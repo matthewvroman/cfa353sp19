@@ -45,20 +45,17 @@ namespace Bradley.AlienArk
 			{
 				if (bait)
 				{
-					Debug.Log("Entering Eat Bait state");
 					m_stateMachine.SetState(new EatBaitState(m_stateMachine));
 					m_stateMachine.controller.rigidbody.velocity = Vector3.zero;
 				}
 				else
 				{
-					Debug.Log("Entering Attack State");
 					m_stateMachine.controller.EnterAttackState();
 				}
 			}
 			else if (distance >= m_stateMachine.controller.dectectionRange || m_stateMachine.controller.IsNextToCliff(dir) || !m_stateMachine.controller.IsReachable(targetPos))
 			{
 				m_stateMachine.SetState(new InvestigateState(m_stateMachine, m_stateMachine.controller.target.position));
-				Debug.Log("Exiting chase state due to the target getting to far away");
 			}
 			else
 			{

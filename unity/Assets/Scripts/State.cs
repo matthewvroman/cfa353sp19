@@ -26,5 +26,10 @@ namespace Bradley.AlienArk
 		{
 			
 		}
+
+		public bool CompareState(string stateName)
+		{
+			return this.name == stateName;
+		}
 	}
 }

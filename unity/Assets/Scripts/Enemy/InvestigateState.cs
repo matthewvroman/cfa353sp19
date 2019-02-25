@@ -32,12 +32,10 @@ namespace Bradley.AlienArk
 			{
 				if (m_stateMachine.controller.IsNextToCliff(moveDir) || !m_stateMachine.controller.IsReachable(searchPoint))
 				{
-					Debug.Log("Can't reach search point and will return to patrol");
 					m_stateMachine.SetState(new PatrolState(m_stateMachine));
 				}
 				else
 				{
-					Debug.Log("Moving to investigate");
 					m_stateMachine.controller.Move(Mathf.Sign((searchPoint - m_stateMachine.controller.transform.position).x),true);
 				}
 			}
