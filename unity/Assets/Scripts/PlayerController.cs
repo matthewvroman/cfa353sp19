@@ -7,6 +7,7 @@ namespace Bradley.AlienArk
     public class PlayerController :  Creature
     {
         GameObject bait;
+        CircleCollider2D circleCollider;
         [SerializeField]
         float jumpFprce = 6, fallMultiplyer = 3, lowJumpMultiplyer = 2;
         int numBait = 5;
@@ -17,6 +18,7 @@ namespace Bradley.AlienArk
         {
             base.init();
             bait = Resources.Load<GameObject>("Prefabs/bait");
+            circleCollider = GetComponent<CircleCollider2D>();
         }
 
         // Use this for initialization
@@ -38,7 +40,6 @@ namespace Bradley.AlienArk
 //===============================================================================================================================================================================
         private void Jump()
         {
-            Debug.Log("grounded: " + m_grounded + "/nClimbing: " + climbing);
             if (Input.GetKeyDown(KeyCode.Space) && (m_grounded || climbing))
             {
                 m_rigidbody.gravityScale = 1;
@@ -65,7 +66,7 @@ namespace Bradley.AlienArk
                 if (!crouching && m_grounded && !climbing)
                 {
                     GetComponent<BoxCollider2D>().enabled = false;
-                    GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Player_Crouched");
+                    m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouched");
                     crouching = true;
                 }
             }
@@ -74,7 +75,7 @@ namespace Bradley.AlienArk
                 if (crouching)
                 {
                     GetComponent<BoxCollider2D>().enabled = true;
-                    GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Player_Standard");
+                    m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Standard");
                     crouching = false;
                 }
             }
@@ -111,7 +112,7 @@ namespace Bradley.AlienArk
 //===============================================================================================================================================================================
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground") && IsGrounded())
+            if (collision.gameObject.CompareTag("Ground") && IsGrounded(circleCollider))
             {
                 m_grounded = true;
             }
@@ -120,18 +121,10 @@ namespace Bradley.AlienArk
 //===============================================================================================================================================================================
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground") && !IsGrounded())
+            if (collision.gameObject.CompareTag("Ground") && !IsGrounded(circleCollider))
             {
                 m_grounded = false;
             }
-        }
-
-//===============================================================================================================================================================================
-        protected override bool IsGrounded()
-        {
-            CircleCollider2D boxCollider = GetComponent<CircleCollider2D>();
-            return Physics2D.Raycast((Vector2)transform.position + boxCollider.offset - new Vector2(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground")) ||
-                Physics2D.Raycast((Vector2)transform.position + boxCollider.offset - new Vector2(-boxCollider.bounds.extents.x, boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         }
 
 //===============================================================================================================================================================================

@@ -6,7 +6,12 @@ namespace Bradley.AlienArk
 {
 	public class State<T> : MonoBehaviour 
 	{
-		StateMachine<T> m_stateMachine;
+		protected StateMachine<T> m_stateMachine;
+
+		public State(StateMachine<T> machine)
+		{
+			m_stateMachine = machine;
+		}
 		public virtual void OnEnter()
 		{
 
