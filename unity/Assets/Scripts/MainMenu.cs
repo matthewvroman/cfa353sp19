@@ -7,13 +7,13 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame ()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level Select");
     }
 	
     public void QuitGame ()
     {
         Debug.Log("Quit!");
-        //Application.Quit(); *Uncomment this if you actually want the game to quit*
+        Application.Quit(); //*Uncomment this if you actually want the game to quit*
     }
 
 }

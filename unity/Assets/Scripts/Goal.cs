@@ -32,7 +32,7 @@ namespace Bradley.AlienArk
 		{
 			if (other.CompareTag("Player"))
 			{
-				Debug.Log("Completed Level");
+				GameManager.instance.CompletedLevel();
 				LevelComplete();
 			}
 		}

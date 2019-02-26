@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 303927012}
   - component: {fileID: 303927011}
   - component: {fileID: 303927010}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fallen Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4331,7 +4331,7 @@ GameObject:
   - component: {fileID: 1498152600}
   - component: {fileID: 1498152599}
   - component: {fileID: 1498152598}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Machinery
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -25,11 +25,12 @@ namespace Bradley.AlienArk
 
 		void OnCollisionEnter2D(Collision2D other)
 		{
-			if (m_rigidbody.velocity.y < -0.1f)
+			if (other.gameObject.layer == 10)
 			{
-				Debug.Log("y velocity: " + m_rigidbody.velocity.y);
-				KillPlayer(other.gameObject);
+				Destroy(gameObject);
+				return;
 			}
+			KillPlayer(other.gameObject);
 		}
 	}
 }

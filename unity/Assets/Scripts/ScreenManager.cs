@@ -41,7 +41,7 @@ namespace Bradley.AlienArk
 		public void ReturnToLevelSelect()
 		{
 			PauseGame(1);
-			Debug.Log("Return to level select");
+			SceneManager.LoadScene("Level Select");
 		}
 
 		public void ReturnToGame(GameObject menu)
