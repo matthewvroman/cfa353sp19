@@ -13,6 +13,7 @@ namespace Bradley.AlienArk
         BoxCollider2D detectionBox;
         [SerializeField]
         float jumpFprce = 6, fallMultiplyer = 3, lowJumpMultiplyer = 2;
+        bool collectedEgg = false;
         int numBait = 5;
         bool crouching = false;
         bool climbing = false;
@@ -25,6 +26,16 @@ namespace Bradley.AlienArk
             bait = Resources.Load<GameObject>("Prefabs/bait");
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        }
+
+        void OnEnable()
+        {
+            Egg.EggCollected += CollectedEgg;
+        }
+
+        void OnDisable()
+        {
+            Egg.EggCollected -= CollectedEgg;
         }
 
         // Use this for initialization
@@ -76,7 +87,15 @@ namespace Bradley.AlienArk
                 if (!crouching && m_grounded && !climbing)
                 {
                     m_boxCollider.enabled = false;
-                    m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouched");
+                    if (collectedEgg)
+                    {
+                        m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouching_Egg");
+                    }
+                    else
+                    {
+                        m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouched");
+                    }
+                    
                     if (canHide)
                     {
                         Hide(true);
@@ -89,7 +108,14 @@ namespace Bradley.AlienArk
                 if (crouching)
                 {
                     m_boxCollider.enabled = true;
-                    m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Standard");
+                    if (collectedEgg)
+                    {
+                        m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Egg");
+                    }
+                    else
+                    {
+                        m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Standard");
+                    }
                     Hide(false);
                     crouching = false;
                 }
@@ -122,7 +148,6 @@ namespace Bradley.AlienArk
 //================================================================================================================================================================================
         private void Hide(bool value)
         {
-            Debug.Log("Hiding");
             detectionBox.enabled = !value;
             if (value)
             {
@@ -147,15 +172,31 @@ namespace Bradley.AlienArk
             }
         }
 
+//================================================================================================================================================================================
+        private void CollectedEgg()
+        {
+            collectedEgg = true;
+            if (crouching)
+            {
+                m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouching_Egg");
+            }
+            else
+            {
+                m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Egg");
+            }
+            
+        }
+
 //===============================================================================================================================================================================
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground") && IsGrounded(circleCollider))
+            if (IsGrounded(circleCollider))
             {
                 m_grounded = true;
             }
-            else if (collision.gameObject.GetComponent<Enemy>())
+            if (collision.gameObject.GetComponent<Enemy>())
             {
+                Debug.Log("Collided with Enemy and the player is now dying");
                 PlayerDied();
             }
         }
@@ -163,7 +204,7 @@ namespace Bradley.AlienArk
 //===============================================================================================================================================================================
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground") && !IsGrounded(circleCollider))
+            if (!IsGrounded(circleCollider))
             {
                 m_grounded = false;
             }
@@ -184,7 +225,6 @@ namespace Bradley.AlienArk
                 {
                     Hide(true);
                 }
-                Debug.Log("can hide is " + canHide);
             }
         }
 
@@ -203,7 +243,6 @@ namespace Bradley.AlienArk
                 {
                     Hide(false);
                 }
-                Debug.Log("Can Hide is " + canHide);
             }
         }
     }

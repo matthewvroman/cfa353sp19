@@ -33,7 +33,6 @@ namespace Bradley.AlienArk
 					float pos = m_collider.bounds.extents.x;
 					random = Random.Range(-pos, pos);
 				}
-				Debug.Log("index: " + i);
 				Instantiate(obstacle, spawningPosition.position + new Vector3(random,0,0), Quaternion.identity, null);
 			}
 		}

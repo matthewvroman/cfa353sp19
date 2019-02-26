@@ -18,7 +18,7 @@ namespace Bradley.AlienArk
 
 		void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.CompareTag("Player"))
+			if (other.GetComponent<PlayerController>())
 			{
 				UpdateMapPosition(false, transform.position);
 				EggCollected();

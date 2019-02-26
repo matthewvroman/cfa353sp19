@@ -45,7 +45,6 @@ namespace Bradley.AlienArk
 				}
 				else
 				{
-					Debug.Log("Moving towards search Point");
 					m_stateMachine.controller.Move(moveDir, false);
 				}
 			}
@@ -53,7 +52,6 @@ namespace Bradley.AlienArk
 
 		private void RandomSearchPoint()
 		{
-			Debug.Log("Seting up random search point");
 			moveDir *= -1;
 			patrolPoint = searchPoint + new Vector3(Random.Range(0,moveDir*paceDistance),0,0);
 		}

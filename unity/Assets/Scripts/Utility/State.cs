@@ -29,7 +29,6 @@ namespace Bradley.AlienArk
 
 		public bool CompareState(string stateName)
 		{
-			Debug.Log("This state is " + this.GetType().ToString());
 			stateName = "Bradley.AlienArk." + stateName;
 			return this.GetType().ToString() == stateName;
 		}

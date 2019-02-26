@@ -13,9 +13,9 @@ namespace Bradley.AlienArk
         public AudioClip clip;
 
         [Range(0f,1f)]
-        public float volume = 1;
+        public float volume;
         [Range(0f, 3f)]
-        public float pitch = 1;
+        public float pitch;
 
         public bool loop = false;
 
