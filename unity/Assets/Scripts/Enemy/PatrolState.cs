@@ -6,13 +6,11 @@ namespace Bradley.AlienArk
 {
     public class PatrolState : State<Enemy>
     {
-        int patrolIndex = 0;
-        int patrolDir = 1;
-        int moveDir = 1;
+        int patrolIndex = 0, patrolDir = 1, moveDir;
+        bool waiting = false;
+        float waitTimer;
 
-        public PatrolState(StateMachine<Enemy> machine): base(machine) {}
-
-        public override void OnEnter()
+        public PatrolState(StateMachine<Enemy> machine): base(machine) 
         {
             float distance = 1000;
             foreach (Transform t in m_stateMachine.controller.patrolRoute)
@@ -27,9 +25,13 @@ namespace Bradley.AlienArk
             moveDir = m_stateMachine.controller.GetMoveDirection(m_stateMachine.controller.patrolRoute[patrolIndex].position);
         }
 
-        public override void OnExit()
+        public override void OnEnter()
         {
-            //Nothing to Do
+            if (m_stateMachine.controller.stateIndicator != null)
+            {
+                GameObject.Destroy(m_stateMachine.controller.stateIndicator);
+                m_stateMachine.controller.stateIndicator = null;
+            }
         }
 
         public override void OnUpdate()
@@ -37,6 +39,15 @@ namespace Bradley.AlienArk
             if (m_stateMachine.controller.IsNearPoint(m_stateMachine.controller.patrolRoute[patrolIndex].position))
             {
                 UpdatePatrol();
+            }
+            else if (waiting)
+            {
+                Debug.Log("Waiting");
+                waitTimer -= Time.deltaTime;
+                if (waitTimer <= 0)
+                {
+                    waiting = false;
+                }
             }
             else
             {
@@ -47,18 +58,23 @@ namespace Bradley.AlienArk
         private void UpdatePatrol()
         {
             patrolIndex += patrolDir;
-            if (patrolIndex >= m_stateMachine.controller.patrolRoute.Count)
+            if (patrolIndex >= m_stateMachine.controller.patrolRoute.Count || patrolIndex < 0)
             {
-                patrolDir = -1;
-                patrolIndex += patrolDir*2;
-            }
-            else if (patrolIndex < 0)
-            {
-                patrolDir = 1;
+                patrolDir *= -1;
                 patrolIndex += patrolDir*2;
             }
 
             moveDir = m_stateMachine.controller.GetMoveDirection(m_stateMachine.controller.patrolRoute[patrolIndex].position);
+
+            m_stateMachine.SetState(new WaitState(m_stateMachine, this));
         }
+
+        public override void CollisionEntered(Collision2D collision)
+		{
+			if (collision.gameObject.GetComponent<PlayerController>())
+			{
+				m_stateMachine.controller.AlertEnemy(collision.contacts[0].point);
+			}
+		}
     }
 }

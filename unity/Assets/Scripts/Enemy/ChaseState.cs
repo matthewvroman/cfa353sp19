@@ -6,11 +6,13 @@ namespace Bradley.AlienArk
 {
 	public class ChaseState : State<Enemy> 
 	{
-		bool bait = false;
+		bool bait = false, initialized = false;
 		float withinRange;
-		public ChaseState(StateMachine<Enemy> machine, Transform Target) : base(machine) 
+
+
+		public ChaseState(StateMachine<Enemy> machine, Transform target) : base(machine) 
 		{
-			m_stateMachine.controller.target = Target;
+			m_stateMachine.controller.target = target;
 		}
 
 		public override void OnEnter()
@@ -18,6 +20,7 @@ namespace Bradley.AlienArk
 			if (m_stateMachine.controller.target == null)
 			{
 				m_stateMachine.SetState(new PatrolState(m_stateMachine));
+				return;
 			}
 
 			if (m_stateMachine.controller.target.GetComponent<Bait>())
@@ -29,11 +32,24 @@ namespace Bradley.AlienArk
 			{
 				withinRange = m_stateMachine.controller.attackRange;
 			}
+			m_stateMachine.controller.CreateStateIndicator("Chase");
+			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
+			if (!initialized)
+			{
+				m_stateMachine.SetState(new WaitState(m_stateMachine, this));
+			}
 		}
 
 		public override void OnExit()
 		{
-			
+			if (initialized)
+			{
+				GameObject.Destroy(m_stateMachine.controller.stateIndicator);
+			}
+			else
+			{
+				initialized = true;
+			}
 		}
 
 		public override void OnUpdate()
@@ -46,26 +62,32 @@ namespace Bradley.AlienArk
 				if (bait)
 				{
 					m_stateMachine.SetState(new EatBaitState(m_stateMachine));
-					m_stateMachine.controller.rigidbody.velocity = Vector3.zero;
+					m_stateMachine.controller.Rigidbody.velocity = Vector3.zero;
 				}
 				else
 				{
 					m_stateMachine.controller.EnterAttackState();
 				}
 			}
-			else if (distance >= m_stateMachine.controller.dectectionRange || m_stateMachine.controller.IsNextToCliff(dir) || !m_stateMachine.controller.IsReachable(targetPos))
+			else if (distance >= m_stateMachine.controller.dectectionRange || !m_stateMachine.controller.IsReachable(targetPos))
 			{
 				m_stateMachine.SetState(new InvestigateState(m_stateMachine, m_stateMachine.controller.target.position));
 			}
 			else
 			{
-				if (!m_stateMachine.controller.IsNextToCliff(dir))
-				{
-					m_stateMachine.controller.Move(dir, true);
-				}
+				m_stateMachine.controller.Move(dir, true);
 			}
 		}
 
-
+		public override void CollisionEntered(Collision2D collision)
+		{
+			if (collision.gameObject.GetComponent<PlayerController>())
+			{
+				if (m_stateMachine.controller.HeadOnCollision(collision))
+				{
+					PlayerController.PlayerDied();	
+				}
+			}
+		}
 	}
 }

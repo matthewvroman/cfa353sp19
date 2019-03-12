@@ -11,7 +11,7 @@ namespace Bradley.AlienArk
     public class Creature : MonoBehaviour
     {
         protected Rigidbody2D m_rigidbody;
-        public Rigidbody2D rigidbody
+        public Rigidbody2D Rigidbody
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Bradley.AlienArk
             }
         }
         protected SpriteRenderer m_spriteRenderer;
-        public SpriteRenderer spriteRenderer
+        public SpriteRenderer SpriteRenderer
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Bradley.AlienArk
             }
         }
         protected BoxCollider2D m_boxCollider;
-        public BoxCollider2D boxCollider
+        public BoxCollider2D BoxCollider
         {
             get
             {
@@ -58,18 +58,23 @@ namespace Bradley.AlienArk
             ApplyMovement(input, speed);
         }
 
+        public void CheckOrientation(float direction)
+        {
+            if ((m_facingRight && direction < 0) || (!m_facingRight && direction > 0))            
+            {
+                SwitchOrientation();
+            }
+        }
+
+        public void SwitchOrientation()
+        {
+            transform.localScale = new Vector3(-1*transform.localScale.x,transform.localScale.y,0);
+            m_facingRight = !m_facingRight;
+        }
+
         public virtual void ApplyMovement(float input, float speed)
         {
-            if (m_facingRight && input < 0)
-            {
-                transform.localScale = new Vector3(-1*transform.localScale.x,transform.localScale.y,0);
-                m_facingRight = false;
-            }
-            else if (!m_facingRight && input > 0)
-            {
-                transform.localScale = new Vector3(-1*transform.localScale.x,transform.localScale.y,0);
-                m_facingRight = true;
-            }
+            CheckOrientation(input);
 
             if (input != 0)
             {
@@ -86,7 +91,12 @@ namespace Bradley.AlienArk
             m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x * (1 - 10 * Time.fixedDeltaTime), m_rigidbody.velocity.y);
         }
 
-        protected virtual bool IsGrounded(Collider2D collider)
+        public void Stop()
+        {
+            m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y);
+        }
+
+        public virtual bool IsGrounded(Collider2D collider)
         {
             return Physics2D.Raycast((Vector2)transform.position + collider.offset - new Vector2(collider.bounds.extents.x, collider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground")) ||
                 Physics2D.Raycast((Vector2)transform.position + collider.offset - new Vector2(-collider.bounds.extents.x, collider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));

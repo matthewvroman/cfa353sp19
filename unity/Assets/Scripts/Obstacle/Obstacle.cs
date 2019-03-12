@@ -14,7 +14,7 @@ namespace Bradley.AlienArk
 		{
 			if (!GetComponent<Collider2D>())
 			{
-				BoxCollider2D temp = gameObject.AddComponent<BoxCollider2D>();
+				gameObject.AddComponent<BoxCollider2D>();
 			}
 			m_collider = GetComponent<Collider2D>();
 			m_spriteRenderer = GetComponent<SpriteRenderer>();

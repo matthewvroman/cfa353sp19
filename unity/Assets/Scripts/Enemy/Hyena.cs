@@ -22,5 +22,10 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.SetState(new ChargeState(m_stateMachine));
 		}
+
+		private void OnCollisionEnter2D(Collision2D other) 
+		{
+			m_stateMachine.CollisionEntered(other);
+		}
 	}
 }

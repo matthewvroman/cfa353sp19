@@ -6,7 +6,8 @@ namespace Bradley.AlienArk
 {
 	public class AlarmObstacle : Obstacle
 	{
-		public float alarmRange = 5;
+		public float alarmRange = 10;
+		private PlayerController player;
 
 		public override void init()
 		{
@@ -22,19 +23,27 @@ namespace Bradley.AlienArk
 
 		void OnTriggerEnter2D(Collider2D other)
 		{
-			PlayerController player = other.GetComponent<PlayerController>();
-			if (player != null)
+			player = other.GetComponent<PlayerController>();
+			if (player != null && !player.IsCrouching())
 			{
-				float radius = alarmRange;
-				if (player.IsCrouching())
-				{
-					radius /= 2;
-				}
-				Collider2D[] results = Physics2D.OverlapCircleAll(other.transform.position, radius, LayerMask.GetMask("Enemy"));
-				for (int i = 0; i < results.Length; i++)
-				{
-					results[i].GetComponent<Enemy>().AlertEnemy(other.transform.position);
-				}
+				AlertEnemies(alarmRange, other.transform.position);
+			}
+		}
+
+		private void OnTriggerStay2D(Collider2D other) 
+		{
+			if (player != null && other.CompareTag(player.tag) && Mathf.Abs(player.Rigidbody.velocity.x) > 0 && !player.IsCrouching())
+			{
+				AlertEnemies(alarmRange, other.transform.position);
+			}
+		}
+
+		private void AlertEnemies(float radius, Vector2 position)
+		{
+			Collider2D[] results = Physics2D.OverlapCircleAll(position, radius, LayerMask.GetMask("Enemy"));
+			for (int i = 0; i < results.Length; i++)
+			{
+				results[i].GetComponent<Enemy>().AlertEnemy(position);
 			}
 		}
 	}

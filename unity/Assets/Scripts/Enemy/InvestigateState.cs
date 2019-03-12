@@ -8,6 +8,8 @@ namespace Bradley.AlienArk
 	{
 		Vector3 searchPoint;
 		int moveDir = 1;
+		bool initialized = false;
+
 		public InvestigateState(StateMachine<Enemy> machine, Vector3 point) : base(machine) 
 		{
 			searchPoint = point;
@@ -15,11 +17,27 @@ namespace Bradley.AlienArk
 		public override void OnEnter()
 		{
 			moveDir = m_stateMachine.controller.GetMoveDirection(searchPoint);
+			m_stateMachine.controller.CheckOrientation(moveDir);
+			m_stateMachine.controller.target = null;
+			m_stateMachine.controller.CreateStateIndicator("Investigate");
+			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
+			if (!initialized)
+			{
+				m_stateMachine.SetState(new WaitState(m_stateMachine, this));
+			}
 		}
 
-		public override void OnExit()
+		public override void OnExit() 
 		{
-			
+			if (initialized)
+			{
+				GameObject.Destroy(m_stateMachine.controller.stateIndicator);
+				m_stateMachine.controller.stateIndicator = null;
+			}
+			else
+			{
+				initialized = true;
+			}
 		}
 
 		public override void OnUpdate()
@@ -30,14 +48,23 @@ namespace Bradley.AlienArk
 			}
 			else
 			{
-				if (m_stateMachine.controller.IsNextToCliff(moveDir) || !m_stateMachine.controller.IsReachable(searchPoint))
+				moveDir = m_stateMachine.controller.GetMoveDirection(searchPoint);
+				if (!m_stateMachine.controller.IsReachable(searchPoint))
 				{
 					m_stateMachine.SetState(new PatrolState(m_stateMachine));
 				}
 				else
 				{
-					m_stateMachine.controller.Move(Mathf.Sign((searchPoint - m_stateMachine.controller.transform.position).x),true);
+					m_stateMachine.controller.Move(moveDir, true);
 				}
+			}
+		}
+
+		public override void CollisionEntered(Collision2D collision)
+		{
+			if (collision.gameObject.GetComponent<PlayerController>())
+			{
+				m_stateMachine.controller.AlertEnemy(collision.contacts[0].point);
 			}
 		}
 	}

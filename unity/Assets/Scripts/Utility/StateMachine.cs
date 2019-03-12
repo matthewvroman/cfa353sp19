@@ -15,7 +15,7 @@ namespace Bradley.AlienArk
             }
         }
 
-        State<T> m_currentState;
+        State<T> m_currentState = null;
         public State<T> currentState
         {
             get
@@ -42,6 +42,36 @@ namespace Bradley.AlienArk
         public void OnUpdate()
         {
             m_currentState.OnUpdate();
+        }
+
+        public void TriggerEntered(Collider2D collider) 
+        {
+            m_currentState.TriggerEntered(collider);
+        }
+
+		public void TriggerStayed(Collider2D collider) 
+        {
+            m_currentState.TriggerStayed(collider);
+        }
+
+		public void TriggerExited(Collider2D collider) 
+        {
+            m_currentState.TriggerExited(collider);
+        }
+
+		public void CollisionEntered(Collision2D collision) 
+        {
+            m_currentState.CollisionEntered(collision);
+        }
+
+		public void CollisionStayed(Collision2D collision) 
+        {
+            m_currentState.CollisionStayed(collision);
+        }
+
+		public void CollisionExited(Collision2D collision) 
+        {
+            m_currentState.CollisionExited(collision);
         }
 	}
 }

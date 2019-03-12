@@ -15,7 +15,7 @@ namespace Bradley.AlienArk
             }
         }
         public List<Transform> patrolRoute;
-        public float dectectionRange = 10, attackRange = 2, actionCooldown = 1, baitEatingSpeed = 0.2f;
+        public float dectectionRange = 10, attackRange = 2, baitEatingSpeed = 0.2f;
         protected float NearPatrolPoint = 0.4f;
         public float NEAR_PATROL_POINT
         {
@@ -24,18 +24,12 @@ namespace Bradley.AlienArk
                 return NearPatrolPoint;
             }
         }
-        protected Transform m_target;
-        public Transform target
-        {
-            get
-            {
-                return m_target;
-            }
-            set
-            {
-                m_target = value;
-            }
-        }
+        [HideInInspector]
+        public Transform target;
+        [HideInInspector]
+        public Transform canvas;
+        [HideInInspector]
+        public GameObject stateIndicator;
 
         protected StateMachine<Enemy> m_stateMachine;
 
@@ -45,6 +39,7 @@ namespace Bradley.AlienArk
             m_stateMachine = new StateMachine<Enemy>(this);
             m_stateMachine.SetState(new PatrolState(m_stateMachine));
             m_sight = GetComponentInChildren<EnemySightDetection>();
+            canvas = GameObject.Find("Canvas").transform;
             NearPatrolPoint += m_boxCollider.bounds.extents.x;
             attackRange += m_boxCollider.bounds.extents.x;
         }
@@ -52,7 +47,7 @@ namespace Bradley.AlienArk
         public virtual void TargetSpotted(Transform Target)
         {
             EnemyTarget possibleTarget = Target.GetComponent<EnemyTarget>();
-            if (m_target == null || (possibleTarget != null && possibleTarget.GetPriority() > m_target.GetComponent<EnemyTarget>().GetPriority()))
+            if (target == null || (possibleTarget != null && possibleTarget.GetPriority() > target.GetComponent<EnemyTarget>().GetPriority()))
             {
                 m_stateMachine.SetState(new ChaseState(m_stateMachine, Target));
             }
@@ -65,12 +60,12 @@ namespace Bradley.AlienArk
 
         public bool IsNearPoint(Vector2 point)
         {
-            return Vector2.Distance(transform.position, point) < NearPatrolPoint;
+            return Mathf.Abs(point.x - transform.position.x) < NearPatrolPoint;
         }
 
         public Vector2 GetTargetDirection()
         {
-            return m_target.position - transform.position;
+            return target.position - transform.position;
         }
 
         public int GetMoveDirection(Vector2 pos)
@@ -86,15 +81,38 @@ namespace Bradley.AlienArk
         public bool IsReachable(Vector3 targetPosition)
         {
             Vector3 dir = targetPosition - transform.position;
-            return !Physics2D.Raycast(transform.position, dir, dir.magnitude, LayerMask.GetMask("Ground"));
+            return !Physics2D.Raycast(transform.position, dir, dir.magnitude, LayerMask.GetMask("Ground")) && !IsNextToCliff(dir.x);
+        }
+
+        public bool HeadOnCollision(Collision2D collision)
+        {
+            Vector3 normal = collision.contacts[0].normal;
+            return Vector3.Angle(normal, new Vector3(m_facingRight ? -1 : 1,0,0)) < 60;
         }
 
         public void AlertEnemy(Vector3 searchPoint)
         {
-            if (m_stateMachine.currentState.CompareState("PatrolState") || m_stateMachine.currentState.CompareState("InvestigateState"))
+            Debug.Log("Alert Enemy called");
+            if (m_stateMachine.currentState.CompareState("PatrolState") || m_stateMachine.currentState.CompareState("WaitState") || m_stateMachine.currentState.CompareState("SearchState"))
             {
+                Debug.Log("Moving towards " + searchPoint);
                 m_stateMachine.SetState(new InvestigateState(m_stateMachine, searchPoint));
             }
+        }
+
+        public void CreateStateIndicator(string name)
+        {
+            if (stateIndicator != null)
+            {
+                Destroy(stateIndicator);
+            }
+            stateIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/StateIndicators/" + name), canvas);
+            stateIndicator.transform.SetAsFirstSibling();
+        }
+
+        public void SearchCompleted()
+        {
+            m_stateMachine.SetState(new PatrolState(m_stateMachine));
         }
 
     }
