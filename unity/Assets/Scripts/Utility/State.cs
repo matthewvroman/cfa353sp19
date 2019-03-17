@@ -30,10 +30,11 @@ namespace Bradley.AlienArk
 
 		public virtual void CollisionExited(Collision2D collision) {}
 
-		public bool CompareState(string stateName)
+		public bool CompareState(string other)
 		{
-			stateName = "Bradley.AlienArk." + stateName;
-			return this.GetType().ToString() == stateName;
+			string state = this.GetType().ToString();
+			state = state.Substring(state.LastIndexOf('.') + 1);
+			return state.Equals(other);
 		}
 	}
 }

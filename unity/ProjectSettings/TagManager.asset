@@ -22,8 +22,8 @@ TagManager:
   - Bait
   - Enemy
   - Enemy Detection
-  - Juvinile
-  - 
+  - Juvenile
+  - Juvenile Physics
   - 
   - 
   - 
@@ -41,8 +41,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3245170943
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 1971792045
     locked: 0
   - name: UI
     uniqueID: 118109851

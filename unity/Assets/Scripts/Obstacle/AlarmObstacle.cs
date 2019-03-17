@@ -8,6 +8,7 @@ namespace Bradley.AlienArk
 	{
 		public float alarmRange = 10;
 		private PlayerController player;
+		string[] layers = {"Enemy","Juvenile"};
 
 		public override void init()
 		{
@@ -23,16 +24,26 @@ namespace Bradley.AlienArk
 
 		void OnTriggerEnter2D(Collider2D other)
 		{
-			player = other.GetComponent<PlayerController>();
-			if (player != null && !player.IsCrouching())
+			PlayerController temp = other.GetComponent<PlayerController>();
+			if (temp != null && !temp.IsCrouching())
 			{
+				player = temp;
 				AlertEnemies(alarmRange, other.transform.position);
+			}
+		}
+
+		private void OnTriggerExit2D(Collider2D other)
+		{
+			PlayerController temp = other.GetComponent<PlayerController>();
+			if (temp != null)
+			{
+				player = null;
 			}
 		}
 
 		private void OnTriggerStay2D(Collider2D other) 
 		{
-			if (player != null && other.CompareTag(player.tag) && Mathf.Abs(player.Rigidbody.velocity.x) > 0 && !player.IsCrouching())
+			if (player != null && other.CompareTag(player.tag) && !player.IsCrouching() && Mathf.Abs(player.Rigidbody.velocity.x) > 0)
 			{
 				AlertEnemies(alarmRange, other.transform.position);
 			}
@@ -40,7 +51,7 @@ namespace Bradley.AlienArk
 
 		private void AlertEnemies(float radius, Vector2 position)
 		{
-			Collider2D[] results = Physics2D.OverlapCircleAll(position, radius, LayerMask.GetMask("Enemy"));
+			Collider2D[] results = Physics2D.OverlapCircleAll(position, radius, LayerMask.GetMask(layers));
 			for (int i = 0; i < results.Length; i++)
 			{
 				results[i].GetComponent<Enemy>().AlertEnemy(position);

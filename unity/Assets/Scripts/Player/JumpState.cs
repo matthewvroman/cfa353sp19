@@ -21,14 +21,10 @@ namespace Bradley.AlienArk
 
 		public override void OnUpdate() 
 		{
-			if (m_stateMachine.controller.Rigidbody.velocity.y < 0)
-            {
-                m_stateMachine.controller.Rigidbody.velocity += Vector2.up * Physics.gravity.y * ((m_stateMachine.controller.fallMultiplyer - 1) * Time.deltaTime);
-            }
-            /*else if (m_stateMachine.controller.Rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+            if (m_stateMachine.controller.Rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
             {
                 m_stateMachine.controller.Rigidbody.velocity += Vector2.up * Physics.gravity.y * (m_stateMachine.controller.lowJumpMultiplyer - 1) * Time.deltaTime;
-            }*/
+            }
 
 			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), true);
 			if (m_stateMachine.controller.canClimb && Input.GetAxis("Climb") > 0)

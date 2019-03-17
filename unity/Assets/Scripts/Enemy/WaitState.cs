@@ -12,11 +12,11 @@ namespace Bradley.AlienArk
 		{
 			previousState = state;
 			waitTimer = waitTime;
-			m_stateMachine.controller.Stop();
 		}
 
 		public override void OnUpdate()
 		{
+			m_stateMachine.controller.ApplyDrag();
 			waitTimer -= Time.deltaTime;
 			if (waitTimer <= 0)
 			{
@@ -26,10 +26,48 @@ namespace Bradley.AlienArk
 
 		public override void CollisionEntered(Collision2D collision)
 		{
-			if (collision.gameObject.GetComponent<PlayerController>() && !previousState.CompareState("Chase") && !previousState.CompareState("Charge"))
+			PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+			if (player)
 			{
-				m_stateMachine.controller.AlertEnemy(collision.contacts[0].point);
+				if (!previousState.CompareState("ChaseState") && !CheckAtatckState())
+				{
+					m_stateMachine.controller.Knockback(collision, player);
+				}
+				else
+				{
+					PlayerController.PlayerDied();
+				}
 			}
+		}
+
+		private bool CheckAtatckState()
+		{
+			return previousState.CompareState(m_stateMachine.controller.attackType.ToString() + "State");
+		}
+
+		public override void TriggerEntered(Collider2D collider)
+        {
+            if (collider.GetComponentInParent<PlayerController>() && !previousState.CompareState("ChaseState"))
+            {
+                m_stateMachine.controller.AlertEnemy(collider.transform.position);
+            }
+        }
+
+		public bool IsAlertable(Vector2 newSearchPoint)
+		{
+			if (previousState.CompareState("ChaseState") || CheckAtatckState())
+			{
+				return false;
+			}
+			else if (previousState.CompareState("InvestigateState"))
+			{
+				return ((InvestigateState)previousState).IsAlertable(newSearchPoint);
+			}
+			else if (previousState.CompareState("SearchState"))
+			{
+				return ((SearchState)previousState).IsAlertable(newSearchPoint);
+			}
+			return true;
 		}
 	}
 }

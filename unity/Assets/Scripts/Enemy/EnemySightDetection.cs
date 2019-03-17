@@ -29,16 +29,19 @@ namespace Bradley.AlienArk
 		public Transform CheckForTargets()
 		{
 			Collider2D[] colliders = new Collider2D[6];
-			sightRange.OverlapCollider(filter, colliders);
 			int highestPriority = -1;
 			Transform newTarget = null;
-			foreach(Collider2D col in colliders)
+			int length = sightRange.OverlapCollider(filter, colliders);
+			if (length > 0)
 			{
-				int priority = col.GetComponent<EnemyTarget>().GetPriority();
-				if (priority > highestPriority)
+				for(int i = 0; i < length; i++)
 				{
-					highestPriority = priority;
-					newTarget = col.transform;
+					EnemyTarget target = colliders[i].GetComponent<EnemyTarget>();
+					if (target != null && target.GetPriority() > highestPriority)
+					{
+						highestPriority = target.GetPriority();
+						newTarget = colliders[i].transform;
+					}
 				}
 			}
 			return newTarget;

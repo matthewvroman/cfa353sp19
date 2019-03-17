@@ -60,12 +60,30 @@ namespace Bradley.AlienArk
 			}
 		}
 
+		public bool IsAlertable(Vector2 newSearchPoint)
+		{
+			if (Vector2.Distance(newSearchPoint, searchPoint) > 1)
+			{
+				return false;
+			}
+			return true;
+		}
+
 		public override void CollisionEntered(Collision2D collision)
 		{
-			if (collision.gameObject.GetComponent<PlayerController>())
-			{
-				m_stateMachine.controller.AlertEnemy(collision.contacts[0].point);
-			}
+			PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player)
+            {
+                m_stateMachine.controller.Knockback(collision, player);
+            }
 		}
+
+		public override void TriggerEntered(Collider2D collider)
+        {
+            if (collider.GetComponentInParent<PlayerController>())
+            {
+                m_stateMachine.controller.AlertEnemy(collider.transform.position);
+            }
+        }
 	}
 }
