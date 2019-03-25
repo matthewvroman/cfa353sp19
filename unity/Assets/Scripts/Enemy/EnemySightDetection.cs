@@ -37,7 +37,7 @@ namespace Bradley.AlienArk
 				for(int i = 0; i < length; i++)
 				{
 					EnemyTarget target = colliders[i].GetComponent<EnemyTarget>();
-					if (target != null && target.GetPriority() > highestPriority)
+					if (target != null && target.GetPriority() > highestPriority && HasVisual(target.transform))
 					{
 						highestPriority = target.GetPriority();
 						newTarget = colliders[i].transform;
@@ -50,10 +50,16 @@ namespace Bradley.AlienArk
 		void OnTriggerEnter2D(Collider2D other)
 		{
 			EnemyTarget target = other.GetComponentInParent<EnemyTarget>();
-			if (target != null)
+			if (target != null && HasVisual(target.transform))
 			{
 				enemy.TargetSpotted(target.transform);
 			}
+		}
+
+		private bool HasVisual(Transform target)
+		{
+			Vector2 pos = enemy.transform.position;
+			return !Physics2D.Raycast(pos, (Vector2)target.position-pos, ((Vector2)target.position-pos).magnitude, LayerMask.GetMask("Ground"));
 		}
 	}
 }

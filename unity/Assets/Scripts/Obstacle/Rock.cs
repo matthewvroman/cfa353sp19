@@ -25,7 +25,7 @@ namespace Bradley.AlienArk
 
 		void OnCollisionEnter2D(Collision2D other)
 		{
-			if (other.gameObject.layer == 10)
+			if (other.gameObject.CompareTag("Ground"))
 			{
 				Destroy(gameObject);
 				return;

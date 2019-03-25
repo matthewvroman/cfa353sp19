@@ -37,6 +37,7 @@ namespace Bradley.AlienArk
 
         [SerializeField]
         protected float m_walkSpeed = 1, m_runSpeed = 2;
+        protected float speedModifier = 1;
         protected bool m_facingRight = true;
         protected bool m_grounded = false;
 
@@ -78,12 +79,22 @@ namespace Bradley.AlienArk
 
             if (input != 0)
             {
-                m_rigidbody.velocity = new Vector2(Mathf.Sign(input)*speed,m_rigidbody.velocity.y);
+                m_rigidbody.velocity = new Vector2(Mathf.Sign(input)*speed*speedModifier,m_rigidbody.velocity.y);
             }
             else
             {
                 ApplyDrag();
             }
+        }
+
+        public void SetSpeedModifier(float modifier)
+        {
+            speedModifier = modifier;
+        }
+
+        public float GetSpeedModifier()
+        {
+            return speedModifier;
         }
 
         public void ApplyDrag()

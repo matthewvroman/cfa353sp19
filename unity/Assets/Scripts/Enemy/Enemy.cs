@@ -9,7 +9,11 @@ namespace Bradley.AlienArk
         public enum AttackType
         {
             Charge,
-            Lunge,
+            Pounce,
+            Shoot,
+            Bombard,
+            Swing,
+            Shockwave
         }
         protected EnemySightDetection m_sight;
         public EnemySightDetection sight
@@ -97,8 +101,29 @@ namespace Bradley.AlienArk
                     m_stateMachine.SetState(new ChargeState(m_stateMachine));
                     break;
                 }
-                case AttackType.Lunge:
+                case AttackType.Pounce:
                 {
+                    m_stateMachine.SetState(new PounceState(m_stateMachine));
+                    break;
+                }
+                case AttackType.Shoot:
+                {
+                    m_stateMachine.SetState(new ShootState(m_stateMachine));
+                    break;
+                }
+                case AttackType.Bombard:
+                {
+                    m_stateMachine.SetState(new BombardState(m_stateMachine));
+                    break;
+                }
+                case AttackType.Swing:
+                {
+                    m_stateMachine.SetState(new SwingState(m_stateMachine));
+                    break;
+                }
+                case AttackType.Shockwave:
+                {
+                    m_stateMachine.SetState(new ShockwaveState(m_stateMachine));
                     break;
                 }
             }
@@ -127,7 +152,7 @@ namespace Bradley.AlienArk
             {
                 Destroy(stateIndicator);
             }
-            stateIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/StateIndicators/" + name), canvas);
+            stateIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/StateIndicators/" + name), Vector2.zero, Quaternion.identity, canvas);
             stateIndicator.transform.SetAsFirstSibling();
         }
 
@@ -137,6 +162,12 @@ namespace Bradley.AlienArk
         }
 
 //============================================================================================================================================================================================================
+        public bool CheckForTarget()
+        {
+            string[] layers = {"Ground","Player"};
+            return target != null && Physics2D.Raycast(transform.position, target.position - transform.position, dectectionRange, LayerMask.GetMask(layers));
+        }
+
         public void Knockback(Collision2D collision, PlayerController player)
         {
             AlertEnemy(collision.contacts[0].point);
@@ -145,11 +176,18 @@ namespace Bradley.AlienArk
 
         public void TriggeredPlayer(Collider2D collider)
         {
-            Debug.Log("Trigger Player Called");
-            if (collider.GetComponent<PlayerController>())
+            if (collider.GetComponent<PlayerController>() != null)
             {
                 Debug.Log("Alerting Enemy");
                 AlertEnemy(collider.transform.position);
+            }
+        }
+
+        public void KillPlayer(GameObject player)
+        {
+            if (player.GetComponent<PlayerController>())
+            {
+                PlayerController.PlayerDied();
             }
         }
         
@@ -161,6 +199,11 @@ namespace Bradley.AlienArk
         public Vector2 GetTargetDirection()
         {
             return target.position - transform.position;
+        }
+
+        public Vector2 GetForwardPosition()
+        {
+            return (transform.position + new Vector3(m_boxCollider.bounds.extents.x * (m_facingRight ? 1 : -1), 0,0));
         }
 
         public int GetMoveDirection(Vector2 pos)

@@ -7,15 +7,17 @@ namespace Bradley.AlienArk
 	public class SpawnerObstacle : Obstacle 
 	{
 		public GameObject obstacle;
-		public Transform spawningPosition;
-		public int numObstaclesToSpawn = 1;
-		public bool randomizedSpawns = false;
-		bool triggered = false;
+		public Transform spawningPoint;
+		public float spawnTime = 5;
+		ParticleSystem particleSystem;
+		float spawnTimer;
 
 		public override void init()
 		{
 			base.init();
 			m_collider.isTrigger = true;
+			spawnTimer = spawnTime;
+			particleSystem = GetComponentInChildren<ParticleSystem>();
 		}
 
 		void Start()
@@ -23,27 +25,18 @@ namespace Bradley.AlienArk
 			init();
 		}
 
-		private void SpawnObstacles()
+		private void Update()
 		{
-			for (int i = 0; i < numObstaclesToSpawn; i++)
+			spawnTimer -= Time.deltaTime;
+			if (spawnTimer <= 0)
 			{
-				float random = 0;
-				if (randomizedSpawns)
-				{
-					float pos = m_collider.bounds.extents.x;
-					random = Random.Range(-pos, pos);
-				}
-				Instantiate(obstacle, spawningPosition.position + new Vector3(random,0,0), Quaternion.identity, null);
+				Instantiate(obstacle, spawningPoint.position, Quaternion.identity, null);
+				spawnTimer = spawnTime;
+				particleSystem.Stop();
 			}
-		}
-
-		void OnTriggerEnter2D(Collider2D other)
-		{
-			if (other.GetComponent<PlayerController>() && !triggered)
+			else if (spawnTimer <= 2 && !particleSystem.isPlaying)
 			{
-				triggered = true;
-				SpawnObstacles();
-				Destroy(gameObject);
+				particleSystem.Play();
 			}
 		}
 	}

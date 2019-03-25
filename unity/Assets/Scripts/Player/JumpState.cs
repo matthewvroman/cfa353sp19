@@ -10,7 +10,7 @@ namespace Bradley.AlienArk
 		{
 			if (jumped)
 			{
-				m_stateMachine.controller.Rigidbody.velocity += Vector2.up * m_stateMachine.controller.jumpFprce;
+				m_stateMachine.controller.Rigidbody.velocity += Vector2.up * (m_stateMachine.controller.jumpForce * m_stateMachine.controller.GetSpeedModifier());
 			}
 		}
 

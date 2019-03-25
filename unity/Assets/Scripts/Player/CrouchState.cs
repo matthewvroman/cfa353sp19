@@ -13,14 +13,7 @@ namespace Bradley.AlienArk
 
 		public override void OnEnter()
 		{
-			if (m_stateMachine.controller.collectedEgg)
-			{
-				m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouching_Egg");
-			}
-			else
-			{
-				m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouched");
-			}
+			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Player_Crouched");
 			m_stateMachine.controller.SetupCrouching(true);
 
 			if (m_stateMachine.controller.canHide && !m_stateMachine.controller.IsSpotted())
@@ -31,15 +24,7 @@ namespace Bradley.AlienArk
 
 		public override void OnExit()
 		{
-			if (m_stateMachine.controller.collectedEgg)
-			{
-				m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Egg");
-			}
-			else
-			{
-				m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Standard");
-			}
-
+			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Player_Standard");
 			m_stateMachine.controller.SetupCrouching(false);
 			m_stateMachine.controller.Hide(false);
 		}

@@ -8,19 +8,17 @@ namespace Bradley.AlienArk
 	public class ScreenManager : MonoBehaviour 
 	{
 		[SerializeField]
-		GameObject pauseScreen, pauseButton, gameOverScreen, levelCompleteScreen, eggCollectionIcon, miniMap;
+		GameObject pauseScreen, pauseButton, gameOverScreen, levelCompleteScreen, miniMap;
 
 
 		void OnEnable()
 		{
-			Egg.EggCollected += OnEggCollected;
 			PlayerController.PlayerDied += GameOver;
 			Goal.LevelComplete += LevelComplete;
 		}
 
 		void OnDisable()
 		{
-			Egg.EggCollected -= OnEggCollected;
 			PlayerController.PlayerDied -= GameOver;
 			Goal.LevelComplete -= LevelComplete;
 		}
@@ -56,11 +54,6 @@ namespace Bradley.AlienArk
 			levelCompleteScreen.SetActive(true);
 		}
 
-		private void OnEggCollected()
-		{
-			eggCollectionIcon.SetActive(true);
-		}
-
 		private void GameOver()
 		{
 			ActivateHud(false);
@@ -72,7 +65,6 @@ namespace Bradley.AlienArk
 			PauseGame(value ? 1 : 0);
 			pauseButton.SetActive(value);
 			miniMap.SetActive(value);
-			eggCollectionIcon.SetActive(value);
 		}
 
 		private void PauseGame(int value = 0)

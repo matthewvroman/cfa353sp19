@@ -7,6 +7,7 @@ namespace Bradley.AlienArk
     public class PlayerController :  Creature
     {
         public static System.Action PlayerDied;
+        public static System.Action PlayerHidden;
         public static System.Action<Vector3> UpdateMapPosition;
         GameObject bait;
 
@@ -15,11 +16,12 @@ namespace Bradley.AlienArk
         public CircleCollider2D circleCollider;
         [HideInInspector]
         public BoxCollider2D detectionBox;
+        protected GameObject egg;
         [HideInInspector]
-        public bool collectedEgg = false, canClimb = false, canHide = false;
+        public bool canClimb = false, canHide = false;
         public LayerMask Detection;
 
-        public float jumpFprce = 6, fallMultiplyer = 3, lowJumpMultiplyer = 2;
+        public float jumpForce = 6, fallMultiplyer = 3, lowJumpMultiplyer = 2;
         int numBait = 5;
 
         protected override void init()
@@ -28,9 +30,11 @@ namespace Bradley.AlienArk
             stateMachine = new StateMachine<PlayerController>(this);
             stateMachine.SetState(new BaseState(stateMachine));
 
-            bait = Resources.Load<GameObject>("Prefabs/bait");
+            bait = Resources.Load<GameObject>("Prefabs/Spawnables/bait");
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+            egg = transform.GetChild(1).gameObject;
+
         }
 
         void OnEnable()
@@ -60,9 +64,20 @@ namespace Bradley.AlienArk
         }
 
 //================================================================================================================================================================================
+        public void Knockback(Vector2 direction)
+        {
+            stateMachine.SetState(new KnockbackState(stateMachine, direction));
+        }
+
+//================================================================================================================================================================================
         public bool IsCrouching()
         {
             return stateMachine.currentState.CompareState("CrouchState");
+        }
+
+        public bool IsJumping()
+        {
+            return stateMachine.currentState.CompareState("JumpState");
         }
 
 //================================================================================================================================================================================
@@ -91,6 +106,10 @@ namespace Bradley.AlienArk
                 m_spriteRenderer.color = Color.white;
             }
             Physics2D.IgnoreLayerCollision(9, 12, value);
+            if (PlayerHidden != null)
+            {
+                PlayerHidden();
+            }
         }
 
 //================================================================================================================================================================================
@@ -123,6 +142,11 @@ namespace Bradley.AlienArk
             return false;
         }
 
+        public override bool IsGrounded(Collider2D collider)
+        {
+            return Physics2D.Raycast(collider.bounds.center - new Vector3(0,collider.bounds.extents.y,0), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        }
+
 //================================================================================================================================================================================
         public void DropBait()
         {
@@ -137,15 +161,7 @@ namespace Bradley.AlienArk
 //================================================================================================================================================================================
         private void CollectedEgg()
         {
-            collectedEgg = true;
-            if (stateMachine.currentState.CompareState("CrouchState"))
-            {
-                m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Crouching_Egg");
-            }
-            else
-            {
-                m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player_Egg");
-            }
+            egg.SetActive(true);
         }
 
 //================================================================================================================================================================================
