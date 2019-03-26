@@ -18,6 +18,7 @@ namespace Bradley.AlienArk
         public float pitch;
 
         public bool loop = false;
+        public bool muted = false;
 
         [HideInInspector]
         public AudioSource source;

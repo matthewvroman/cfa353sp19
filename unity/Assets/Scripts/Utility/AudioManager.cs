@@ -38,6 +38,7 @@ namespace Bradley.AlienArk
                 s.source.volume = s.volume;
                 s.source.pitch = s.pitch;
                 s.source.loop = s.loop;
+                s.source.mute = s.muted;
             }
         }
 
