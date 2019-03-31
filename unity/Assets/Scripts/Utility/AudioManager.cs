@@ -6,7 +6,20 @@ namespace Bradley.AlienArk
 {
     public class AudioManager : MonoBehaviour
     {
-        AudioManager m_instance;
+        static AudioManager m_instance;
+        public static AudioManager Instance
+        {
+            get 
+            {
+                if (m_instance == null)
+                {
+                    GameObject prefabs = Resources.Load<GameObject>("Prefabs/Utility/AudioManager");
+                    GameObject gameObject = Instantiate(prefabs, null);
+                    m_instance = gameObject.GetComponent<AudioManager>();
+                }
+                return m_instance;
+            }
+        }
         [SerializeField]
         Sound[] sounds;
         public Sound[] soundLibrary
@@ -27,6 +40,7 @@ namespace Bradley.AlienArk
             else
             {
                 Destroy(gameObject);
+                return;
             }
 
             DontDestroyOnLoad(gameObject);
@@ -34,6 +48,7 @@ namespace Bradley.AlienArk
             foreach (Sound s in sounds)
             {
                 s.source = gameObject.AddComponent<AudioSource>();
+                s.source.spatialBlend = 0;
                 s.source.clip = s.clip;
                 s.source.volume = s.volume;
                 s.source.pitch = s.pitch;

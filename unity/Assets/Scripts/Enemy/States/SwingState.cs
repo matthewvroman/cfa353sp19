@@ -8,7 +8,7 @@ namespace Bradley.AlienArk
 	{
 		Transform attackPoint;
 		Vector3 searchPoint;
-		float attackSize = 0.6f;
+		float attackSize = 0.75f;
 		float attackTime = 1;
 		bool initialized = false;
 
@@ -28,7 +28,7 @@ namespace Bradley.AlienArk
 
 			if (!initialized)
 			{
-				m_stateMachine.SetState(new WaitState(m_stateMachine, this, 0.25f));
+				m_stateMachine.SetState(new WaitState(m_stateMachine, this, 0.3f));
 			}
 			else
 			{
@@ -57,6 +57,7 @@ namespace Bradley.AlienArk
 			{
 				PlayerController.PlayerDied();
 			}
+
 			attackTime -= Time.deltaTime;
 			if (attackTime <= 0)
 			{

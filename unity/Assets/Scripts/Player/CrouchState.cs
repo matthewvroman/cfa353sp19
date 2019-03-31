@@ -13,7 +13,7 @@ namespace Bradley.AlienArk
 
 		public override void OnEnter()
 		{
-			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Player_Crouched");
+			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Keveon Sneak Idle_00000");
 			m_stateMachine.controller.SetupCrouching(true);
 
 			if (m_stateMachine.controller.canHide && !m_stateMachine.controller.IsSpotted())
@@ -24,7 +24,7 @@ namespace Bradley.AlienArk
 
 		public override void OnExit()
 		{
-			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Player_Standard");
+			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Keveon_00");
 			m_stateMachine.controller.SetupCrouching(false);
 			m_stateMachine.controller.Hide(false);
 		}
@@ -38,11 +38,11 @@ namespace Bradley.AlienArk
 				{
 					m_stateMachine.SetState(new JumpState(m_stateMachine, true));
 				}
-				if (Input.GetAxis("Crouch") <= 0)
+				if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
 				{
 					m_stateMachine.SetState(new BaseState(m_stateMachine));
 				}
-				if (m_stateMachine.controller.canClimb && Input.GetAxis("Climb") > 0)
+				if (m_stateMachine.controller.canClimb && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
 				{
 					m_stateMachine.SetState(new ClimbState(m_stateMachine));
 				}

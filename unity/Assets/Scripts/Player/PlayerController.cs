@@ -30,7 +30,7 @@ namespace Bradley.AlienArk
             stateMachine = new StateMachine<PlayerController>(this);
             stateMachine.SetState(new BaseState(stateMachine));
 
-            bait = Resources.Load<GameObject>("Prefabs/Spawnables/bait");
+            bait = Resources.Load<GameObject>("Spawnables/bait");
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
             egg = transform.GetChild(1).gameObject;
@@ -61,12 +61,6 @@ namespace Bradley.AlienArk
             {
                 UpdateMapPosition(transform.position);
             }
-        }
-
-//================================================================================================================================================================================
-        public void Knockback(Vector2 direction)
-        {
-            stateMachine.SetState(new KnockbackState(stateMachine, direction));
         }
 
 //================================================================================================================================================================================
@@ -117,8 +111,8 @@ namespace Bradley.AlienArk
         public void SetupCrouching(bool value)
         {
             m_boxCollider.enabled = !value;
-			detectionBox.offset = (m_spriteRenderer.bounds.center - transform.position);
-            detectionBox.size = new Vector2(detectionBox.size.x, m_spriteRenderer.bounds.size.y);
+			detectionBox.offset = (value ? circleCollider.offset : Vector2.zero);
+            detectionBox.size =  value ? (Vector2.one * circleCollider.radius*2) : m_boxCollider.size + new Vector2(0, 0.5f);
         }
 
 //================================================================================================================================================================================

@@ -44,6 +44,12 @@ TagManager:
   - name: Background
     uniqueID: 3245170943
     locked: 0
+  - name: Trees
+    uniqueID: 555892757
+    locked: 0
+  - name: Ground
+    uniqueID: 316317651
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

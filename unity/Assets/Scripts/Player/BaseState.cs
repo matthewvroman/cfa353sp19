@@ -18,7 +18,7 @@ namespace Bradley.AlienArk
 			{
 				m_stateMachine.SetState(new JumpState(m_stateMachine, true));
 			}
-			if (Input.GetAxis("Crouch") > 0)
+			if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				m_stateMachine.SetState(new CrouchState(m_stateMachine));
 			}

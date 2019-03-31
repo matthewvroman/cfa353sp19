@@ -12,8 +12,8 @@ namespace Bradley.AlienArk
             Pounce,
             Shoot,
             Bombard,
-            Swing,
-            Shockwave
+            Peck,
+            Swing
         }
         protected EnemySightDetection m_sight;
         public EnemySightDetection sight
@@ -116,14 +116,14 @@ namespace Bradley.AlienArk
                     m_stateMachine.SetState(new BombardState(m_stateMachine));
                     break;
                 }
+                case AttackType.Peck:
+                {
+                    m_stateMachine.SetState(new PeckState(m_stateMachine));
+                    break;
+                }
                 case AttackType.Swing:
                 {
                     m_stateMachine.SetState(new SwingState(m_stateMachine));
-                    break;
-                }
-                case AttackType.Shockwave:
-                {
-                    m_stateMachine.SetState(new ShockwaveState(m_stateMachine));
                     break;
                 }
             }
@@ -203,7 +203,7 @@ namespace Bradley.AlienArk
 
         public Vector2 GetForwardPosition()
         {
-            return (transform.position + new Vector3(m_boxCollider.bounds.extents.x * (m_facingRight ? 1 : -1), 0,0));
+            return ((Vector2)transform.position + m_boxCollider.offset + new Vector2(m_boxCollider.bounds.extents.x * (m_facingRight ? 1 : -1), 0));
         }
 
         public int GetMoveDirection(Vector2 pos)
@@ -213,8 +213,8 @@ namespace Bradley.AlienArk
 
         public bool IsNextToCliff(float direction)
         {
-            return  !Physics2D.Raycast(transform.position + new Vector3(m_boxCollider.bounds.extents.x * Mathf.Sign(direction), -m_boxCollider.bounds.extents.y), 
-                Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+            return  !Physics2D.Raycast((Vector2)transform.position + m_boxCollider.offset + new Vector2(m_boxCollider.bounds.extents.x * Mathf.Sign(direction),
+                -m_boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         }
 
         public bool IsReachable(Vector3 targetPosition)

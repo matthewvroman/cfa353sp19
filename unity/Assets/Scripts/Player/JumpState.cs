@@ -27,7 +27,7 @@ namespace Bradley.AlienArk
             }
 
 			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), true);
-			if (m_stateMachine.controller.canClimb && Input.GetAxis("Climb") > 0)
+			if (m_stateMachine.controller.canClimb && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)))
 			{
 				m_stateMachine.SetState(new ClimbState(m_stateMachine));
 			}
