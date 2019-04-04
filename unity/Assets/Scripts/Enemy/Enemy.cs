@@ -152,7 +152,7 @@ namespace Bradley.AlienArk
             {
                 Destroy(stateIndicator);
             }
-            stateIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/StateIndicators/" + name), Vector2.zero, Quaternion.identity, canvas);
+            stateIndicator = Instantiate(Resources.Load<GameObject>("StateIndicators/" + name), Vector2.zero, Quaternion.identity, canvas);
             stateIndicator.transform.SetAsFirstSibling();
         }
 

@@ -11,6 +11,7 @@ namespace Bradley.AlienArk
 		void Start () 
 		{
 			init();
+			gameObject.AddComponent<PolygonCollider2D>();
 		}
 		
 		// Update is called once per frame
