@@ -6,12 +6,16 @@ namespace Bradley.AlienArk
 {
 	public class ScreamingObstacle : AlarmObstacle 
 	{
+		SpriteRenderer renderer;
 		public float screamInterval = 3;
+		public string spriteName = "Screamer";
 		float screamTimer;
 
 		void Start () 
 		{
 			init();
+			renderer = GetComponent<SpriteRenderer>();
+			renderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/Screamer 1");
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -19,8 +23,7 @@ namespace Bradley.AlienArk
 			PlayerController player = other.GetComponent<PlayerController>();
 			if (player != null && !player.IsCrouching())
 			{
-				AlertEnemies(alarmRange, transform.position);
-				screamTimer = screamInterval;
+				StartCoroutine("Scream");
 			}
 		}
 
@@ -34,8 +37,7 @@ namespace Bradley.AlienArk
 					screamTimer -= Time.deltaTime;
 					if (screamTimer <= 0)
 					{
-						AlertEnemies(alarmRange, transform.position);
-						screamTimer = screamInterval;
+						StartCoroutine("Scream");
 					}
 				}
 				else
@@ -43,6 +45,15 @@ namespace Bradley.AlienArk
 					screamTimer = screamInterval;
 				}
 			}
+		}
+
+		IEnumerator Scream()
+		{
+			renderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/" + spriteName + " 2");
+			AlertEnemies(alarmRange, transform.position);
+			screamTimer = screamInterval;
+			yield return new WaitForSeconds(1f);
+			renderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/" + spriteName + " 1");
 		}
 	}
 }

@@ -38,6 +38,7 @@ namespace Bradley.AlienArk
 				{
 					circle = other.GetComponent<CircleCollider2D>();
 				}
+
 				if (player.IsJumping() && body.velocity.y <= 0)
 				{
 					Vector2 pos = (circle.offset + (Vector2)circle.transform.position) - new Vector2(0,circle.radius);
@@ -46,12 +47,15 @@ namespace Bradley.AlienArk
 			}
 		}
 
-		private void OnTriggerExit(Collider other)
+		private void OnTriggerExit2D(Collider2D other)
 		{
-			if (other.GetComponent<PlayerController>())
+			PlayerController player = other.GetComponent<PlayerController>();
+			if (player)
 			{
+				player.SetSpeedModifier(1);
 				quickSand.ResetGround();
 				circle = null;
+				body = null;
 			}
 		}
 	}

@@ -1228,7 +1228,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &612363620
@@ -2027,6 +2027,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9769ed5c501e71c42bbad70e24f874d2, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1438658181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114217839357225586, guid: 9769ed5c501e71c42bbad70e24f874d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1438658180}
+  m_Script: {fileID: 11500000, guid: b62ea0e973724e94a9cd0cbe73bda50b, type: 3}
 --- !u!1 &1469493887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,7 +2720,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1707007441
@@ -2931,6 +2937,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114752974276908150, guid: 786afb6a911126044a507c2e1959a5dd,
+        type: 2}
+      propertyPath: baitManager
+      value: 
+      objectReference: {fileID: 1438658181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
   m_IsPrefabAsset: 0

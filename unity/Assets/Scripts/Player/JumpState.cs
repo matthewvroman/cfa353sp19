@@ -6,11 +6,13 @@ namespace Bradley.AlienArk
 {
 	public class JumpState : State<PlayerController>
 	{
+		float speedModifier;
 		public JumpState(StateMachine<PlayerController> machine, bool jumped) : base(machine)
 		{
 			if (jumped)
 			{
 				m_stateMachine.controller.Rigidbody.velocity += Vector2.up * (m_stateMachine.controller.jumpForce * m_stateMachine.controller.GetSpeedModifier());
+				speedModifier = m_stateMachine.controller.GetSpeedModifier();
 			}
 		}
 
@@ -23,7 +25,7 @@ namespace Bradley.AlienArk
 		{
             if (m_stateMachine.controller.Rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
             {
-                m_stateMachine.controller.Rigidbody.velocity += Vector2.up * Physics.gravity.y * (m_stateMachine.controller.lowJumpMultiplyer - 1) * Time.deltaTime;
+                m_stateMachine.controller.Rigidbody.velocity += Vector2.up * Physics.gravity.y * (m_stateMachine.controller.lowJumpMultiplyer - 1) * speedModifier * Time.deltaTime;
             }
 
 			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), true);
