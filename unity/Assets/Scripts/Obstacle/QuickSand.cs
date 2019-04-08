@@ -8,8 +8,11 @@ namespace Bradley.AlienArk
 	public class QuickSand : Obstacle 
 	{
 
-		public float fallGravity = 0.5f;
-		float fallVelocity = 0.1f;
+		public float fallGravity = 1;
+		float fallVelocity;
+		static float initfallVelocity = 0.1f;
+		float speedModifier;
+		static float initSpeedMod = 0.6f;
 		float initOffset;
 		EdgeCollider2D edge;
 
@@ -18,34 +21,21 @@ namespace Bradley.AlienArk
 			init();
 			m_collider.isTrigger = true;
 			edge = GetComponent<EdgeCollider2D>();
-			initOffset = edge.offset.x;
-		}
-
-		private void OnCollisionEnter2D(Collision2D other)
-		{
-			PlayerController player = other.gameObject.GetComponent<PlayerController>();
-			if (player)
-			{
-				player.SetSpeedModifier(0.5f);
-			}
+			initOffset = edge.offset.y;
+			fallVelocity = initfallVelocity;
+			speedModifier = initSpeedMod;
 		}
 
 		private void OnCollisionStay2D(Collision2D other)
 		{
-			if (other.gameObject.GetComponent<PlayerController>())
-			{
-				Debug.Log("Moving Down");
-				edge.offset -= new Vector2(0, fallVelocity * Time.deltaTime);
-				fallVelocity += fallGravity*Time.deltaTime;
-			}
-		}
-
-		private void OnCollisionExit2D(Collision2D other)
-		{
 			PlayerController player = other.gameObject.GetComponent<PlayerController>();
 			if (player)
 			{
-				player.SetSpeedModifier(1);
+				edge.offset -= new Vector2(0, fallVelocity * Time.deltaTime);
+				fallVelocity += fallGravity*Time.deltaTime;
+
+				player.SetSpeedModifier(speedModifier);
+				speedModifier = Mathf.Clamp(speedModifier - (fallGravity/3*Time.deltaTime), 0.2f, 1);
 			}
 		}
 
@@ -60,11 +50,13 @@ namespace Bradley.AlienArk
 		public void ResetGround()
 		{
 			edge.offset = new Vector2(edge.offset.x, initOffset);
+			fallVelocity = initfallVelocity;
+			speedModifier = initSpeedMod;
 		}
 
 		public void UpdateGround(Vector2 playerFeet)
 		{
-			float y = playerFeet.y - transform.position.y;
+			float y = Mathf.Clamp(playerFeet.y - transform.position.y, Mathf.NegativeInfinity, initOffset);
 			Mathf.Clamp(y, Mathf.NegativeInfinity, initOffset);
 			edge.offset = new Vector2(edge.offset.x,y);
 		}

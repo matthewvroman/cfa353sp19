@@ -79,7 +79,7 @@ namespace Bradley.AlienArk
 
             if (input != 0)
             {
-                m_rigidbody.velocity = new Vector2(Mathf.Sign(input)*speed*speedModifier,m_rigidbody.velocity.y);
+                m_rigidbody.velocity = new Vector2(Mathf.Sign(input)*speed*speedModifier, m_rigidbody.velocity.y);
             }
             else
             {

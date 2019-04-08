@@ -9,6 +9,7 @@ namespace Bradley.AlienArk
         public static System.Action PlayerDied;
         public static System.Action PlayerHidden;
         public static System.Action<Vector3> UpdateMapPosition;
+        public BaitManager baitManager;
         GameObject bait;
 
         StateMachine<PlayerController> stateMachine;
@@ -146,6 +147,7 @@ namespace Bradley.AlienArk
         {
             if (Input.GetKeyDown(KeyCode.F) && numBait > 0)
             {
+                baitManager.DroppedBait();
                 CircleCollider2D collider = GetComponent<CircleCollider2D>();
                 Instantiate(bait, (Vector2)transform.position + collider.offset + new Vector2(collider.radius, -collider.radius - 0.1f), Quaternion.identity, null);
                 numBait--;

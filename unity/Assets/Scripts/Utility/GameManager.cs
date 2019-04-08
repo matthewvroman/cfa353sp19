@@ -33,13 +33,18 @@ namespace Bradley.AlienArk
 
 		public void CompletedLevel()
 		{
-			string levelName = SceneManager.GetActiveScene().name;
-			int levelNum = int.Parse(levelName.Substring(levelName.Length - 1));
+			int levelNum = GetLevelNum();
 			levels[levelNum - 1].Completed();
 			if (levelNum < levels.Length)
 			{
 				levels[levelNum].Unlocked();
 			}
+		}
+
+		public int GetLevelNum()
+		{
+			string levelName = SceneManager.GetActiveScene().name;
+			return int.Parse(levelName.Substring(levelName.Length - 1));
 		}
 
 		public Level GetLevelStatus(int levelIndex)

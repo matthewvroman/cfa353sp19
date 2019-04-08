@@ -18,7 +18,7 @@ namespace Bradley.AlienArk
         public void ToggledSound()
         {
             _isMuted = !_isMuted; // inverts the value. false -> true. true -> false
-            muteButton.sprite = Resources.Load<Sprite>(_isMuted ? "Sprites/UI/No Volume Button" : "Sprites/UI/Volume Button" );
+            muteButton.sprite = Resources.Load<Sprite>(_isMuted ? "Sprites/UI/Volume_1" : "Sprites/UI/Volume_2" );
             AudioListener.volume = _isMuted ? 0f : 1f; // ? operator allows you to assing values depending on a boolean expression (expression?true:false;)
         }
     }

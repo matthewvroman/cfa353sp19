@@ -8,6 +8,11 @@ namespace Bradley.AlienArk
 	{
 		float bait = 1;
 
+		private void Start()
+		{
+			GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Bait/Berry" + GameManager.instance.GetLevelNum());
+		}
+
 		public void EatBait(float eaten)
 		{
 			Debug.Log("Bait being Eaten");
