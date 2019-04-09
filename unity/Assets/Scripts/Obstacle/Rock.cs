@@ -16,6 +16,7 @@ namespace Bradley.AlienArk
 		// Update is called once per frame
 		void Update () 
 		{
+			transform.rotation = Quaternion.Euler(0,0, transform.rotation.eulerAngles.z + 30*Time.deltaTime);
 			timer -= Time.deltaTime;
 			if (timer <= 0)
 			{
@@ -31,6 +32,15 @@ namespace Bradley.AlienArk
 				return;
 			}
 			KillPlayer(other.gameObject);
+		}
+		
+		public void SetSprite(int levelNum, int spriteNum)
+		{
+			if (!m_spriteRenderer)
+			{
+				m_spriteRenderer = GetComponent<SpriteRenderer>();
+			}
+			m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/" + levelNum + "S Rock " + spriteNum);
 		}
 	}
 }

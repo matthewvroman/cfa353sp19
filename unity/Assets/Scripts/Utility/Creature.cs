@@ -10,30 +10,14 @@ namespace Bradley.AlienArk
     [RequireComponent(typeof(SpriteRenderer))]
     public class Creature : MonoBehaviour
     {
-        protected Rigidbody2D m_rigidbody;
-        public Rigidbody2D Rigidbody
-        {
-            get
-            {
-                return m_rigidbody;
-            }
-        }
-        protected SpriteRenderer m_spriteRenderer;
-        public SpriteRenderer SpriteRenderer
-        {
-            get
-            {
-                return m_spriteRenderer;
-            }
-        }
-        protected BoxCollider2D m_boxCollider;
-        public BoxCollider2D BoxCollider
-        {
-            get
-            {
-                return m_boxCollider;
-            }
-        }
+        [HideInInspector]
+        public Rigidbody2D m_rigidbody;
+        [HideInInspector]
+        public Animator m_animator;
+        [HideInInspector]
+        public SpriteRenderer m_spriteRenderer;
+        [HideInInspector]
+        public BoxCollider2D m_boxCollider;
 
         [SerializeField]
         protected float m_walkSpeed = 1, m_runSpeed = 2;
@@ -44,19 +28,9 @@ namespace Bradley.AlienArk
         protected virtual void init()
         {
             m_rigidbody = GetComponent<Rigidbody2D>();
+            m_animator = GetComponent<Animator>();
             m_spriteRenderer = GetComponent<SpriteRenderer>();
             m_boxCollider = GetComponent<BoxCollider2D>();
-        }
-
-        public virtual void Move(float input, bool running)
-        {
-            float speed = m_walkSpeed;
-            if (running)
-            {
-                speed = m_runSpeed;
-            }
-
-            ApplyMovement(input, speed);
         }
 
         public void CheckOrientation(float direction)
@@ -73,6 +47,29 @@ namespace Bradley.AlienArk
             m_facingRight = !m_facingRight;
         }
 
+        public void SetSpeedModifier(float modifier)
+        {
+            speedModifier = modifier;
+        }
+
+        public float GetSpeedModifier()
+        {
+            return speedModifier;
+        }
+
+        
+        public virtual void Move(float input, bool running)
+        {
+            float speed = m_walkSpeed;
+            if (running)
+            {
+                speed = m_runSpeed;
+            }
+
+            UpdateAnimatorMovement(input, running);
+            ApplyMovement(input, speed);
+        }
+
         public virtual void ApplyMovement(float input, float speed)
         {
             CheckOrientation(input);
@@ -87,24 +84,20 @@ namespace Bradley.AlienArk
             }
         }
 
-        public void SetSpeedModifier(float modifier)
-        {
-            speedModifier = modifier;
-        }
-
-        public float GetSpeedModifier()
-        {
-            return speedModifier;
-        }
-
         public void ApplyDrag()
         {
             m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x * (1 - 10 * Time.fixedDeltaTime), m_rigidbody.velocity.y);
+            UpdateAnimatorMovement(0, false);
         }
 
         public void Stop()
         {
             m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y);
+        }
+
+        public virtual void UpdateAnimatorMovement(float input, bool running)
+        {
+            m_animator.SetBool("Move", input != 0);
         }
 
         public virtual bool IsGrounded(Collider2D collider)

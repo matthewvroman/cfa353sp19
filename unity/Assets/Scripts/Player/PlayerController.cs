@@ -81,10 +81,12 @@ namespace Bradley.AlienArk
             if (input > 0)
             {
                 m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, Mathf.Clamp(input, 0, 1) * m_runSpeed);
+                m_animator.speed = 1;
             }
             else
             {
                 m_rigidbody.velocity = new Vector2 (m_rigidbody.velocity.x, m_rigidbody.velocity.y * (1 - 10 * Time.deltaTime));
+                m_animator.speed = 0;
             }
         }
 
@@ -140,6 +142,16 @@ namespace Bradley.AlienArk
         public override bool IsGrounded(Collider2D collider)
         {
             return Physics2D.Raycast(collider.bounds.center - new Vector3(0,collider.bounds.extents.y,0), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        }
+
+        public override void UpdateAnimatorMovement(float input, bool running)
+        {
+            bool move = input != 0;
+            m_animator.SetBool("Move", move);
+            if (stateMachine.currentState.CompareState("ClimbState"))
+            {
+                m_animator.speed = move ? 1 : 0;
+            }
         }
 
 //================================================================================================================================================================================

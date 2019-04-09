@@ -67,7 +67,7 @@ namespace Bradley.AlienArk
 				if (bait)
 				{
 					m_stateMachine.SetState(new EatBaitState(m_stateMachine));
-					m_stateMachine.controller.Rigidbody.velocity = Vector3.zero;
+					m_stateMachine.controller.m_rigidbody.velocity = Vector3.zero;
 				}
 				else
 				{

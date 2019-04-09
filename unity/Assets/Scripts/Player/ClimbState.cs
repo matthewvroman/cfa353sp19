@@ -13,12 +13,15 @@ namespace Bradley.AlienArk
 
 		public override void OnEnter()
 		{
-			m_stateMachine.controller.Rigidbody.gravityScale = 0;
+			m_stateMachine.controller.m_rigidbody.gravityScale = 0;
+			m_stateMachine.controller.m_animator.SetBool("Climb", true);
 		}
 
 		public override void OnExit()
 		{
-			m_stateMachine.controller.Rigidbody.gravityScale = 1;
+			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
+			m_stateMachine.controller.m_animator.speed = 1;
+			m_stateMachine.controller.m_animator.SetBool("Climb", false);
 		}
 
 		public override void OnUpdate() 

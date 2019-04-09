@@ -28,12 +28,14 @@ namespace Bradley.AlienArk
 					enemy.AlertEnemy(target);
 				}
 			}
+			m_stateMachine.controller.m_animator.SetBool("Panic", true);
 		}
 
 		public override void OnExit()
 		{
 			GameObject.Destroy(m_stateMachine.controller.stateIndicator);
 			m_stateMachine.controller.stateIndicator = null;
+			m_stateMachine.controller.m_animator.SetBool("Panic", false);
 		}
 
 		public override void OnUpdate()

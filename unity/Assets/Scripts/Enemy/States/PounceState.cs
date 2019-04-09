@@ -15,7 +15,7 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
-			if (m_stateMachine.controller.BoxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
+			if (m_stateMachine.controller.m_boxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
 			{
 				PlayerController.PlayerDied();
 			}
@@ -33,7 +33,7 @@ namespace Bradley.AlienArk
 				Vector2 velocity = (Quaternion.Euler(0,0,angle) * (Vector2.right * force));
 				velocity.x *= Mathf.Sign(dir.x);
 				velocity.y = Mathf.Clamp(velocity.y, 0.5f, 10);
-				m_stateMachine.controller.Rigidbody.velocity = velocity;
+				m_stateMachine.controller.m_rigidbody.velocity = velocity;
 			}
 		}
 

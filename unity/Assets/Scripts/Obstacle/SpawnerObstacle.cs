@@ -6,18 +6,23 @@ namespace Bradley.AlienArk
 {
 	public class SpawnerObstacle : Obstacle 
 	{
-		public GameObject obstacle;
+		GameObject obstacle;
 		public Transform spawningPoint;
 		public float spawnTime = 5;
-		ParticleSystem particleSystem;
+		ParticleSystem[] particleSystems;
 		float spawnTimer;
+		int levelNum;
 
 		public override void init()
 		{
 			base.init();
-			m_collider.isTrigger = true;
+			levelNum = GameManager.instance.GetLevelNum();
 			spawnTimer = spawnTime;
-			particleSystem = GetComponentInChildren<ParticleSystem>();
+			particleSystems = new ParticleSystem[transform.childCount];
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				particleSystems[i] = transform.GetChild(i).GetComponent<ParticleSystem>();
+			}
 		}
 
 		void Start()
@@ -30,14 +35,31 @@ namespace Bradley.AlienArk
 			spawnTimer -= Time.deltaTime;
 			if (spawnTimer <= 0)
 			{
-				Instantiate(obstacle, spawningPoint.position, Quaternion.identity, null);
+				SpawnObstacle();
 				spawnTimer = spawnTime;
-				particleSystem.Stop();
+				Play(false);
 			}
-			else if (spawnTimer <= 2 && !particleSystem.isPlaying)
+			else if (spawnTimer <= 2 && !particleSystems[0].isPlaying)
 			{
-				particleSystem.Play();
+				Play(true);
 			}
+		}
+
+		void Play(bool value)
+		{
+			foreach (ParticleSystem p in particleSystems)
+			{
+				if (value) p.Play();
+				else p.Stop();
+			}
+		}
+
+		void SpawnObstacle()
+		{
+			int random = Random.Range(1,4);
+			obstacle = Resources.Load<GameObject>("Spawnables/Rock " + random);
+			GameObject o = Instantiate(obstacle, spawningPoint.position, Quaternion.Euler(0,0, Random.Range(0, 360)), null);
+			o.GetComponent<Rock>().SetSprite(levelNum, random);
 		}
 	}
 }

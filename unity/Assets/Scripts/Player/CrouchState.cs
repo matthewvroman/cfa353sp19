@@ -13,8 +13,8 @@ namespace Bradley.AlienArk
 
 		public override void OnEnter()
 		{
-			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Keveon Sneak Idle_00000");
 			m_stateMachine.controller.SetupCrouching(true);
+			m_stateMachine.controller.m_animator.SetBool("Crouch", true);
 
 			if (m_stateMachine.controller.canHide && !m_stateMachine.controller.IsSpotted())
 			{
@@ -24,9 +24,9 @@ namespace Bradley.AlienArk
 
 		public override void OnExit()
 		{
-			m_stateMachine.controller.SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Old Sprites/Keveon_00");
 			m_stateMachine.controller.SetupCrouching(false);
 			m_stateMachine.controller.Hide(false);
+			m_stateMachine.controller.m_animator.SetBool("Crouch", false);
 		}
 
 		public override void OnUpdate() 

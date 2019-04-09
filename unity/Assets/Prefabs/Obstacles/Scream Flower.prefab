@@ -56,7 +56,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1
 --- !u!114 &114982613582690578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alarmRange: 10
   screamInterval: 3
+  spriteName: Screamer
 --- !u!212 &212425510987469036
 SpriteRenderer:
   m_ObjectHideFlags: 1

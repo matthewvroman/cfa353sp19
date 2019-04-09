@@ -20,7 +20,7 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
-			if (m_stateMachine.controller.BoxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
+			if (m_stateMachine.controller.m_boxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
 			{
 				PlayerController.PlayerDied();
 			}

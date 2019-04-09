@@ -19,7 +19,7 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
-			if (m_stateMachine.controller.BoxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
+			if (m_stateMachine.controller.m_boxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
 			{
 				PlayerController.PlayerDied();
 			}
@@ -31,7 +31,7 @@ namespace Bradley.AlienArk
 			else
 			{
 				Vector2 dir = m_stateMachine.controller.GetTargetDirection();
-				float offset = m_stateMachine.controller.BoxCollider.bounds.extents.x;
+				float offset = m_stateMachine.controller.m_boxCollider.bounds.extents.x;
 				dir.x += (dir.x > 0) ? -offset : offset;
 				searchPoint = m_stateMachine.controller.target.position;
 				m_stateMachine.controller.CheckOrientation(dir.x);

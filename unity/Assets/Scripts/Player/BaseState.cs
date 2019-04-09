@@ -11,6 +11,16 @@ namespace Bradley.AlienArk
 			//Do nothing
 		}
 
+		public override void OnEnter()
+		{
+			m_stateMachine.controller.m_animator.SetBool("Base", true);
+		}
+
+		public override void OnExit()
+		{
+			m_stateMachine.controller.m_animator.SetBool("Base", false);
+		}
+
 		public override void OnUpdate() 
 		{
 			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), true);

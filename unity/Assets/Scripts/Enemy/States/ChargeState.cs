@@ -22,7 +22,7 @@ namespace Bradley.AlienArk
 			chargeDir = (int)Mathf.Sign(m_stateMachine.controller.GetTargetDirection().x);
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
-			if (m_stateMachine.controller.BoxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
+			if (m_stateMachine.controller.m_boxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
 			{
 				PlayerController.PlayerDied();
 			}
@@ -56,7 +56,7 @@ namespace Bradley.AlienArk
 				if (m_stateMachine.controller.IsNextToCliff(chargeDir))
 				{
 					m_stateMachine.controller.ApplyDrag();
-					if (m_stateMachine.controller.Rigidbody.velocity.x == 0)
+					if (m_stateMachine.controller.m_rigidbody.velocity.x == 0)
 					{
 						m_stateMachine.SetState(new ChaseState(m_stateMachine, m_stateMachine.controller.target));
 					}

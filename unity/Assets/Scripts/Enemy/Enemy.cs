@@ -25,6 +25,7 @@ namespace Bradley.AlienArk
         }
         public List<Transform> patrolRoute;
         public AttackType attackType;
+        LayerMask ground;
         public bool juvenile = false;
         public float dectectionRange = 10, attackRange = 2, baitEatingSpeed = 0.2f;
         protected float NearPatrolPoint = 0.4f;
@@ -53,6 +54,14 @@ namespace Bradley.AlienArk
             canvas = GameObject.Find("Canvas").transform;
             NearPatrolPoint += m_boxCollider.bounds.extents.x;
             attackRange += m_boxCollider.bounds.extents.x;
+            string[] layers = {"Obstacle Physics", "Ground"};
+            ground = LayerMask.GetMask(layers);
+        }
+
+        public override void UpdateAnimatorMovement(float input, bool running)
+        {
+            m_animator.SetBool("Move", input != 0);
+            m_animator.SetBool("Run", running);
         }
 
 //=====================================================================================================================================================================================
@@ -152,7 +161,7 @@ namespace Bradley.AlienArk
             {
                 Destroy(stateIndicator);
             }
-            stateIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/StateIndicators/" + name), Vector2.zero, Quaternion.identity, canvas);
+            stateIndicator = Instantiate(Resources.Load<GameObject>("StateIndicators/" + name), Vector2.zero, Quaternion.identity, canvas);
             stateIndicator.transform.SetAsFirstSibling();
         }
 
@@ -171,7 +180,7 @@ namespace Bradley.AlienArk
         public void Knockback(Collision2D collision, PlayerController player)
         {
             AlertEnemy(collision.contacts[0].point);
-            player.Rigidbody.AddForce((player.transform.position - transform.position).normalized * 3, ForceMode2D.Impulse);
+            player.m_rigidbody.AddForce((player.transform.position - transform.position).normalized * 5, ForceMode2D.Impulse);
         }
 
         public void TriggeredPlayer(Collider2D collider)
@@ -187,6 +196,7 @@ namespace Bradley.AlienArk
         {
             if (player.GetComponent<PlayerController>())
             {
+                m_animator.SetTrigger("Attack");
                 PlayerController.PlayerDied();
             }
         }
@@ -214,7 +224,7 @@ namespace Bradley.AlienArk
         public bool IsNextToCliff(float direction)
         {
             return  !Physics2D.Raycast((Vector2)transform.position + m_boxCollider.offset + new Vector2(m_boxCollider.bounds.extents.x * Mathf.Sign(direction),
-                -m_boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+                -m_boxCollider.bounds.extents.y), Vector2.down, 0.1f, ground);
         }
 
         public bool IsReachable(Vector3 targetPosition)
@@ -231,8 +241,8 @@ namespace Bradley.AlienArk
             }
             Vector2 y = new Vector2(0, m_boxCollider.bounds.extents.y);
             Vector2 dir = position - origin;
-            RaycastHit2D upHit = Physics2D.Raycast(origin + y, dir, dir.magnitude, LayerMask.GetMask("Ground"));
-            RaycastHit2D downHit = Physics2D.Raycast(origin - y, dir, dir.magnitude, LayerMask.GetMask("Ground"));
+            RaycastHit2D upHit = Physics2D.Raycast(origin + y, dir, dir.magnitude, ground);
+            RaycastHit2D downHit = Physics2D.Raycast(origin - y, dir, dir.magnitude, ground);
             if (upHit)
             {
                 if (!downHit)

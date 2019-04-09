@@ -11,21 +11,28 @@ namespace Bradley.AlienArk
 		{
 			if (jumped)
 			{
-				m_stateMachine.controller.Rigidbody.velocity += Vector2.up * (m_stateMachine.controller.jumpForce * m_stateMachine.controller.GetSpeedModifier());
+				m_stateMachine.controller.m_rigidbody.velocity += Vector2.up * (m_stateMachine.controller.jumpForce * m_stateMachine.controller.GetSpeedModifier());
 				speedModifier = m_stateMachine.controller.GetSpeedModifier();
 			}
 		}
 
 		public override void OnEnter()
 		{
-			m_stateMachine.controller.Rigidbody.gravityScale = 1;
+			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
+			m_stateMachine.controller.m_animator.SetBool("Jump", true);
+			Debug.Log("Entered Jump State");
+		}
+
+		public override void OnExit()
+		{
+			m_stateMachine.controller.m_animator.SetBool("Jump", false);
 		}
 
 		public override void OnUpdate() 
 		{
-            if (m_stateMachine.controller.Rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+            if (m_stateMachine.controller.m_rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
             {
-                m_stateMachine.controller.Rigidbody.velocity += Vector2.up * Physics.gravity.y * (m_stateMachine.controller.lowJumpMultiplyer - 1) * speedModifier * Time.deltaTime;
+                m_stateMachine.controller.m_rigidbody.velocity += Vector2.up * Physics.gravity.y * (m_stateMachine.controller.lowJumpMultiplyer - 1) * speedModifier * Time.deltaTime;
             }
 
 			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), true);
