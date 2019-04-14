@@ -15,10 +15,7 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
-			if (m_stateMachine.controller.m_boxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
-			{
-				PlayerController.PlayerDied();
-			}
+			m_stateMachine.controller.PlayAnimation("Attack");
 
 			if (!initialized)
 			{
@@ -26,6 +23,7 @@ namespace Bradley.AlienArk
 			}
 			else
 			{
+				m_stateMachine.controller.Attack();
 				Vector2 dir = m_stateMachine.controller.GetTargetDirection();
 				m_stateMachine.controller.CheckOrientation(dir.x);
 				float angle = 40;
@@ -42,6 +40,7 @@ namespace Bradley.AlienArk
 			if (initialized)
 			{
 				GameObject.Destroy(m_stateMachine.controller.stateIndicator);
+				m_stateMachine.controller.Attack();
 			}
 			else
 			{
@@ -49,17 +48,11 @@ namespace Bradley.AlienArk
 			}
 		}
 
-		public override void OnUpdate()
-		{
-
-		}
-
 		public override void CollisionEntered(Collision2D collision)
 		{
-			m_stateMachine.controller.KillPlayer(collision.gameObject);
 			if (collision.gameObject.CompareTag("Ground") && initialized)
 			{
-				Transform target = m_stateMachine.controller.sight.CheckForTargets();
+				Transform target = m_stateMachine.controller.m_sight.CheckForTargets();
 				if (target != null)
 				{
 					m_stateMachine.SetState(new ChaseState(m_stateMachine, target));

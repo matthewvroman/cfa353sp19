@@ -21,10 +21,6 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
-			if (m_stateMachine.controller.m_boxCollider.IsTouching(m_stateMachine.controller.target.GetComponent<Collider2D>()))
-			{
-				PlayerController.PlayerDied();
-			}
 
 			if (!initialized)
 			{
@@ -33,9 +29,9 @@ namespace Bradley.AlienArk
 			else
 			{
 				searchPoint = m_stateMachine.controller.target.position;
-				Animator anim = m_stateMachine.controller.GetComponent<Animator>();
-				anim.SetTrigger("attack");
-				attackTime = anim.GetCurrentAnimatorClipInfo(0).Length;
+				string name = m_stateMachine.controller.gameObject.name;
+				m_stateMachine.controller.PlayAnimation("Attack");
+				attackTime = m_stateMachine.controller.m_animator.GetCurrentAnimatorClipInfo(0).Length;
 			}
 		}
 
@@ -53,15 +49,10 @@ namespace Bradley.AlienArk
 
 		public override void OnUpdate()
 		{
-			if (Physics2D.OverlapBox(attackPoint.position, new Vector2(attackSize, attackSize), 0f, LayerMask.GetMask("Player")) != null)
-			{
-				PlayerController.PlayerDied();
-			}
-
 			attackTime -= Time.deltaTime;
 			if (attackTime <= 0)
 			{
-				Transform target = m_stateMachine.controller.sight.CheckForTargets();
+				Transform target = m_stateMachine.controller.m_sight.CheckForTargets();
 				if (target != null)
 				{
 					m_stateMachine.SetState(new ChaseState(m_stateMachine, target));
@@ -71,12 +62,6 @@ namespace Bradley.AlienArk
 					m_stateMachine.SetState(new InvestigateState(m_stateMachine, m_stateMachine.controller.transform.position));
 				}
 			}
-
-		}
-
-		public override void CollisionEntered(Collision2D collision)
-		{
-			m_stateMachine.controller.KillPlayer(collision.gameObject);
 		}
 	}
 }

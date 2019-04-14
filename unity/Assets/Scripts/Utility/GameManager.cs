@@ -20,41 +20,19 @@ namespace Bradley.AlienArk
 			}
 		}
 
-		Level[] levels = new Level[3];
-
 		public GameManager()
 		{
-			for (int i = 0; i < levels.Length; i++)
-			{
-				levels[i] = new Level("Sample_Level_" + (i + 1));
-			}
-			levels[0].Unlocked();
 		}
 
 		public void CompletedLevel()
 		{
-			int levelNum = GetLevelNum();
-			levels[levelNum - 1].Completed();
-			if (levelNum < levels.Length)
-			{
-				levels[levelNum].Unlocked();
-			}
+			//Display Game Complete Screen
 		}
 
 		public int GetLevelNum()
 		{
 			string levelName = SceneManager.GetActiveScene().name;
 			return int.Parse(levelName.Substring(levelName.Length - 1));
-		}
-
-		public Level GetLevelStatus(int levelIndex)
-		{
-			if (levelIndex < levels.Length && levelIndex >= 0)
-			{
-				return levels[levelIndex];
-			}
-			Debug.Log("WARNING: Requested level status for level that didn't exist");
-			return null;
 		}
 	}
 }

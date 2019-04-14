@@ -12,7 +12,7 @@ namespace Bradley.AlienArk
 		{
 			if (m_stateMachine.controller.target == null)
 			{
-				Transform target = m_stateMachine.controller.sight.CheckForTargets();
+				Transform target = m_stateMachine.controller.m_sight.CheckForTargets();
 				if (target != null)
 				{
 					m_stateMachine.controller.TargetSpotted(target);

@@ -8,24 +8,16 @@ namespace Bradley.AlienArk
     {
         public enum AttackType
         {
-            Charge,
             Pounce,
-            Shoot,
             Bombard,
-            Peck,
             Swing
         }
-        protected EnemySightDetection m_sight;
-        public EnemySightDetection sight
-        {
-            get
-            {
-                return m_sight;
-            }
-        }
+        [HideInInspector]
+        public CircleCollider2D m_killBox;
+        [HideInInspector]
+        public EnemySightDetection m_sight;
         public List<Transform> patrolRoute;
         public AttackType attackType;
-        LayerMask ground;
         public bool juvenile = false;
         public float dectectionRange = 10, attackRange = 2, baitEatingSpeed = 0.2f;
         protected float NearPatrolPoint = 0.4f;
@@ -48,20 +40,32 @@ namespace Bradley.AlienArk
         protected override void init()
         {
             base.init();
+            m_killBox = GetComponentInChildren<CircleCollider2D>();
+            m_killBox.isTrigger = true;
+            m_killBox.enabled = false;
             m_stateMachine = new StateMachine<Enemy>(this);
             m_stateMachine.SetState(new PatrolState(m_stateMachine));
             m_sight = GetComponentInChildren<EnemySightDetection>();
             canvas = GameObject.Find("Canvas").transform;
             NearPatrolPoint += m_boxCollider.bounds.extents.x;
             attackRange += m_boxCollider.bounds.extents.x;
-            string[] layers = {"Obstacle Physics", "Ground"};
-            ground = LayerMask.GetMask(layers);
         }
 
         public override void UpdateAnimatorMovement(float input, bool running)
         {
-            m_animator.SetBool("Move", input != 0);
-            m_animator.SetBool("Run", running);
+            string name = gameObject.name;
+            if (input == 0)
+            {
+                PlayAnimation("Idle");
+            }
+            else if (running)
+            {
+                PlayAnimation("Run");
+            }
+            else
+            {
+                PlayAnimation("Walk");
+            }
         }
 
 //=====================================================================================================================================================================================
@@ -90,10 +94,11 @@ namespace Bradley.AlienArk
         public virtual void TargetSpotted(Transform Target)
         {
             EnemyTarget possibleTarget = Target.GetComponent<EnemyTarget>();
+            if (Target == target) return;
             PlayerController player = Target.GetComponent<PlayerController>();
             if (juvenile && player)
             {
-                m_stateMachine.SetState(new PanicState(m_stateMachine, Target.position));
+                m_stateMachine.SetState(new PanicState(m_stateMachine, Target));
             }
             else if (target == null || (possibleTarget != null && possibleTarget.GetPriority() > target.GetComponent<EnemyTarget>().GetPriority()))
             {
@@ -105,29 +110,14 @@ namespace Bradley.AlienArk
         {
             switch (attackType)
             {
-                case AttackType.Charge:
-                {
-                    m_stateMachine.SetState(new ChargeState(m_stateMachine));
-                    break;
-                }
                 case AttackType.Pounce:
                 {
                     m_stateMachine.SetState(new PounceState(m_stateMachine));
                     break;
                 }
-                case AttackType.Shoot:
-                {
-                    m_stateMachine.SetState(new ShootState(m_stateMachine));
-                    break;
-                }
                 case AttackType.Bombard:
                 {
                     m_stateMachine.SetState(new BombardState(m_stateMachine));
-                    break;
-                }
-                case AttackType.Peck:
-                {
-                    m_stateMachine.SetState(new PeckState(m_stateMachine));
                     break;
                 }
                 case AttackType.Swing:
@@ -148,7 +138,9 @@ namespace Bradley.AlienArk
                     if (s.Equals("SearchState") && !((SearchState)m_stateMachine.currentState).IsAlertable(searchPoint)) return;
                     else if (s.Equals("WaitState") && !((WaitState)m_stateMachine.currentState).IsAlertable(searchPoint)) return;
                     else if (s.Equals("InvestigateState") && !((InvestigateState)m_stateMachine.currentState).IsAlertable(searchPoint)) return;
-                    
+
+                    float dir = (searchPoint - ((Vector3)m_boxCollider.offset + transform.position)).x;
+                    if ((m_facingRight && dir < 0) || (!m_facingRight && dir >= 0)) SwitchOrientation();
                     m_stateMachine.SetState(new InvestigateState(m_stateMachine, searchPoint));
                     return;
                 }
@@ -170,6 +162,11 @@ namespace Bradley.AlienArk
             m_stateMachine.SetState(new PatrolState(m_stateMachine));
         }
 
+        public void PlayAnimation(string animName)
+        {
+            m_animator.Play(animName, 0);
+        }
+
 //============================================================================================================================================================================================================
         public bool CheckForTarget()
         {
@@ -180,24 +177,25 @@ namespace Bradley.AlienArk
         public void Knockback(Collision2D collision, PlayerController player)
         {
             AlertEnemy(collision.contacts[0].point);
-            player.m_rigidbody.AddForce((player.transform.position - transform.position).normalized * 5, ForceMode2D.Impulse);
+            player.m_rigidbody.AddForce((player.transform.position - transform.position).normalized * 1, ForceMode2D.Impulse);
+        }
+
+        public void Attack()
+        {
+            m_killBox.enabled = !m_killBox.enabled;
+            if (m_stateMachine.currentState is BombardState)
+            {
+                BombardState b = m_stateMachine.currentState as BombardState;
+                b.Bombard(transform.GetChild(2).position);
+
+            }
         }
 
         public void TriggeredPlayer(Collider2D collider)
         {
             if (collider.GetComponent<PlayerController>() != null)
             {
-                Debug.Log("Alerting Enemy");
                 AlertEnemy(collider.transform.position);
-            }
-        }
-
-        public void KillPlayer(GameObject player)
-        {
-            if (player.GetComponent<PlayerController>())
-            {
-                m_animator.SetTrigger("Attack");
-                PlayerController.PlayerDied();
             }
         }
         
@@ -208,7 +206,7 @@ namespace Bradley.AlienArk
 
         public Vector2 GetTargetDirection()
         {
-            return target.position - transform.position;
+            return target.position - (transform.position + (Vector3)m_boxCollider.offset);
         }
 
         public Vector2 GetForwardPosition()
@@ -224,7 +222,7 @@ namespace Bradley.AlienArk
         public bool IsNextToCliff(float direction)
         {
             return  !Physics2D.Raycast((Vector2)transform.position + m_boxCollider.offset + new Vector2(m_boxCollider.bounds.extents.x * Mathf.Sign(direction),
-                -m_boxCollider.bounds.extents.y), Vector2.down, 0.1f, ground);
+                -m_boxCollider.bounds.extents.y), Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         }
 
         public bool IsReachable(Vector3 targetPosition)
@@ -237,19 +235,15 @@ namespace Bradley.AlienArk
         {
             if (origin == default(Vector2))
             {
-                origin = transform.position;
+                origin = m_boxCollider.offset + (Vector2)transform.position;
             }
             Vector2 y = new Vector2(0, m_boxCollider.bounds.extents.y);
-            Vector2 dir = position - origin;
-            RaycastHit2D upHit = Physics2D.Raycast(origin + y, dir, dir.magnitude, ground);
-            RaycastHit2D downHit = Physics2D.Raycast(origin - y, dir, dir.magnitude, ground);
+            Vector2 pos = position - origin;
+            RaycastHit2D upHit = Physics2D.Raycast(origin + y, Vector2.right*pos.x, pos.magnitude, LayerMask.GetMask("Ground"));
+            RaycastHit2D downHit = Physics2D.Raycast(origin - y, Vector2.right*pos.x, pos.magnitude, LayerMask.GetMask("Ground"));
             if (upHit)
             {
-                if (!downHit)
-                {
-                    return upHit;
-                }
-                else if (Vector2.Distance(upHit.point, origin) > Vector2.Distance(upHit.point, origin))
+                if (!downHit || Vector2.Distance(upHit.point, origin) > Vector2.Distance(upHit.point, origin))
                 {
                     return upHit;
                 }
@@ -260,12 +254,5 @@ namespace Bradley.AlienArk
                 return downHit;
             }
         }
-
-        public bool HeadOnCollision(Collision2D collision)
-        {
-            Vector3 normal = collision.contacts[0].normal;
-            return Vector3.Angle(normal, new Vector3(m_facingRight ? -1 : 1,0,0)) < 60;
-        }
-
     }
 }

@@ -7,8 +7,6 @@ namespace Bradley.AlienArk
     public class PatrolState : State<Enemy>
     {
         int patrolIndex = 0, patrolDir = 1, moveDir;
-        bool waiting = false;
-        float waitTimer;
 
         public PatrolState(StateMachine<Enemy> machine): base(machine) 
         {
@@ -40,15 +38,6 @@ namespace Bradley.AlienArk
             {
                 UpdatePatrol();
             }
-            else if (waiting)
-            {
-                Debug.Log("Waiting");
-                waitTimer -= Time.deltaTime;
-                if (waitTimer <= 0)
-                {
-                    waiting = false;
-                }
-            }
             else
             {
                 m_stateMachine.controller.Move(moveDir, false);
@@ -66,7 +55,7 @@ namespace Bradley.AlienArk
 
             moveDir = m_stateMachine.controller.GetMoveDirection(m_stateMachine.controller.patrolRoute[patrolIndex].position);
 
-            m_stateMachine.SetState(new WaitState(m_stateMachine, this));
+            m_stateMachine.SetState(new WaitState(m_stateMachine, this, 2));
         }
 
         public override void CollisionEntered(Collision2D collision)

@@ -9,9 +9,10 @@ namespace Bradley.AlienArk
 		Vector3 target;
 		float panicTimer = 10, alarmRange = 10;
 		int moveDir = 1;
-		public PanicState(StateMachine<Enemy> machine, Vector2 playerPos) : base (machine)
+		public PanicState(StateMachine<Enemy> machine, Transform player) : base (machine)
 		{
-			target = playerPos;
+			m_stateMachine.controller.target = player;
+			target = player.position;
 		}
 
 		public override void OnEnter()
@@ -28,14 +29,13 @@ namespace Bradley.AlienArk
 					enemy.AlertEnemy(target);
 				}
 			}
-			m_stateMachine.controller.m_animator.SetBool("Panic", true);
 		}
 
 		public override void OnExit()
 		{
 			GameObject.Destroy(m_stateMachine.controller.stateIndicator);
 			m_stateMachine.controller.stateIndicator = null;
-			m_stateMachine.controller.m_animator.SetBool("Panic", false);
+			m_stateMachine.controller.target = null;
 		}
 
 		public override void OnUpdate()
@@ -61,7 +61,6 @@ namespace Bradley.AlienArk
 		public override void TriggerEntered(Collider2D collider)
 		{
 			Enemy enemy = collider.GetComponent<Enemy>();
-			PlayerController player = collider.GetComponent<PlayerController>();
 			if (enemy)
 			{
 				enemy.AlertEnemy(target);

@@ -8,15 +8,20 @@ namespace Bradley.AlienArk
 	{
 		State<Enemy> previousState;
 		float waitTimer;
-		public WaitState(StateMachine<Enemy> machine, State<Enemy> state, float waitTime = 1) : base(machine)
+		bool m_stop = true;
+		public WaitState(StateMachine<Enemy> machine, State<Enemy> state, float waitTime = 1, bool stop = true) : base(machine)
 		{
 			previousState = state;
 			waitTimer = waitTime;
+			m_stop = stop;
 		}
 
 		public override void OnUpdate()
 		{
-			m_stateMachine.controller.ApplyDrag();
+			if (m_stop || !m_stateMachine.controller.IsReachable(m_stateMachine.controller.GetForwardPosition()))
+			{
+				m_stateMachine.controller.ApplyDrag();
+			}
 			waitTimer -= Time.deltaTime;
 			if (waitTimer <= 0)
 			{
@@ -32,10 +37,6 @@ namespace Bradley.AlienArk
 				if (!previousState.CompareState("ChaseState") && !CheckAtatckState())
 				{
 					m_stateMachine.controller.Knockback(collision, player);
-				}
-				else
-				{
-					PlayerController.PlayerDied();
 				}
 			}
 		}

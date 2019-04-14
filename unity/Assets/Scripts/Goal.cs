@@ -8,7 +8,6 @@ namespace Bradley.AlienArk
 	[RequireComponent(typeof(SpriteRenderer))]
 	public class Goal : MonoBehaviour 
 	{
-		public static System.Action<bool, Vector3> UpdateMapPosition;
 		public static System.Action LevelComplete;
 
 		void OnEnable()
@@ -41,7 +40,6 @@ namespace Bradley.AlienArk
 		{
 			GetComponent<BoxCollider2D>().enabled = true;
 			GetComponent<SpriteRenderer>().enabled = true;
-			UpdateMapPosition(true, transform.position);
 		}
 	}
 }

@@ -4,14 +4,18 @@ using UnityEngine;
 
 namespace Bradley.AlienArk
 {
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(CircleCollider2D))]
     public class PlayerController :  Creature
     {
+        //============================================================
         public static System.Action PlayerDied;
         public static System.Action PlayerHidden;
         public static System.Action<Vector3> UpdateMapPosition;
+        //============================================================
         public BaitManager baitManager;
         GameObject bait;
-
+        //============================================================
         StateMachine<PlayerController> stateMachine;
         [HideInInspector]
         public CircleCollider2D circleCollider;
@@ -30,7 +34,6 @@ namespace Bradley.AlienArk
             base.init();
             stateMachine = new StateMachine<PlayerController>(this);
             stateMachine.SetState(new BaseState(stateMachine));
-
             bait = Resources.Load<GameObject>("Spawnables/bait");
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
@@ -58,10 +61,6 @@ namespace Bradley.AlienArk
         void Update()
         {
             stateMachine.OnUpdate();
-            if (UpdateMapPosition != null)
-            {
-                UpdateMapPosition(transform.position);
-            }
         }
 
 //================================================================================================================================================================================

@@ -11,9 +11,10 @@ namespace Bradley.AlienArk
         {
             AudioManager.Instance.PlaySound("Background Music");
         }
+
         public void PlayGame ()
         {
-            SceneManager.LoadScene("Level Select");
+            SceneManager.LoadScene("Level 1");
         }
         
         public void QuitGame ()

@@ -16,16 +16,20 @@ namespace Bradley.AlienArk
 
 		void OnEnable()
 		{
+			/*
 			PlayerController.UpdateMapPosition += UpdatePlayerPosition;
 			Egg.UpdateMapPosition += UpdateEggPosition;
 			Goal.UpdateMapPosition += UpdateGoalPosition;
+			*/
 		}
 
 		void OnDisable()
 		{
+			/*
 			PlayerController.UpdateMapPosition -= UpdatePlayerPosition;
 			Egg.UpdateMapPosition -= UpdateEggPosition;
 			Goal.UpdateMapPosition -= UpdateGoalPosition;
+			*/
 		}
 
 		// Use this for initialization

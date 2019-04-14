@@ -8,16 +8,17 @@ namespace Bradley.AlienArk
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Animator))]
     public class Creature : MonoBehaviour
     {
         [HideInInspector]
         public Rigidbody2D m_rigidbody;
         [HideInInspector]
+        public BoxCollider2D m_boxCollider;
+        [HideInInspector]
         public Animator m_animator;
         [HideInInspector]
         public SpriteRenderer m_spriteRenderer;
-        [HideInInspector]
-        public BoxCollider2D m_boxCollider;
 
         [SerializeField]
         protected float m_walkSpeed = 1, m_runSpeed = 2;
@@ -28,9 +29,9 @@ namespace Bradley.AlienArk
         protected virtual void init()
         {
             m_rigidbody = GetComponent<Rigidbody2D>();
+            m_boxCollider = GetComponent<BoxCollider2D>();
             m_animator = GetComponent<Animator>();
             m_spriteRenderer = GetComponent<SpriteRenderer>();
-            m_boxCollider = GetComponent<BoxCollider2D>();
         }
 
         public void CheckOrientation(float direction)
@@ -43,7 +44,7 @@ namespace Bradley.AlienArk
 
         public void SwitchOrientation()
         {
-            transform.localScale = new Vector3(-1*transform.localScale.x,transform.localScale.y,0);
+            transform.localScale = new Vector3(-1*transform.localScale.x, transform.localScale.y,0);
             m_facingRight = !m_facingRight;
         }
 

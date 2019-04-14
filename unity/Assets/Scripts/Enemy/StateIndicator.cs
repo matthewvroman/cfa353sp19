@@ -14,6 +14,7 @@ namespace Bradley.AlienArk
 		public virtual void SetIndicator(Enemy target)
 		{
 			m_target = target;
+			m_offset += (Vector3)m_target.m_boxCollider.offset + Vector3.up*m_target.m_boxCollider.bounds.extents.y;
 			transform.position = m_target.transform.position + m_offset;
 		}
 
@@ -25,13 +26,12 @@ namespace Bradley.AlienArk
 
 		protected virtual void UpdatePosition()
 		{
-			Vector3 screenPosition = Camera.main.WorldToScreenPoint(m_target.transform.position + m_offset);
 			/*
 			screenPosition = new Vector3(Mathf.Clamp(screenPosition.x, 60, Camera.main.scaledPixelWidth - 60), 
 				Mathf.Clamp(screenPosition.y, 60, Camera.main.scaledPixelHeight - 120), screenPosition.z);
 			screenPosition.z = 10;
 			*/
-			transform.position = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(screenPosition), 0.4f);
+			transform.position = Vector2.Lerp(transform.position, m_target.transform.position + m_offset, 0.4f);
 		}
 
 		protected virtual void UpdatePointer()

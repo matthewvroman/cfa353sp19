@@ -50,7 +50,7 @@ namespace Bradley.AlienArk
 		void OnTriggerEnter2D(Collider2D other)
 		{
 			EnemyTarget target = other.GetComponentInParent<EnemyTarget>();
-			if (target != null && HasVisual(target.transform))
+			if (target && HasVisual(target.transform))
 			{
 				enemy.TargetSpotted(target.transform);
 			}
@@ -58,8 +58,7 @@ namespace Bradley.AlienArk
 
 		private bool HasVisual(Transform target)
 		{
-			Vector2 pos = enemy.transform.position;
-			return !Physics2D.Raycast(pos, (Vector2)target.position-pos, ((Vector2)target.position-pos).magnitude, LayerMask.GetMask("Ground"));
+			return !Physics2D.Raycast(transform.position, target.position-transform.position, (target.position-transform.position).magnitude, LayerMask.GetMask("Ground"));
 		}
 	}
 }

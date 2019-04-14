@@ -8,7 +8,7 @@ namespace Bradley.AlienArk
 	public class ScreenManager : MonoBehaviour 
 	{
 		[SerializeField]
-		GameObject pauseScreen, pauseButton, gameOverScreen, levelCompleteScreen, miniMap;
+		GameObject pauseScreen, pauseButton, gameOverScreen, levelCompleteScreen;
 
 
 		void OnEnable()
@@ -36,10 +36,10 @@ namespace Bradley.AlienArk
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 
-		public void ReturnToLevelSelect()
+		public void ReturnToMenu()
 		{
 			PauseGame(1);
-			SceneManager.LoadScene("Level Select");
+			SceneManager.LoadScene("Menu");
 		}
 
 		public void ReturnToGame(GameObject menu)
@@ -64,7 +64,6 @@ namespace Bradley.AlienArk
 		{
 			PauseGame(value ? 1 : 0);
 			pauseButton.SetActive(value);
-			miniMap.SetActive(value);
 		}
 
 		private void PauseGame(int value = 0)
