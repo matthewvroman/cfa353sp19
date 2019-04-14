@@ -6,6 +6,8 @@ namespace Bradley.AlienArk
 {
 	public class ClimbState : State<PlayerController>
 	{
+		bool climbing = false;
+
 		public ClimbState(StateMachine<PlayerController> machine) : base(machine)
 		{
 			//Do nothing
@@ -14,21 +16,20 @@ namespace Bradley.AlienArk
 		public override void OnEnter()
 		{
 			m_stateMachine.controller.m_rigidbody.gravityScale = 0;
-			m_stateMachine.controller.m_animator.SetBool("Climb", true);
+			m_stateMachine.controller.PlayAnimation("Climb");
 		}
 
 		public override void OnExit()
 		{
 			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
 			m_stateMachine.controller.m_animator.speed = 1;
-			m_stateMachine.controller.m_animator.SetBool("Climb", false);
 		}
 
 		public override void OnUpdate() 
 		{
 			m_stateMachine.controller.Climb(Input.GetAxis("Climb"));
+			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), false);
 
-			m_stateMachine.controller.Move(Input.GetAxis("Horizontal"), true);
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				m_stateMachine.SetState(new JumpState(m_stateMachine, true));

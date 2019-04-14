@@ -162,11 +162,6 @@ namespace Bradley.AlienArk
             m_stateMachine.SetState(new PatrolState(m_stateMachine));
         }
 
-        public void PlayAnimation(string animName)
-        {
-            m_animator.Play(animName, 0);
-        }
-
 //============================================================================================================================================================================================================
         public bool CheckForTarget()
         {

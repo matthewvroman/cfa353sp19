@@ -11,7 +11,6 @@ namespace Bradley.AlienArk
         //============================================================
         public static System.Action PlayerDied;
         public static System.Action PlayerHidden;
-        public static System.Action<Vector3> UpdateMapPosition;
         //============================================================
         public BaitManager baitManager;
         GameObject bait;
@@ -21,7 +20,6 @@ namespace Bradley.AlienArk
         public CircleCollider2D circleCollider;
         [HideInInspector]
         public BoxCollider2D detectionBox;
-        protected GameObject egg;
         [HideInInspector]
         public bool canClimb = false, canHide = false;
         public LayerMask Detection;
@@ -37,18 +35,7 @@ namespace Bradley.AlienArk
             bait = Resources.Load<GameObject>("Spawnables/bait");
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
-            egg = transform.GetChild(1).gameObject;
 
-        }
-
-        void OnEnable()
-        {
-            Egg.EggCollected += CollectedEgg;
-        }
-
-        void OnDisable()
-        {
-            Egg.EggCollected -= CollectedEgg;
         }
 
         // Use this for initialization
@@ -80,12 +67,10 @@ namespace Bradley.AlienArk
             if (input > 0)
             {
                 m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, Mathf.Clamp(input, 0, 1) * m_runSpeed);
-                m_animator.speed = 1;
             }
             else
             {
                 m_rigidbody.velocity = new Vector2 (m_rigidbody.velocity.x, m_rigidbody.velocity.y * (1 - 10 * Time.deltaTime));
-                m_animator.speed = 0;
             }
         }
 
@@ -113,8 +98,8 @@ namespace Bradley.AlienArk
         public void SetupCrouching(bool value)
         {
             m_boxCollider.enabled = !value;
-			detectionBox.offset = (value ? circleCollider.offset : Vector2.zero);
-            detectionBox.size =  value ? (Vector2.one * circleCollider.radius*2) : m_boxCollider.size + new Vector2(0, 0.5f);
+			detectionBox.offset = (value ? new Vector2(0, -0.15f) : new Vector2(0, 0.025f));
+            detectionBox.size =  value ? new Vector2(0.9f, 1.58f) : new Vector2(0.9f, 1.95f);
         }
 
 //================================================================================================================================================================================
@@ -145,11 +130,20 @@ namespace Bradley.AlienArk
 
         public override void UpdateAnimatorMovement(float input, bool running)
         {
-            bool move = input != 0;
-            m_animator.SetBool("Move", move);
-            if (stateMachine.currentState.CompareState("ClimbState"))
+            if (stateMachine.currentState is CrouchState)
             {
-                m_animator.speed = move ? 1 : 0;
+                if (input != 0) PlayAnimation("Sneak");
+                else PlayAnimation("Sneak Idle");
+            }
+            else if (stateMachine.currentState is BaseState)
+            {
+                if (input != 0) PlayAnimation("Run");
+                else PlayAnimation("Idle");
+            }
+            else if (stateMachine.currentState is ClimbState)
+            {
+                if (input != 0 || Input.GetAxis("Climb") > 0) m_animator.speed = 1;
+                else m_animator.speed = 0;
             }
         }
 
@@ -163,12 +157,6 @@ namespace Bradley.AlienArk
                 Instantiate(bait, (Vector2)transform.position + collider.offset + new Vector2(collider.radius, -collider.radius - 0.1f), Quaternion.identity, null);
                 numBait--;
             }
-        }
-
-//================================================================================================================================================================================
-        private void CollectedEgg()
-        {
-            egg.SetActive(true);
         }
 
 //================================================================================================================================================================================

@@ -98,7 +98,12 @@ namespace Bradley.AlienArk
 
         public virtual void UpdateAnimatorMovement(float input, bool running)
         {
-            m_animator.SetBool("Move", input != 0);
+            //Override Me
+        }
+
+        public void PlayAnimation(string animName)
+        {
+            m_animator.Play(animName, 0);
         }
 
         public virtual bool IsGrounded(Collider2D collider)

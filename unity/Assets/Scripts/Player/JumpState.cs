@@ -19,13 +19,7 @@ namespace Bradley.AlienArk
 		public override void OnEnter()
 		{
 			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
-			m_stateMachine.controller.m_animator.SetBool("Jump", true);
-			Debug.Log("Entered Jump State");
-		}
-
-		public override void OnExit()
-		{
-			m_stateMachine.controller.m_animator.SetBool("Jump", false);
+			m_stateMachine.controller.PlayAnimation("Jump");
 		}
 
 		public override void OnUpdate() 

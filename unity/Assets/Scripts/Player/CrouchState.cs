@@ -14,7 +14,6 @@ namespace Bradley.AlienArk
 		public override void OnEnter()
 		{
 			m_stateMachine.controller.SetupCrouching(true);
-			m_stateMachine.controller.m_animator.SetBool("Crouch", true);
 
 			if (m_stateMachine.controller.canHide && !m_stateMachine.controller.IsSpotted())
 			{
@@ -26,7 +25,6 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.SetupCrouching(false);
 			m_stateMachine.controller.Hide(false);
-			m_stateMachine.controller.m_animator.SetBool("Crouch", false);
 		}
 
 		public override void OnUpdate() 
