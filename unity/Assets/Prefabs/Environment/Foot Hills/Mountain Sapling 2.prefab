@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104082577110554}
   - component: {fileID: 212095440636449572}
-  - component: {fileID: 60357884740370004}
+  - component: {fileID: 68060228703182258}
   m_Layer: 2
   m_Name: Mountain Sapling 2
   m_TagString: Climbable
@@ -41,8 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60357884740370004
-PolygonCollider2D:
+--- !u!68 &68060228703182258
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,24 +53,11 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.15, y: 5.03}
-    newSize: {x: 1.15, y: 5.03}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: -0.25}
+  m_EdgeRadius: 0.05
   m_Points:
-    m_Paths:
-    - - {x: -0.21778965, y: -2.4738321}
-      - {x: 0.029797554, y: -2.4471998}
-      - {x: 0.105, y: -0.035}
-      - {x: 0.12637734, y: 1.6530008}
-      - {x: 0.08783293, y: 2.3639889}
-      - {x: -0.10621452, y: -0.09020233}
+  - {x: 0.1, y: 2}
+  - {x: -0.1, y: -2}
 --- !u!212 &212095440636449572
 SpriteRenderer:
   m_ObjectHideFlags: 1

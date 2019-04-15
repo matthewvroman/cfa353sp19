@@ -6,7 +6,7 @@ namespace Bradley.AlienArk
 {
 	public class SpawnerObstacle : Obstacle 
 	{
-		GameObject obstacle;
+		public GameObject[] obstacles;
 		public Transform spawningPoint;
 		public float spawnTime = 5;
 		ParticleSystem[] particleSystems;
@@ -56,10 +56,8 @@ namespace Bradley.AlienArk
 
 		void SpawnObstacle()
 		{
-			int random = Random.Range(1,4);
-			obstacle = Resources.Load<GameObject>("Spawnables/Rock " + random);
-			GameObject o = Instantiate(obstacle, spawningPoint.position, Quaternion.Euler(0,0, Random.Range(0, 360)), null);
-			o.GetComponent<Rock>().SetSprite(levelNum, random);
+			int random = Random.Range(0,obstacles.Length);
+			Instantiate(obstacles[random], spawningPoint.position, Quaternion.Euler(0,0, Random.Range(0, 360)), null);
 		}
 	}
 }

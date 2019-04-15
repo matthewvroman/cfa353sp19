@@ -163,6 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1749084b598e7f445b3970138708dcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacles:
+  - {fileID: 1012804027234994, guid: ada0a66c535876947a2e22a917df2033, type: 2}
+  - {fileID: 1012804027234994, guid: e3e71674b1200e342bfd17c81bbbca78, type: 2}
+  - {fileID: 1604850926104800, guid: 39572b2e9121a8a4db4bd8fc3e2ba6de, type: 2}
   spawningPoint: {fileID: 4251304758005900}
   spawnTime: 4
 --- !u!198 &198219068281216314

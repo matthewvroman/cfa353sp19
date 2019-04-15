@@ -20,7 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4995718242244252}
   - component: {fileID: 212355441387466530}
-  - component: {fileID: 60481607305760060}
+  - component: {fileID: 68019898340866962}
+  - component: {fileID: 58210069390562870}
   m_Layer: 2
   m_Name: Desert Tree 1
   m_TagString: Climbable
@@ -41,8 +42,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60481607305760060
-PolygonCollider2D:
+--- !u!58 &58210069390562870
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036566329429342}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.5, y: -3}
+  serializedVersion: 2
+  m_Radius: 1.5
+--- !u!68 &68019898340866962
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -54,37 +70,11 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.19, y: 9.29}
-    newSize: {x: 5.19, y: 9.29}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_EdgeRadius: 0.8
   m_Points:
-    m_Paths:
-    - - {x: 1.2971351, y: -3.5475826}
-      - {x: 1.3437418, y: -2.3538303}
-      - {x: 0.84415543, y: 1.8934423}
-      - {x: 0.5170468, y: 2.7048986}
-      - {x: 0.15229687, y: 3.556624}
-      - {x: -0.1796363, y: 3.726095}
-      - {x: -0.38363963, y: 3.5129626}
-      - {x: -0.5668336, y: 3.3282158}
-      - {x: -0.646644, y: 2.881316}
-      - {x: -0.799682, y: 1.9554678}
-      - {x: -1.0372393, y: 1.1975436}
-      - {x: -1.4265305, y: -0.3204298}
-      - {x: -2.008472, y: -1.9497294}
-      - {x: -2.2454662, y: -2.5494342}
-      - {x: -2.3468523, y: -3.4618618}
-      - {x: -2.1821427, y: -4.1842604}
-      - {x: -1.4579201, y: -4.4371705}
-      - {x: 0.0630106, y: -4.3893414}
-      - {x: 0.9172293, y: -4.363063}
-      - {x: 1.0223383, y: -4.076421}
+  - {x: 0, y: 3}
+  - {x: -0.1, y: 1}
+  - {x: -0.5, y: -3.5}
 --- !u!212 &212355441387466530
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -118,7 +108,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8df83d6f6c9a94341be6a36e41ddb45f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

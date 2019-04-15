@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109628423173366}
   - component: {fileID: 212468735776716678}
-  - component: {fileID: 60100176599119236}
+  - component: {fileID: 68198100857963936}
   m_Layer: 2
   m_Name: L Tree 2
   m_TagString: Climbable
@@ -41,8 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!60 &60100176599119236
-PolygonCollider2D:
+--- !u!68 &68198100857963936
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,32 +53,12 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.8, y: 9.6}
-    newSize: {x: 18.8, y: 9.6}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: -0.1}
+  m_EdgeRadius: 1.2
   m_Points:
-    m_Paths:
-    - - {x: 3.1912313, y: 1.2883563}
-      - {x: 0.60842556, y: 0.9618581}
-      - {x: -3.0103164, y: 0.6836064}
-      - {x: -5.034633, y: 1.1045504}
-      - {x: -6.563941, y: 1.3217492}
-      - {x: -6.5806694, y: -2.130786}
-      - {x: -2.8657606, y: -2.427117}
-      - {x: 0.1442066, y: -2.2318857}
-      - {x: 2.3119173, y: -1.9452822}
-      - {x: 4.66101, y: -2.1937633}
-      - {x: 7.7800703, y: -2.9921484}
-      - {x: 8.516236, y: -2.4083815}
-      - {x: 8.850472, y: -1.9605894}
-      - {x: 8.555198, y: 1.3090124}
+  - {x: -3, y: -0.75}
+  - {x: 2, y: -0.5}
+  - {x: 8, y: -0.8}
 --- !u!212 &212468735776716678
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,7 +92,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d569d7ea77aa9ef41ac06754d51d1eb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4037476311946260}
   - component: {fileID: 212191334566557460}
-  - component: {fileID: 60845573866863828}
+  - component: {fileID: 68853970514609104}
   m_Layer: 2
   m_Name: L Tree 1
   m_TagString: Climbable
@@ -41,8 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!60 &60845573866863828
-PolygonCollider2D:
+--- !u!68 &68853970514609104
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,31 +53,12 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.8, y: 9.6}
-    newSize: {x: 18.8, y: 9.6}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0, y: -0.15}
+  m_EdgeRadius: 1.25
   m_Points:
-    m_Paths:
-    - - {x: 0.21331826, y: 0.9155756}
-      - {x: -1.3014774, y: 0.6130799}
-      - {x: -2.0076203, y: 0.7398038}
-      - {x: -3.3910735, y: 0.5801327}
-      - {x: -3.7643766, y: 0.68826056}
-      - {x: -5.751271, y: 1.1651454}
-      - {x: -7.254355, y: 1.2454696}
-      - {x: -7.291356, y: -2.1694326}
-      - {x: -3.4472804, y: -2.383736}
-      - {x: 2.3774898, y: -2.097938}
-      - {x: 7.895215, y: -2.9140272}
-      - {x: 8.713218, y: -2.1267061}
-      - {x: 8.496976, y: 1.307107}
+  - {x: -3, y: -0.8}
+  - {x: 2, y: -0.25}
+  - {x: 9, y: -0.75}
 --- !u!212 &212191334566557460
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -111,7 +92,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ebb495f4c82570e408d306ff3f25f985, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

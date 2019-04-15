@@ -9,13 +9,15 @@ namespace Bradley.AlienArk
 		SpriteRenderer renderer;
 		public float screamInterval = 3;
 		public string spriteName = "Screamer";
+		AudioSource sound;
 		float screamTimer;
 
 		void Start () 
 		{
 			init();
 			renderer = GetComponent<SpriteRenderer>();
-			renderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/Screamer 1");
+			renderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/" + spriteName + " 1");
+			sound = GetComponentInChildren<AudioSource>();
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -50,6 +52,7 @@ namespace Bradley.AlienArk
 		IEnumerator Scream()
 		{
 			renderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/" + spriteName + " 2");
+			sound.Play();
 			AlertEnemies(alarmRange, transform.position);
 			screamTimer = screamInterval;
 			yield return new WaitForSeconds(1f);

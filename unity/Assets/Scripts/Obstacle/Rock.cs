@@ -33,14 +33,5 @@ namespace Bradley.AlienArk
 			}
 			KillPlayer(other.gameObject);
 		}
-		
-		public void SetSprite(int levelNum, int spriteNum)
-		{
-			if (!m_spriteRenderer)
-			{
-				m_spriteRenderer = GetComponent<SpriteRenderer>();
-			}
-			m_spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Obstacles/" + levelNum + "S Rock " + spriteNum);
-		}
 	}
 }

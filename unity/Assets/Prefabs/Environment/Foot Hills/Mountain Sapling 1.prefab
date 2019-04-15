@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4019771808770776}
   - component: {fileID: 212483502709436042}
-  - component: {fileID: 60064197493585124}
+  - component: {fileID: 68094506393127972}
   m_Layer: 0
   m_Name: Mountain Sapling 1
   m_TagString: Climbable
@@ -41,8 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60064197493585124
-PolygonCollider2D:
+--- !u!68 &68094506393127972
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,25 +53,11 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.1, y: 8}
-    newSize: {x: 3.1, y: 8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.2, y: -0.5}
+  m_EdgeRadius: 0.1
   m_Points:
-    m_Paths:
-    - - {x: -0.10516164, y: -3.9164138}
-      - {x: 0.44396546, y: -3.9630706}
-      - {x: 0.38, y: -3.62}
-      - {x: 0.4054246, y: 2.265749}
-      - {x: 0.21659109, y: 3.7612364}
-      - {x: 0.061872512, y: 2.3254728}
-      - {x: -0.047314882, y: -3.5968485}
+  - {x: 0, y: 3.25}
+  - {x: 0, y: -3.25}
 --- !u!212 &212483502709436042
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -105,7 +91,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d8c51940cacb7fe498efefad06a80dab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

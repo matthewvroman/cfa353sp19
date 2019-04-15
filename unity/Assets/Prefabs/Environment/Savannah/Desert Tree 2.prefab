@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4264501109375002}
   - component: {fileID: 212751774066026718}
-  - component: {fileID: 60329881436023396}
+  - component: {fileID: 68182531792670740}
   m_Layer: 2
   m_Name: Desert Tree 2
   m_TagString: Climbable
@@ -41,8 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60329881436023396
-PolygonCollider2D:
+--- !u!68 &68182531792670740
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,40 +53,11 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.07, y: 9.46}
-    newSize: {x: 9.07, y: 9.46}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.1, y: 0}
+  m_EdgeRadius: 1.6
   m_Points:
-    m_Paths:
-    - - {x: 1.6860708, y: -4.3092866}
-      - {x: 1.8286817, y: -4.0662313}
-      - {x: 2.1364934, y: -3.2123606}
-      - {x: 2.2860446, y: -2.1223302}
-      - {x: 2.050634, y: -1.0655216}
-      - {x: 1.5170536, y: 1.2393248}
-      - {x: 1.0225941, y: 2.4521158}
-      - {x: 1.2459213, y: 3.068923}
-      - {x: 0.92599344, y: 3.703451}
-      - {x: 0.19134933, y: 3.541069}
-      - {x: -0.33192635, y: 2.4893866}
-      - {x: -0.9937824, y: 3.6360617}
-      - {x: -1.6532248, y: 3.191787}
-      - {x: -1.5982287, y: 2.483858}
-      - {x: -1.832092, y: 1.2210774}
-      - {x: -2.3434036, y: -0.69193316}
-      - {x: -2.250692, y: -3.7392757}
-      - {x: -1.9303695, y: -4.1483483}
-      - {x: -1.5608821, y: -4.404617}
-      - {x: -0.42499998, y: -4.49}
-      - {x: -0.415, y: -4.5}
-      - {x: 0.87130535, y: -4.52}
+  - {x: 0, y: 2}
+  - {x: 0, y: -3}
 --- !u!212 &212751774066026718
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -120,7 +91,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4ebbe0a2935d4d4eac033d0885ea52e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

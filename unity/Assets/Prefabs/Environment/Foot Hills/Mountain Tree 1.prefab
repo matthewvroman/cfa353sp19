@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4100747920535766}
   - component: {fileID: 212674524202186362}
-  - component: {fileID: 60427826077002870}
+  - component: {fileID: 68363351302898088}
   m_Layer: 2
   m_Name: Mountain Tree 1
   m_TagString: Climbable
@@ -34,15 +34,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596244535361176}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.03, y: 0.52, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60427826077002870
-PolygonCollider2D:
+--- !u!68 &68363351302898088
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,27 +53,11 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.27, y: 9.65}
-    newSize: {x: 10.27, y: 9.65}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.215, y: -0.5}
+  m_EdgeRadius: 0.125
   m_Points:
-    m_Paths:
-    - - {x: 0.14929125, y: -4.8335557}
-      - {x: 0.3669765, y: -4.6333766}
-      - {x: 0.4395299, y: -2.6743534}
-      - {x: 0.42950672, y: -1.161983}
-      - {x: 0.4854622, y: 3.859939}
-      - {x: -0.00283432, y: 3.8758721}
-      - {x: -0.034964025, y: -0.11388439}
-      - {x: -0.031220555, y: -0.8692064}
-      - {x: -0.08541101, y: -4.640011}
+  - {x: 0, y: 4}
+  - {x: -0.075, y: -4}
 --- !u!212 &212674524202186362
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -107,7 +91,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2f675687e612f4649bae6ed46ba6444c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

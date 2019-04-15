@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4412060212081690}
   - component: {fileID: 212118977775299384}
-  - component: {fileID: 60043472805761634}
+  - component: {fileID: 68332568122054384}
   m_Layer: 2
   m_Name: S Tree 2
   m_TagString: Climbable
@@ -41,8 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!60 &60043472805761634
-PolygonCollider2D:
+--- !u!68 &68332568122054384
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,35 +53,11 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.55, y: 5.04}
-    newSize: {x: 18.55, y: 5.04}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: -0.6}
+  m_EdgeRadius: 0.8
   m_Points:
-    m_Paths:
-    - - {x: 9.125002, y: -1.9677477}
-      - {x: 5.8159122, y: -2.0283108}
-      - {x: 4.057379, y: -1.6636515}
-      - {x: 2.554095, y: -1.7586637}
-      - {x: 1.1661268, y: -1.6046268}
-      - {x: 0.4037245, y: -1.7748518}
-      - {x: -2.0497818, y: -1.550139}
-      - {x: -2.9128563, y: -1.8330928}
-      - {x: -4.268815, y: -1.7200255}
-      - {x: -4.2678995, y: 0.7073674}
-      - {x: -3.1401978, y: 0.78072596}
-      - {x: -1.5609457, y: 0.5079384}
-      - {x: 1.2079852, y: 0.6888854}
-      - {x: 2.4908452, y: 0.41746187}
-      - {x: 3.5996706, y: 0.72498584}
-      - {x: 5.9376383, y: 0.9609399}
-      - {x: 9.024227, y: 0.9602165}
+  - {x: -3, y: 0}
+  - {x: 9, y: 0}
 --- !u!212 &212118977775299384
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -115,7 +91,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 555892757
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 420c95ec8e4180c489acf5f54e09e57e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
