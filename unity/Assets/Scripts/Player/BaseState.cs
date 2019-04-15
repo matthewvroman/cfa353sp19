@@ -10,6 +10,11 @@ namespace Bradley.AlienArk
 		{
 			//Do nothing
 		}
+
+		public override void OnExit()
+		{
+			m_stateMachine.controller.m_sound.Stop("Run");
+		}
 		
 		public override void OnUpdate() 
 		{
@@ -18,7 +23,7 @@ namespace Bradley.AlienArk
 			{
 				m_stateMachine.SetState(new JumpState(m_stateMachine, true));
 			}
-			if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
 				m_stateMachine.SetState(new CrouchState(m_stateMachine));
 			}

@@ -29,6 +29,7 @@ namespace Bradley.AlienArk
 					enemy.AlertEnemy(target);
 				}
 			}
+			m_stateMachine.controller.m_sound.Play("Cry");
 		}
 
 		public override void OnExit()
@@ -56,6 +57,8 @@ namespace Bradley.AlienArk
 					m_stateMachine.controller.Move(moveDir, true);
 				}
 			}
+
+			if (Random.Range(0f, 1f) < 0.3*Time.deltaTime) m_stateMachine.controller.m_sound.Play("Cry");
 		}
 
 		public override void TriggerEntered(Collider2D collider)
@@ -63,6 +66,7 @@ namespace Bradley.AlienArk
 			Enemy enemy = collider.GetComponent<Enemy>();
 			if (enemy)
 			{
+				m_stateMachine.controller.m_sound.Play("Cry");
 				enemy.AlertEnemy(target);
 			}
 		}

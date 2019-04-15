@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Background Music
-    clip: {fileID: 8300000, guid: 8a0e01d3600dd3042bfcf517fafb265d, type: 3}
+    clip: {fileID: 8300000, guid: 7edaf63de6b157345a5b5d8777f99b33, type: 3}
     volume: 1
     pitch: 1
     loop: 1

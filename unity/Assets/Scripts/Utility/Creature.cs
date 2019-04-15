@@ -19,6 +19,8 @@ namespace Bradley.AlienArk
         public Animator m_animator;
         [HideInInspector]
         public SpriteRenderer m_spriteRenderer;
+        [HideInInspector]
+        public SFXManager m_sound;
 
         [SerializeField]
         protected float m_walkSpeed = 1, m_runSpeed = 2;
@@ -32,6 +34,7 @@ namespace Bradley.AlienArk
             m_boxCollider = GetComponent<BoxCollider2D>();
             m_animator = GetComponent<Animator>();
             m_spriteRenderer = GetComponent<SpriteRenderer>();
+            m_sound = GetComponentInChildren<SFXManager>();
         }
 
         public void CheckOrientation(float direction)

@@ -49,6 +49,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1599691739919980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4134795408982232}
+  - component: {fileID: 114279466079933846}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4134795408982232
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599691739919980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4186862042829854}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4186862042829854
 Transform:
   m_ObjectHideFlags: 1
@@ -60,6 +89,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4859316677874240}
+  - {fileID: 4134795408982232}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -179,6 +209,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114279466079933846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599691739919980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Run
+    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Sneak
+    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
+    volume: 0.025
+    pitch: 0.5
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 4693b4540596cf340bc029730eb5e775, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    source: {fileID: 0}
+  - name: Climb
+    clip: {fileID: 8300000, guid: 9f983b90fb3255b43a6bc3fd063531e0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Bait
+    clip: {fileID: 8300000, guid: 19f8da48a0c813746a94e30a9fc1cbb6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    source: {fileID: 0}
+  - name: Hidden
+    clip: {fileID: 8300000, guid: 34c58d2abe4664149b14216d108f7b20, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
 --- !u!114 &114574685799503980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,6 +290,7 @@ MonoBehaviour:
   m_boxCollider: {fileID: 0}
   m_animator: {fileID: 0}
   m_spriteRenderer: {fileID: 0}
+  m_sound: {fileID: 0}
   m_walkSpeed: 2
   m_runSpeed: 3.5
   baitManager: {fileID: 0}

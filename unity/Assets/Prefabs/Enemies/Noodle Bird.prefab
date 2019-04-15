@@ -46,6 +46,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1866679598294612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4998141693192600}
+  - component: {fileID: 114736011515706824}
+  m_Layer: 12
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1916156990017800
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,13 +115,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1916156990017800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9225534, y: -4.201254, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4133647157218206}
   - {fileID: 4071058213837686}
+  - {fileID: 4998141693192600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4998141693192600
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1866679598294612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4828863285630722}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50476955100307192
 Rigidbody2D:
@@ -228,6 +258,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b5202a77a3743408ada90fbb5654f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114736011515706824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1866679598294612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Walk
+    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
+    volume: 0.025
+    pitch: 0.5
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Cry
+    clip: {fileID: 8300000, guid: 5f4b8084feed9464aa5f4a9c44e0ec5a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    source: {fileID: 0}
 --- !u!114 &114744325598182086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,6 +317,7 @@ MonoBehaviour:
   m_boxCollider: {fileID: 0}
   m_animator: {fileID: 0}
   m_spriteRenderer: {fileID: 0}
+  m_sound: {fileID: 0}
   m_walkSpeed: 2
   m_runSpeed: 4
   m_killBox: {fileID: 0}

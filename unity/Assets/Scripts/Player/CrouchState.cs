@@ -25,6 +25,8 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.SetupCrouching(false);
 			m_stateMachine.controller.Hide(false);
+			m_stateMachine.controller.m_sound.Stop("Sneak");
+			m_stateMachine.controller.m_sound.Stop("Hidden");
 		}
 
 		public override void OnUpdate() 

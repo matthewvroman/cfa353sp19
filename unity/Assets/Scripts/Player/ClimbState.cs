@@ -23,6 +23,7 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
 			m_stateMachine.controller.m_animator.speed = 1;
+			m_stateMachine.controller.m_sound.Stop("Climb");
 		}
 
 		public override void OnUpdate() 
@@ -47,7 +48,8 @@ namespace Bradley.AlienArk
 			if (collider.CompareTag("Climbable"))
 			{
 				m_stateMachine.controller.canClimb = false;
-				m_stateMachine.SetState(new BaseState(m_stateMachine));
+				if (m_stateMachine.controller.IsGrounded(m_stateMachine.controller.circleCollider)) m_stateMachine.SetState(new BaseState(m_stateMachine));
+				else m_stateMachine.SetState(new JumpState(m_stateMachine, false));
 			}
 			m_stateMachine.controller.Hideable(collider, false);
 		}

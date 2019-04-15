@@ -132,18 +132,44 @@ namespace Bradley.AlienArk
         {
             if (stateMachine.currentState is CrouchState)
             {
-                if (input != 0) PlayAnimation("Sneak");
-                else PlayAnimation("Sneak Idle");
+                if (input != 0)
+                {
+                    PlayAnimation("Sneak");
+                    m_sound.Play("Sneak");
+                    if (!detectionBox.enabled) m_sound.Play("Hidden");
+                }
+                else
+                {
+                    PlayAnimation("Sneak Idle");
+                    m_sound.Stop("Sneak");
+                    m_sound.Stop("Hidden");
+                }
             }
             else if (stateMachine.currentState is BaseState)
             {
-                if (input != 0) PlayAnimation("Run");
-                else PlayAnimation("Idle");
+                if (input != 0)
+                {
+                    PlayAnimation("Run");
+                    m_sound.Play("Run");
+                }
+                else
+                {
+                    PlayAnimation("Idle");
+                    m_sound.Stop("Run");
+                }
             }
             else if (stateMachine.currentState is ClimbState)
             {
-                if (input != 0 || Input.GetAxis("Climb") > 0) m_animator.speed = 1;
-                else m_animator.speed = 0;
+                if (input != 0 || Input.GetAxis("Climb") > 0)
+                {
+                    m_animator.speed = 1;
+                    m_sound.Play("Climb");
+                }
+                else
+                {
+                    m_animator.speed = 0;
+                    m_sound.Stop("Climb");
+                }
             }
         }
 
@@ -152,6 +178,7 @@ namespace Bradley.AlienArk
         {
             if (Input.GetKeyDown(KeyCode.F) && numBait > 0)
             {
+                m_sound.Play("Bait");
                 baitManager.DroppedBait();
                 CircleCollider2D collider = GetComponent<CircleCollider2D>();
                 Instantiate(bait, (Vector2)transform.position + collider.offset + new Vector2(collider.radius, -collider.radius - 0.1f), Quaternion.identity, null);

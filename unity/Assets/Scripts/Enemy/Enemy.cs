@@ -57,14 +57,20 @@ namespace Bradley.AlienArk
             if (input == 0)
             {
                 PlayAnimation("Idle");
+                m_sound.Stop("Run");
+                m_sound.Stop("Walk");
             }
             else if (running)
             {
                 PlayAnimation("Run");
+                m_sound.Play("Run");
+                m_sound.Stop("Walk");
             }
             else
             {
                 PlayAnimation("Walk");
+                m_sound.Play("Walk");
+                m_sound.Stop("Run");
             }
         }
 
@@ -91,10 +97,11 @@ namespace Bradley.AlienArk
         
 //=====================================================================================================================================================================================
 
-        public virtual void TargetSpotted(Transform Target)
+        public virtual void TargetSpotted(Transform Target, EnemyTarget possibleTarget = default(EnemyTarget))
         {
-            EnemyTarget possibleTarget = Target.GetComponent<EnemyTarget>();
+            if (possibleTarget == default(EnemyTarget)) possibleTarget = Target.GetComponentInParent<EnemyTarget>();
             if (Target == target) return;
+            
             PlayerController player = Target.GetComponent<PlayerController>();
             if (juvenile && player)
             {

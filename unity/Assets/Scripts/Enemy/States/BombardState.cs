@@ -20,6 +20,7 @@ namespace Bradley.AlienArk
 			m_stateMachine.controller.CreateStateIndicator("Attack");
 			m_stateMachine.controller.stateIndicator.GetComponent<StateIndicator>().SetIndicator(m_stateMachine.controller);
 			m_stateMachine.controller.PlayAnimation("Attack");
+			m_stateMachine.controller.m_sound.Play("Cry");
 			m_stateMachine.controller.m_killBox.enabled = true;
 		}
 
@@ -78,6 +79,7 @@ namespace Bradley.AlienArk
 				shots[i].GetComponent<Projectile>().ShootProjectile(velocity);
 			}
 			m_stateMachine.controller.m_killBox.enabled = true;
+			m_stateMachine.controller.m_sound.Play("Shoot");
 			initialized = true;
 		}
 	}

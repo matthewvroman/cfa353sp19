@@ -31,6 +31,7 @@ namespace Bradley.AlienArk
 				searchPoint = m_stateMachine.controller.target.position;
 				string name = m_stateMachine.controller.gameObject.name;
 				m_stateMachine.controller.PlayAnimation("Attack");
+				m_stateMachine.controller.m_sound.Play("Cry");
 				attackTime = m_stateMachine.controller.m_animator.GetCurrentAnimatorClipInfo(0).Length;
 			}
 		}

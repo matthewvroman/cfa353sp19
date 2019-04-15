@@ -27,6 +27,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1281746757679420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4140678661529094}
+  - component: {fileID: 114455094954250700}
+  m_Layer: 14
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1539189607155452
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,6 +97,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4140678661529094
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281746757679420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4172916799418700}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4172916799418700
 Transform:
   m_ObjectHideFlags: 1
@@ -94,6 +123,7 @@ Transform:
   - {fileID: 4451500451434788}
   - {fileID: 4380823691491446}
   - {fileID: 4533783260051902}
+  - {fileID: 4140678661529094}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -286,6 +316,7 @@ MonoBehaviour:
   m_boxCollider: {fileID: 0}
   m_animator: {fileID: 0}
   m_spriteRenderer: {fileID: 0}
+  m_sound: {fileID: 0}
   m_walkSpeed: 3
   m_runSpeed: 6
   m_killBox: {fileID: 0}
@@ -312,6 +343,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b5202a77a3743408ada90fbb5654f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114455094954250700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281746757679420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Walk
+    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
+    volume: 0.015
+    pitch: 0.5
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
+    volume: 0.04
+    pitch: 1
+    loop: 1
+    muted: 0
+    source: {fileID: 0}
+  - name: Cry
+    clip: {fileID: 8300000, guid: c4fa86066d7a3ab4695e5310c242ab0a, type: 3}
+    volume: 0.2
+    pitch: 3
+    loop: 0
+    muted: 0
+    source: {fileID: 0}
 --- !u!212 &212266865304189294
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -20,6 +20,7 @@ namespace Bradley.AlienArk
 		{
 			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
 			m_stateMachine.controller.PlayAnimation("Jump");
+			m_stateMachine.controller.m_sound.Play("Jump");
 		}
 
 		public override void OnUpdate() 

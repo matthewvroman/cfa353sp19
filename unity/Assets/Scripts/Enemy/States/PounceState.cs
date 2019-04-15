@@ -20,6 +20,7 @@ namespace Bradley.AlienArk
 			if (!initialized)
 			{
 				m_stateMachine.SetState(new WaitState(m_stateMachine, this));
+				m_stateMachine.controller.m_sound.Play("Cry");
 			}
 			else
 			{
@@ -32,6 +33,7 @@ namespace Bradley.AlienArk
 				velocity.x *= Mathf.Sign(dir.x);
 				velocity.y = Mathf.Clamp(velocity.y, 0.5f, 10);
 				m_stateMachine.controller.m_rigidbody.velocity = velocity;
+				m_stateMachine.controller.m_sound.Play("Pounce");
 			}
 		}
 
