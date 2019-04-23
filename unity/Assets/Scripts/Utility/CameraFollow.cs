@@ -13,6 +13,8 @@ namespace Bradley.AlienArk
         [Range(0, 1)]
         public float deadZoneX = 0, deadZoneY = 0, lookForward;
         [SerializeField]
+        float lerpSpeed = 0.3f;
+        [SerializeField]
         Vector3 offset = new Vector3(0,4,-10);
         float width, height;
 
@@ -33,8 +35,7 @@ namespace Bradley.AlienArk
             if (Mathf.Abs((desiredPos - transform.position).x) <= deadZone.x) desiredPos.x = transform.position.x;
             if (Mathf.Abs((pos - transform.position).y) <= deadZone.y) desiredPos.y = transform.position.y;
             desiredPos.x = Mathf.Clamp(desiredPos.x, startPoint.position.x + width/2, endPoint.position.x - width/2);
-            transform.position = Vector3.Lerp(transform.position, desiredPos, 0.025f);
-            //transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, desiredPos.y, desiredPos.z), 0.02f);
+            transform.position = Vector3.Lerp(transform.position, desiredPos, lerpSpeed * Time.fixedDeltaTime);
         }
 
         private Vector3 DeadZone()
