@@ -168,7 +168,7 @@ MonoBehaviour:
   - {fileID: 1012804027234994, guid: 49a62518b1b86cf4ab0df92bd746c124, type: 2}
   - {fileID: 1604850926104800, guid: 7f338d094d647904da8fba13eb1071d6, type: 2}
   spawningPoint: {fileID: 4846821907464340}
-  spawnTime: 4
+  spawnTime: 3
 --- !u!198 &198432485516931712
 ParticleSystem:
   m_ObjectHideFlags: 1

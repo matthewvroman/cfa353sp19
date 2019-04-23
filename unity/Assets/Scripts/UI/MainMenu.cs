@@ -14,7 +14,7 @@ namespace Bradley.AlienArk
 
         public void PlayGame ()
         {
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadScene("Level_1");
         }
         
         public void QuitGame ()

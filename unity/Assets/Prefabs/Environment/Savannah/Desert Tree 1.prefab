@@ -20,8 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4995718242244252}
   - component: {fileID: 212355441387466530}
-  - component: {fileID: 68019898340866962}
-  - component: {fileID: 58210069390562870}
+  - component: {fileID: 60995988080583200}
   m_Layer: 2
   m_Name: Desert Tree 1
   m_TagString: Climbable
@@ -42,23 +41,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58210069390562870
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1036566329429342}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.5, y: -3}
-  serializedVersion: 2
-  m_Radius: 1.5
---- !u!68 &68019898340866962
-EdgeCollider2D:
+--- !u!60 &60995988080583200
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -70,11 +54,25 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.8
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.19, y: 9.29}
+    newSize: {x: 5.19, y: 9.29}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 0, y: 3}
-  - {x: -0.1, y: 1}
-  - {x: -0.5, y: -3.5}
+    m_Paths:
+    - - {x: 0.99544716, y: -3.1903996}
+      - {x: 1.0305462, y: -2.1294408}
+      - {x: 0.6011524, y: 1.8206038}
+      - {x: -0.51984406, y: 1.8724246}
+      - {x: -1.8708858, y: -2.7070794}
+      - {x: -1.8178787, y: -4.012213}
+      - {x: -0.5291195, y: -4.314406}
+      - {x: 0.7190647, y: -3.9973378}
 --- !u!212 &212355441387466530
 SpriteRenderer:
   m_ObjectHideFlags: 1

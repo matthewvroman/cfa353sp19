@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Bradley.AlienArk
 {
-	[RequireComponent(typeof(CircleCollider2D))]
 	[RequireComponent(typeof(SpriteRenderer))]
 	public class Egg : MonoBehaviour 
 	{

@@ -19,6 +19,7 @@ namespace Bradley.AlienArk
 		{
 			if (player.CompareTag("Player"))
 			{
+				Debug.Log("Hit Spike");
 				PlayerController.PlayerDied();
 			}
 		}

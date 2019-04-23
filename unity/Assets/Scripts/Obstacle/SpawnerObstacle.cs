@@ -17,7 +17,7 @@ namespace Bradley.AlienArk
 		{
 			base.init();
 			levelNum = GameManager.instance.GetLevelNum();
-			spawnTimer = spawnTime;
+			spawnTimer = Random.Range(0.1f, spawnTime);
 			particleSystems = new ParticleSystem[transform.childCount];
 			for (int i = 0; i < transform.childCount; i++)
 			{
