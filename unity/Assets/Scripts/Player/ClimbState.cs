@@ -35,7 +35,6 @@ namespace Bradley.AlienArk
 			{
 				m_stateMachine.SetState(new JumpState(m_stateMachine, true));
 			}
-			m_stateMachine.controller.DropBait();
 		}
 
 		public override void TriggerEntered(Collider2D collider) 

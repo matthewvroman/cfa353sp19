@@ -39,11 +39,6 @@ namespace Bradley.AlienArk
 					changeDir = false;
 					return;
 				}
-				if (m_stateMachine.controller.target.GetComponent<Bait>())
-				{
-					withinRange = m_stateMachine.controller.NEAR_PATROL_POINT;
-					bait = true;
-				}
 				else
 				{
 					withinRange = m_stateMachine.controller.attackRange;
@@ -76,15 +71,7 @@ namespace Bradley.AlienArk
 			Vector3 targetPos = m_stateMachine.controller.target.position;
 			if (distance <= withinRange)
 			{
-				if (bait)
-				{
-					m_stateMachine.SetState(new EatBaitState(m_stateMachine));
-					m_stateMachine.controller.m_rigidbody.velocity = Vector3.zero;
-				}
-				else
-				{
-					m_stateMachine.controller.EnterAttackState();
-				}
+				m_stateMachine.controller.EnterAttackState();
 			}
 			else if (distance > m_stateMachine.controller.dectectionRange || !m_stateMachine.controller.IsReachable(targetPos))
 			{

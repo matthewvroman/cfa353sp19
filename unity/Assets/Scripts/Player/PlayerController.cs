@@ -12,9 +12,6 @@ namespace Bradley.AlienArk
         public static System.Action PlayerDied;
         public static System.Action PlayerHidden;
         //============================================================
-        public BaitManager baitManager;
-        GameObject bait;
-        //============================================================
         StateMachine<PlayerController> stateMachine;
         [HideInInspector]
         public CircleCollider2D circleCollider;
@@ -32,7 +29,6 @@ namespace Bradley.AlienArk
             base.init();
             stateMachine = new StateMachine<PlayerController>(this);
             stateMachine.SetState(new BaseState(stateMachine));
-            bait = Resources.Load<GameObject>("Spawnables/bait");
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
 
@@ -170,19 +166,6 @@ namespace Bradley.AlienArk
                     m_animator.speed = 0;
                     m_sound.Stop("Climb");
                 }
-            }
-        }
-
-//================================================================================================================================================================================
-        public void DropBait()
-        {
-            if (Input.GetKeyDown(KeyCode.F) && numBait > 0)
-            {
-                m_sound.Play("Bait");
-                baitManager.DroppedBait();
-                CircleCollider2D collider = GetComponent<CircleCollider2D>();
-                Instantiate(bait, (Vector2)transform.position + collider.offset + new Vector2(collider.radius, -collider.radius - 0.1f), Quaternion.identity, null);
-                numBait--;
             }
         }
 

@@ -4573,7 +4573,7 @@ Prefab:
     - target: {fileID: 212263046307844784, guid: 5d886fedb561e0644adbd88679a22d20,
         type: 2}
       propertyPath: m_SortingOrder
-      value: -2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 212263046307844784, guid: 5d886fedb561e0644adbd88679a22d20,
         type: 2}
@@ -5307,7 +5307,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396116765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8, y: -7.8, z: 0}
+  m_LocalPosition: {x: 1.7, y: -7.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2132876363}
@@ -7556,7 +7556,7 @@ RectTransform:
   m_GameObject: {fileID: 572458889}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1284565474}
   - {fileID: 1357373368}
@@ -11750,7 +11750,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839703927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 0, z: 0}
+  m_LocalPosition: {x: -200, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2068823511}
@@ -13362,7 +13362,7 @@ GameObject:
   - component: {fileID: 940573305}
   - component: {fileID: 940573304}
   - component: {fileID: 940573303}
-  - component: {fileID: 1795885748}
+  - component: {fileID: 940573306}
   m_Layer: 5
   m_Name: Eggs
   m_TagString: Untagged
@@ -13427,6 +13427,17 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: -30}
   m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &940573306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 940573302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5b707b1ac306b47938253135cbb2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &945393488
 GameObject:
   m_ObjectHideFlags: 0
@@ -19028,7 +19039,7 @@ Prefab:
         type: 2}
       propertyPath: baitManager
       value: 
-      objectReference: {fileID: 1795885748}
+      objectReference: {fileID: 0}
     - target: {fileID: 114279466079933846, guid: 786afb6a911126044a507c2e1959a5dd,
         type: 2}
       propertyPath: sounds.Array.data[0].volume
@@ -26410,11 +26421,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4112536981318494, guid: a31d7e1dd77919b45969f3e894495996, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 166.25
+      value: 168
       objectReference: {fileID: 0}
     - target: {fileID: 4112536981318494, guid: a31d7e1dd77919b45969f3e894495996, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 18.5
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4112536981318494, guid: a31d7e1dd77919b45969f3e894495996, type: 2}
       propertyPath: m_LocalPosition.z
@@ -26549,18 +26560,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4469885666769642, guid: 6224967ca79732b43adde266b83c1b6e,
     type: 2}
   m_PrefabInternal: {fileID: 1786496284}
---- !u!114 &1795885748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114217839357225586, guid: 9769ed5c501e71c42bbad70e24f874d2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 940573302}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b62ea0e973724e94a9cd0cbe73bda50b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1796746525
 GameObject:
   m_ObjectHideFlags: 0
@@ -29151,6 +29150,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114038594321361882, guid: 53e463295f4cbab4a8565b2b4a09d318,
+        type: 2}
+      propertyPath: patrolRoute.Array.data[0]
+      value: 
+      objectReference: {fileID: 2051141608}
+    - target: {fileID: 114038594321361882, guid: 53e463295f4cbab4a8565b2b4a09d318,
+        type: 2}
+      propertyPath: patrolRoute.Array.data[1]
+      value: 
+      objectReference: {fileID: 382519003}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53e463295f4cbab4a8565b2b4a09d318, type: 2}
   m_IsPrefabAsset: 0
@@ -29633,7 +29642,7 @@ RectTransform:
   m_GameObject: {fileID: 2008007403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1700026486}
   - {fileID: 659630012}
