@@ -6,6 +6,8 @@ namespace Bradley.AlienArk
 {
 	public class SFXManager : MonoBehaviour 
 	{
+        [Range(1, 25f)]
+        public float maxDistance = 15f;
 		[SerializeField]
         Sound[] sounds;
 
@@ -21,6 +23,8 @@ namespace Bradley.AlienArk
                 s.source.loop = s.loop;
                 s.source.mute = s.muted;
 				s.source.playOnAwake = false;
+                s.source.maxDistance = maxDistance;
+                s.source.spatialBlend = 1;
             }
 		}
 
@@ -34,7 +38,7 @@ namespace Bradley.AlienArk
                     return;
                 }
             }
-            Debug.Log("WARNING: Sound you tried to play was not found!");
+            Debug.LogWarning("WARNING: Sound you tried to play was not found!");
         }
 
         public void Stop(string soundName)
@@ -47,7 +51,7 @@ namespace Bradley.AlienArk
                     return;
                 }
             }
-            Debug.Log("WARNING: Sound you tried to play was not found!");
+            Debug.LogWarning("WARNING: Sound you tried to stop was not found!");
         }
 
         public void StopAll()
