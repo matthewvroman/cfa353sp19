@@ -182,6 +182,11 @@ namespace Bradley.AlienArk
             }
         }
 
+        public void ToggleVision(bool value)
+        {
+            m_sight.GetComponent<SpriteRenderer>().enabled = value;
+        }
+
         public void TriggeredPlayer(Collider2D collider)
         {
             if (collider.GetComponent<PlayerController>() != null)

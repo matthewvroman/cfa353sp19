@@ -25,6 +25,7 @@ namespace Bradley.AlienArk
 			else
 			{
 				m_stateMachine.controller.Attack();
+				m_stateMachine.controller.ToggleVision(false);
 				Vector2 dir = m_stateMachine.controller.GetTargetDirection();
 				m_stateMachine.controller.CheckOrientation(dir.x);
 				float angle = 40;
@@ -34,6 +35,7 @@ namespace Bradley.AlienArk
 				velocity.y = Mathf.Clamp(velocity.y, 0.5f, 10);
 				m_stateMachine.controller.m_rigidbody.velocity = velocity;
 				m_stateMachine.controller.m_sound.Play("Pounce");
+				
 			}
 		}
 
@@ -43,6 +45,7 @@ namespace Bradley.AlienArk
 			{
 				GameObject.Destroy(m_stateMachine.controller.stateIndicator);
 				m_stateMachine.controller.Attack();
+				m_stateMachine.controller.ToggleVision(true);
 				m_stateMachine.controller.PlaySound("Land");
 			}
 			else

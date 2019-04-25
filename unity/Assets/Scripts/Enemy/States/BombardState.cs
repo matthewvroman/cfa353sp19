@@ -22,12 +22,14 @@ namespace Bradley.AlienArk
 			m_stateMachine.controller.PlayAnimation("Attack");
 			m_stateMachine.controller.m_sound.Play("Cry");
 			m_stateMachine.controller.m_killBox.enabled = true;
+			m_stateMachine.controller.ToggleVision(false);
 		}
 
 		public override void OnExit()
 		{
 			GameObject.Destroy(m_stateMachine.controller.stateIndicator);
 			m_stateMachine.controller.m_killBox.enabled = false;
+			m_stateMachine.controller.ToggleVision(true);
 		}
 
 		public override void OnUpdate()
