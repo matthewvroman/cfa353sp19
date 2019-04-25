@@ -18,7 +18,6 @@ namespace Bradley.AlienArk
         public EnemySightDetection m_sight;
         public List<Transform> patrolRoute;
         public AttackType attackType;
-        public bool juvenile = false;
         public float dectectionRange = 10, attackRange = 2, baitEatingSpeed = 0.2f;
         protected float NearPatrolPoint = 0.4f;
         public float NEAR_PATROL_POINT
@@ -57,19 +56,15 @@ namespace Bradley.AlienArk
             if (input == 0)
             {
                 PlayAnimation("Idle");
-                m_sound.Stop("Run");
-                m_sound.Stop("Walk");
             }
             else if (running)
             {
                 PlayAnimation("Run");
-                m_sound.Play("Run");
                 m_sound.Stop("Walk");
             }
             else
             {
                 PlayAnimation("Walk");
-                m_sound.Play("Walk");
                 m_sound.Stop("Run");
             }
         }
@@ -102,12 +97,7 @@ namespace Bradley.AlienArk
             if (possibleTarget == default(EnemyTarget)) possibleTarget = Target.GetComponentInParent<EnemyTarget>();
             if (Target == target) return;
             
-            PlayerController player = Target.GetComponent<PlayerController>();
-            if (juvenile && player)
-            {
-                m_stateMachine.SetState(new PanicState(m_stateMachine, Target));
-            }
-            else if (target == null || (possibleTarget != null && possibleTarget.GetPriority() > target.GetComponent<EnemyTarget>().GetPriority()))
+            if (target == null || (possibleTarget != null && possibleTarget.GetPriority() > target.GetComponent<EnemyTarget>().GetPriority()))
             {
                 m_stateMachine.SetState(new ChaseState(m_stateMachine, Target));
             }

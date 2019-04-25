@@ -299,7 +299,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   attackType: 1
-  juvenile: 0
   dectectionRange: 14
   attackRange: 7
   baitEatingSpeed: 0.4
@@ -328,19 +327,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 15
   sounds:
   - name: Walk
     clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
     volume: 0.04
     pitch: 0.5
-    loop: 1
+    loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Run
     clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
     volume: 0.08
     pitch: 1
-    loop: 1
+    loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Cry

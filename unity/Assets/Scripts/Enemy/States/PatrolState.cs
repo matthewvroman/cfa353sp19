@@ -32,6 +32,11 @@ namespace Bradley.AlienArk
             }
         }
 
+        public override void OnExit()
+        {
+            m_stateMachine.controller.StopSound("Walk");
+        }
+
         public override void OnUpdate()
         {
             if (m_stateMachine.controller.IsNearPoint(m_stateMachine.controller.patrolRoute[patrolIndex].position))

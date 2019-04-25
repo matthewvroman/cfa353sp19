@@ -21,7 +21,7 @@ namespace Bradley.AlienArk
 			}
 			sightRange = GetComponent<Collider2D>();
 			filter = new ContactFilter2D();
-			string[] layerNames = {"Player", "Bait"};
+			string[] layerNames = {"Player"};
 			filter.layerMask = LayerMask.GetMask(layerNames);
 			filter.useTriggers = true;
 		}

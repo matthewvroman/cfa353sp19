@@ -131,13 +131,11 @@ namespace Bradley.AlienArk
                 if (input != 0)
                 {
                     PlayAnimation("Sneak");
-                    m_sound.Play("Sneak");
                     if (!detectionBox.enabled) m_sound.Play("Hidden");
                 }
                 else
                 {
                     PlayAnimation("Sneak Idle");
-                    m_sound.Stop("Sneak");
                     m_sound.Stop("Hidden");
                 }
             }
@@ -146,12 +144,10 @@ namespace Bradley.AlienArk
                 if (input != 0)
                 {
                     PlayAnimation("Run");
-                    m_sound.Play("Run");
                 }
                 else
                 {
                     PlayAnimation("Idle");
-                    m_sound.Stop("Run");
                 }
             }
             else if (stateMachine.currentState is ClimbState)

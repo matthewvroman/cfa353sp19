@@ -94,7 +94,7 @@ namespace Bradley.AlienArk
             UpdateAnimatorMovement(0, false);
         }
 
-        public void Stop()
+        public void StopMovement()
         {
             m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y);
         }
@@ -107,6 +107,16 @@ namespace Bradley.AlienArk
         public void PlayAnimation(string animName)
         {
             m_animator.Play(animName, 0);
+        }
+
+        public void PlaySound(string soundName)
+        {
+            m_sound.Play(soundName);
+        }
+
+        public void StopSound(string soundName)
+        {
+            m_sound.Stop(soundName);
         }
 
         public virtual bool IsGrounded(Collider2D collider)

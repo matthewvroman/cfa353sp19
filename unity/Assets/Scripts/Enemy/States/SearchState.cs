@@ -28,6 +28,11 @@ namespace Bradley.AlienArk
 			RandomSearchPoint();
 		}
 
+		public override void OnExit()
+		{
+			m_stateMachine.controller.StopSound("Run");
+		}
+
 		public override void OnUpdate()
 		{
 			if (m_stateMachine.controller.IsNearPoint(patrolPoint) || m_stateMachine.controller.IsNextToCliff(moveDir))
@@ -36,7 +41,7 @@ namespace Bradley.AlienArk
 			}
 			else
 			{
-				m_stateMachine.controller.Move(moveDir, false);
+				m_stateMachine.controller.Move(moveDir, true);
 			}
 		}
 

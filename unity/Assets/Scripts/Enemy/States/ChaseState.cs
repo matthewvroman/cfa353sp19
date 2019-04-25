@@ -53,6 +53,7 @@ namespace Bradley.AlienArk
 			{
 				GameObject.Destroy(m_stateMachine.controller.stateIndicator);
 				PlayerController.PlayerHidden -= PlayerLost;
+				m_stateMachine.controller.StopSound("Run");
 			}
 			else
 			{
