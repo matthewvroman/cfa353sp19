@@ -179,7 +179,6 @@ namespace Bradley.AlienArk
             {
                 BombardState b = m_stateMachine.currentState as BombardState;
                 b.Bombard(transform.GetChild(2).position);
-
             }
         }
 

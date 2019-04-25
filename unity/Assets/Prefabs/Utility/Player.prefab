@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 12
+  maxDistance: 25
   sounds:
   - name: Run
     clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
@@ -250,7 +250,7 @@ MonoBehaviour:
     loop: 1
     muted: 0
     source: {fileID: 0}
-  - name: Bait
+  - name: Land
     clip: {fileID: 8300000, guid: 19f8da48a0c813746a94e30a9fc1cbb6, type: 3}
     volume: 1
     pitch: 1

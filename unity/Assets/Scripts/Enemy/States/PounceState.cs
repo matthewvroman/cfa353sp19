@@ -43,6 +43,7 @@ namespace Bradley.AlienArk
 			{
 				GameObject.Destroy(m_stateMachine.controller.stateIndicator);
 				m_stateMachine.controller.Attack();
+				m_stateMachine.controller.PlaySound("Land");
 			}
 			else
 			{

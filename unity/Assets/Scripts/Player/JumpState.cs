@@ -9,6 +9,7 @@ namespace Bradley.AlienArk
 		float speedModifier;
 		float jumpBuffer = 0.3f;
 		bool m_jumped = false;
+
 		public JumpState(StateMachine<PlayerController> machine, bool jumped) : base(machine)
 		{
 			m_jumped = jumped;
@@ -25,6 +26,11 @@ namespace Bradley.AlienArk
 			m_stateMachine.controller.m_rigidbody.gravityScale = 1;
 			m_stateMachine.controller.PlayAnimation("Jump");
 			if(m_jumped) jumpBuffer = 0;
+		}
+
+		public override void OnExit()
+		{
+			m_stateMachine.controller.PlaySound("Land");
 		}
 
 		public override void OnUpdate() 
