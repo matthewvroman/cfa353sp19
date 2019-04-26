@@ -75,6 +75,16 @@ namespace Bradley.AlienArk
             init();
         }
 
+        private void OnEnable()
+        {
+            PlayerController.PlayerDied += SearchCompleted;
+        }
+
+        private void OnDisable()
+        {
+            PlayerController.PlayerDied -= SearchCompleted;
+        }
+
         private void Update()
         {
             m_stateMachine.OnUpdate();

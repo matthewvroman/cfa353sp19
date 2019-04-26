@@ -11,12 +11,10 @@ namespace Bradley.AlienArk
 		public float spawnTime = 5;
 		ParticleSystem[] particleSystems;
 		float spawnTimer;
-		int levelNum;
 
 		public override void init()
 		{
 			base.init();
-			levelNum = GameManager.instance.GetLevelNum();
 			spawnTimer = Random.Range(0.1f, spawnTime);
 			particleSystems = new ParticleSystem[transform.childCount];
 			for (int i = 0; i < transform.childCount; i++)

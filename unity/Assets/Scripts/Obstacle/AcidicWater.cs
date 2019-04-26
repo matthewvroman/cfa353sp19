@@ -16,9 +16,12 @@ namespace Bradley.AlienArk
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.GetComponent<PlayerController>())
+			PlayerController player = other.GetComponent<PlayerController>();
+			if (player)
 			{
-				PlayerController.PlayerDied();
+				float dir = (player.GetPosition() - transform.position).x;
+				dir = (dir > 0 ? 1 : 0);
+				player.Died((int)dir);
 			}
 		}
 	}

@@ -15,12 +15,14 @@ namespace Bradley.AlienArk
 			m_rigidbody = GetComponent<Rigidbody2D>();
 		}
 
-		protected virtual void KillPlayer(GameObject player)
+		protected virtual void KillPlayer(GameObject target)
 		{
-			if (player.CompareTag("Player"))
+			PlayerController player = target.GetComponent<PlayerController>();
+			if (player)
 			{
-				Debug.Log("Hit Spike");
-				PlayerController.PlayerDied();
+				float dir = (player.GetPosition() - transform.position).x;
+				dir = (dir > 0 ? 1 : 0);
+				player.Died((int) dir);
 			}
 		}
 		

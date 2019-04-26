@@ -165,6 +165,19 @@ namespace Bradley.AlienArk
             }
         }
 
+        public void Died(int dir)
+        {
+            stateMachine.SetState(new DeadState(stateMachine));
+            CheckOrientation(-1*dir);
+            m_rigidbody.velocity = new Vector2(dir,1)*3;
+            PlayerDied();
+        }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position + (Vector3)(circleCollider.offset + Vector2.up*circleCollider.radius);
+        }
+
 //================================================================================================================================================================================
         public void Climbable(bool compareTag, bool entered)
         {

@@ -17,6 +17,7 @@ namespace Bradley.AlienArk
 			for (int i = 0; i < numEggs; i++)
 			{
 				images[i] = transform.GetChild(i).GetComponent<Image>();
+				images[i].color = Color.gray;
 			}
 		}
 

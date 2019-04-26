@@ -22,17 +22,7 @@ namespace Bradley.AlienArk
 
 		public GameManager()
 		{
-		}
-
-		public void CompletedLevel()
-		{
-			//Display Game Complete Screen
-		}
-
-		public int GetLevelNum()
-		{
-			string levelName = SceneManager.GetActiveScene().name;
-			return int.Parse(levelName.Substring(levelName.Length - 1));
+			//Do Nothing
 		}
 	}
 }
