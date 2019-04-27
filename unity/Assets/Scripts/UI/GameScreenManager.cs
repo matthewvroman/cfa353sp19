@@ -28,10 +28,12 @@ namespace Bradley.AlienArk
 		private void Start()
 		{
 			pauseButton.onClick.AddListener(OnPauseButtonPressed);
-			soundButton.onClick.AddListener(OnSoundButtonPressed);
 			resumeButton.onClick.AddListener(OnResumeButtonPressed);
+			soundButton.onClick.AddListener(OnSoundButtonPressed);
+			helpButton.onClick.AddListener(OnHelpButtonPressed);
 			quitButton.onClick.AddListener(OnQuitPressed);
 			quitConfirm = Resources.Load<GameObject>("UI/QuitConfirm");
+			helpScreen = Resources.Load<GameObject>("UI/Help");
 			gameOverScreen = Resources.Load<GameObject>("UI/GameOver");
 			levelCompleteScreen = Resources.Load<GameObject>("UI/LevelComplete");
 			SetOverlay();
@@ -85,6 +87,12 @@ namespace Bradley.AlienArk
 			if (AudioListener.volume == 1) AudioListener.volume = 0;
 			else AudioListener.volume = 1;
 			SetSoundButton();
+		}
+
+		private void OnHelpButtonPressed()
+		{
+			pauseScreen.SetActive(false);
+			Instantiate(helpScreen, transform);
 		}
 
 		private void OnResumeButtonPressed()

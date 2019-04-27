@@ -18,7 +18,7 @@ namespace Bradley.AlienArk
             AudioManager.Instance.PlaySound("Background Music");
             SetSoundButton();
             SetOverlay();
-            exitConfirm = Resources.Load<GameObject>("UI/ExitConfirmation");
+            exitConfirm = Resources.Load<GameObject>("UI/ExitConfirm");
             play.onClick.AddListener(OnPlayClicked);
             sound.onClick.AddListener(OnSoundButtonClicked);
             exit.onClick.AddListener(OnExitClicked);
@@ -66,12 +66,13 @@ namespace Bradley.AlienArk
 
         public void EnterMenu()
         {
-            ActivateOverlay(true);
+            menu.SetActive(false);
         }
 
         public void ReturnToMenu()
         {
-            ActivateOverlay(false);
+            if (overlay.activeSelf) ActivateOverlay(false);
+            else menu.SetActive(true);
         }
     }
 }

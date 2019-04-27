@@ -14,7 +14,7 @@ namespace Bradley.AlienArk
 		{
 			init();
 			header.text = "Quit?";
-			body.text = "Do you want to quit the game? All progress will be lost.";
+			body.text = "Are you sure you want to leave the level? All progress will be lost.";
 			screenManager = transform.parent.GetComponent<GameScreenManager>();
 		}
 		

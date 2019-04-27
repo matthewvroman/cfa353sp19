@@ -14,7 +14,7 @@ namespace Bradley.AlienArk
 			init();
 			MainMenu = GetComponentInParent<MainMenu>();
 			header.text = "Exit Game?";
-			body.text = "Do you want to exit the game?";
+			body.text = "Are you sure you want to leave the game?";
 		}
 
 		protected override void OnYesClicked()
