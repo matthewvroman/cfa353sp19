@@ -12341,7 +12341,7 @@ GameObject:
   - component: {fileID: 892421978}
   - component: {fileID: 892421977}
   m_Layer: 0
-  m_Name: Hyena Egg
+  m_Name: Swampmander Egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13199,6 +13199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5b707b1ac306b47938253135cbb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eggs:
+  - {fileID: 1455654431}
+  - {fileID: 1522089065}
+  - {fileID: 892421975}
+  collectedEggs: 
 --- !u!1 &945393488
 GameObject:
   m_ObjectHideFlags: 0
@@ -18485,46 +18490,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114752974276908150, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: baitManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114279466079933846, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: sounds.Array.data[0].volume
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 114279466079933846, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 114279466079933846, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: sounds.Array.data[4].name
-      value: Land
-      objectReference: {fileID: 0}
-    - target: {fileID: 114279466079933846, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: maxDistance
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 61450987725403608, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61450987725403608, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 61450987725403608, guid: 786afb6a911126044a507c2e1959a5dd,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
   m_IsPrefabAsset: 0
@@ -20609,7 +20574,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -30, y: -30}
-  m_SizeDelta: {x: 150, y: 120}
+  m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!1001 &1443845031
 Prefab:

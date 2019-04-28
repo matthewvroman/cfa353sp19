@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450421920892718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: -8.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4859316677874240}
@@ -224,14 +224,14 @@ MonoBehaviour:
   sounds:
   - name: Run
     clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.05
+    volume: 0.025
     pitch: 1
     loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Sneak
     clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.025
+    volume: 0.01
     pitch: 0.5
     loop: 0
     muted: 0

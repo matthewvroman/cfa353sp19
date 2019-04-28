@@ -7,13 +7,13 @@ namespace Bradley.AlienArk
 	[RequireComponent(typeof(SpriteRenderer))]
 	public class Egg : MonoBehaviour 
 	{
-		public static System.Action EggCollected;
+		public static System.Action<int> EggCollected;
 
 		void OnTriggerEnter2D(Collider2D other)
 		{
 			if (other.GetComponent<PlayerController>())
 			{
-				EggCollected();
+				if (EggCollected != null) EggCollected(gameObject.GetInstanceID());
 				Destroy(gameObject);
 			}
 		}

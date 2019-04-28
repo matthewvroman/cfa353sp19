@@ -11,8 +11,9 @@ namespace Bradley.AlienArk
 		[SerializeField]
 		GameObject pauseScreen;
 		public Button pauseButton, soundButton, quitButton, resumeButton, helpButton;
-		private GameObject overlay, quitConfirm, helpScreen, gameOverScreen, levelCompleteScreen = null;
+		private GameObject overlay, quitConfirm, helpScreen, gameOverScreen, levelCompleteScreen, hud = null;
 		private Text soundButtonText;
+
 
 
 		void OnEnable()
@@ -32,6 +33,7 @@ namespace Bradley.AlienArk
 			soundButton.onClick.AddListener(OnSoundButtonPressed);
 			helpButton.onClick.AddListener(OnHelpButtonPressed);
 			quitButton.onClick.AddListener(OnQuitPressed);
+			hud = transform.GetChild(0).gameObject;
 			quitConfirm = Resources.Load<GameObject>("UI/QuitConfirm");
 			helpScreen = Resources.Load<GameObject>("UI/Help");
 			gameOverScreen = Resources.Load<GameObject>("UI/GameOver");
@@ -65,7 +67,7 @@ namespace Bradley.AlienArk
 		private void ActivateHud(bool value)
 		{
 			PauseGame(value ? 1 : 0);
-			pauseButton.gameObject.SetActive(value);
+			hud.SetActive(value);
 		}
 
 		private void PauseGame(int value = 0)
