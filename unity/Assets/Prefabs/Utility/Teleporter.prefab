@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 212671263429707420}
   - component: {fileID: 61084431052798054}
   - component: {fileID: 114316937760237990}
+  - component: {fileID: 114267536922835704}
   m_Layer: 0
   m_Name: Teleporter
   m_TagString: Untagged
@@ -96,6 +97,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 2.75}
   m_EdgeRadius: 0
+--- !u!114 &114267536922835704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503611655643360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 15
+  sounds:
+  - name: Activated
+    clip: {fileID: 8300000, guid: a48e36d2a65c59e4882e9c77d0b275c8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    source: {fileID: 0}
 --- !u!114 &114316937760237990
 MonoBehaviour:
   m_ObjectHideFlags: 1

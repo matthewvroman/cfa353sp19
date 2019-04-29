@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 212546440475845562}
   - component: {fileID: 68519277809232802}
   - component: {fileID: 114071782561208530}
+  - component: {fileID: 114329831529106640}
   m_Layer: 10
   m_Name: Rock Fall Swamp
   m_TagString: Ground
@@ -168,7 +169,28 @@ MonoBehaviour:
   - {fileID: 1012804027234994, guid: ec8ccb095857aca419220efcd750a146, type: 2}
   - {fileID: 1604850926104800, guid: 5ecc2d5d8075fa34590d0efe19e069c9, type: 2}
   spawningPoint: {fileID: 4404353158945276}
-  spawnTime: 3
+  spawnTime: 4
+--- !u!114 &114329831529106640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1051793199318190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 15
+  sounds:
+  - name: Rumbling
+    clip: {fileID: 8300000, guid: 9de92d7c5c637424cb944612705e6e93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!198 &198406886411667262
 ParticleSystem:
   m_ObjectHideFlags: 1

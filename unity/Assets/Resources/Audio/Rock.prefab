@@ -9,30 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1029138838923160}
+  m_RootGameObject: {fileID: 1549085728223874}
   m_IsPrefabAsset: 1
---- !u!1 &1029138838923160
+--- !u!1 &1549085728223874
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4982299240682354}
-  - component: {fileID: 114977962010550834}
+  - component: {fileID: 4535666727861386}
+  - component: {fileID: 114526338488625480}
+  - component: {fileID: 114755515344737822}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4982299240682354
+--- !u!4 &4535666727861386
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1029138838923160}
+  m_GameObject: {fileID: 1549085728223874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,31 +41,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114977962010550834
+--- !u!114 &114526338488625480
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1029138838923160}
+  m_GameObject: {fileID: 1549085728223874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2032b2bd83e609f41a0557f85e0b73b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 12
   sounds:
-  - name: Background Music
-    clip: {fileID: 8300000, guid: 7edaf63de6b157345a5b5d8777f99b33, type: 3}
-    volume: 0.25
-    pitch: 1
-    loop: 1
-    muted: 0
-    playOnAwake: 0
-    source: {fileID: 0}
-  - name: Click
-    clip: {fileID: 8300000, guid: d228bd44a708ca34e960e57668d10341, type: 3}
-    volume: 0.5
+  - name: Collected
+    clip: {fileID: 8300000, guid: 1cade3269c518b1428f76f40418ae1f9, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     muted: 0
-    playOnAwake: 0
+    playOnAwake: 1
     source: {fileID: 0}
+--- !u!114 &114755515344737822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549085728223874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a527b7ce4b9242bad5a337fb8cb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

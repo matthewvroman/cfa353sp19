@@ -223,42 +223,42 @@ MonoBehaviour:
   maxDistance: 25
   sounds:
   - name: Run
-    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.025
+    clip: {fileID: 8300000, guid: 679d874be51edb446b8bf520b864db30, type: 3}
+    volume: 0.8
     pitch: 1
     loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Sneak
-    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.01
+    clip: {fileID: 8300000, guid: 679d874be51edb446b8bf520b864db30, type: 3}
+    volume: 0.5
     pitch: 0.5
     loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Jump
-    clip: {fileID: 8300000, guid: 4693b4540596cf340bc029730eb5e775, type: 3}
+    clip: {fileID: 8300000, guid: 79a31e4fa86563442bd19b6157ac4327, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Climb
-    clip: {fileID: 8300000, guid: 9f983b90fb3255b43a6bc3fd063531e0, type: 3}
+    clip: {fileID: 8300000, guid: 17d059e4284050a4daf9ddd2399b68a9, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     muted: 0
     source: {fileID: 0}
   - name: Land
-    clip: {fileID: 8300000, guid: 19f8da48a0c813746a94e30a9fc1cbb6, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 3d8a64ade79e7f0418f795677dd9dc5d, type: 3}
+    volume: 0.8
     pitch: 1
     loop: 0
     muted: 0
     source: {fileID: 0}
   - name: Hidden
-    clip: {fileID: 8300000, guid: 34c58d2abe4664149b14216d108f7b20, type: 3}
+    clip: {fileID: 8300000, guid: 6d57ceddf12e3d145ae18f06eb7e97e6, type: 3}
     volume: 1
     pitch: 1
     loop: 1
@@ -298,6 +298,7 @@ MonoBehaviour:
   detectionBox: {fileID: 0}
   canClimb: 0
   canHide: 0
+  collectedEgg: 0
   Detection:
     serializedVersion: 2
     m_Bits: 8192

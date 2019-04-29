@@ -81,7 +81,7 @@ namespace Bradley.AlienArk
 				shots[i].GetComponent<Projectile>().ShootProjectile(velocity);
 			}
 			m_stateMachine.controller.m_killBox.enabled = true;
-			m_stateMachine.controller.m_sound.Play("Shoot");
+			//m_stateMachine.controller.m_sound.Play("Shoot");
 			initialized = true;
 		}
 	}

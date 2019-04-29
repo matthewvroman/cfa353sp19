@@ -10,12 +10,14 @@ namespace Bradley.AlienArk
 		public Transform spawningPoint;
 		public float spawnTime = 5;
 		ParticleSystem[] particleSystems;
+		SFXManager audio;
 		float spawnTimer;
 
 		public override void init()
 		{
 			base.init();
 			spawnTimer = Random.Range(0.1f, spawnTime);
+			audio = GetComponent<SFXManager>();
 			particleSystems = new ParticleSystem[transform.childCount];
 			for (int i = 0; i < transform.childCount; i++)
 			{
@@ -46,10 +48,12 @@ namespace Bradley.AlienArk
 				SpawnObstacle();
 				spawnTimer = spawnTime;
 				Play(false);
+				audio.Stop("Rumbling");
 			}
 			else if (spawnTimer <= 2 && !particleSystems[0].isPlaying)
 			{
 				Play(true);
+				audio.Play("Rumbling");
 			}
 		}
 

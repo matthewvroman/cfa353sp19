@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 212234175941310056}
   - component: {fileID: 68105236186936652}
   - component: {fileID: 114509599483075510}
+  - component: {fileID: 114782345623983444}
   m_Layer: 10
   m_Name: Rock Fall Savanah
   m_TagString: Ground
@@ -168,7 +169,28 @@ MonoBehaviour:
   - {fileID: 1012804027234994, guid: 49a62518b1b86cf4ab0df92bd746c124, type: 2}
   - {fileID: 1604850926104800, guid: 7f338d094d647904da8fba13eb1071d6, type: 2}
   spawningPoint: {fileID: 4846821907464340}
-  spawnTime: 3
+  spawnTime: 4
+--- !u!114 &114782345623983444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1976745885849422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 15
+  sounds:
+  - name: Rumbling
+    clip: {fileID: 8300000, guid: 9de92d7c5c637424cb944612705e6e93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!198 &198432485516931712
 ParticleSystem:
   m_ObjectHideFlags: 1

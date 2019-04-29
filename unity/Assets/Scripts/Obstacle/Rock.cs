@@ -7,10 +7,12 @@ namespace Bradley.AlienArk
 	public class Rock : DeadlyObstacle 
 	{
 		float timer = 5;
+		GameObject rockBreakAudio;
 		// Use this for initialization
 		void Start () 
 		{
 			init();
+			rockBreakAudio = Resources.Load<GameObject>("Audio/Rock");
 		}
 		
 		// Update is called once per frame
@@ -20,7 +22,7 @@ namespace Bradley.AlienArk
 			timer -= Time.deltaTime;
 			if (timer <= 0)
 			{
-				Destroy(gameObject);
+				Break();
 			}
 		}
 
@@ -28,10 +30,23 @@ namespace Bradley.AlienArk
 		{
 			if (other.gameObject.CompareTag("Ground"))
 			{
-				Destroy(gameObject);
+				Break();
 				return;
 			}
-			KillPlayer(other.gameObject);
+			PlayerController player = other.gameObject.GetComponent<PlayerController>();
+			if (player && !player.IsDead())
+			{
+				float dir = (player.GetPosition() - transform.position).x;
+				dir = (dir > 0 ? 1 : 0);
+				player.Died((int) dir);
+				Break();
+			}
+		}
+
+		private void Break()
+		{
+			Instantiate(rockBreakAudio, transform.position, Quaternion.identity, null);
+			Destroy(gameObject);
 		}
 	}
 }

@@ -7,13 +7,19 @@ namespace Bradley.AlienArk
 	public class Projectile : MonoBehaviour 
 	{
 		public float shotTimer = 5;
+		private GameObject acidBallAudio;
+
+		private void Start()
+		{
+			acidBallAudio = Resources.Load<GameObject>("Audio/Acid Ball");
+		}
 
 		private void Update()
 		{
 			shotTimer -= Time.deltaTime;
 			if (shotTimer <= 0)
 			{
-				Destroy(gameObject);
+				Burst();
 			}
 		}
 
@@ -25,11 +31,11 @@ namespace Bradley.AlienArk
 				float dir = (player.GetPosition() - transform.position).x;
 				dir = (dir > 0 ? 1 : 0);
 				player.Died((int)dir);
-				Destroy(gameObject);
+				Burst();
 			}
 			if (other.gameObject.CompareTag("Ground"))
 			{
-				Destroy(gameObject);
+				Burst();
 			}	
 		}
 
@@ -38,6 +44,12 @@ namespace Bradley.AlienArk
 			Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 			rigidbody.gravityScale = useGravity ? 1 : 0;
 			rigidbody.velocity = velocity;
+		}
+
+		private void Burst()
+		{
+			Instantiate(acidBallAudio, transform.position, Quaternion.identity, null);
+			Destroy(gameObject);
 		}
 	}
 }

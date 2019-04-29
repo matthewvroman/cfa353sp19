@@ -311,21 +311,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 15
+  maxDistance: 18
   sounds:
   - name: Walk
-    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.025
+    clip: {fileID: 8300000, guid: 679d874be51edb446b8bf520b864db30, type: 3}
+    volume: 0.075
     pitch: 0.75
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Run
-    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.05
+    clip: {fileID: 8300000, guid: 679d874be51edb446b8bf520b864db30, type: 3}
+    volume: 0.15
     pitch: 1
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Pounce
     clip: {fileID: 8300000, guid: 4693b4540596cf340bc029730eb5e775, type: 3}
@@ -333,6 +335,7 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Cry
     clip: {fileID: 8300000, guid: c4fa86066d7a3ab4695e5310c242ab0a, type: 3}
@@ -340,13 +343,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Land
-    clip: {fileID: 8300000, guid: 19f8da48a0c813746a94e30a9fc1cbb6, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 3d8a64ade79e7f0418f795677dd9dc5d, type: 3}
+    volume: 0.6
     pitch: 1
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
 --- !u!212 &212005553065790712
 SpriteRenderer:

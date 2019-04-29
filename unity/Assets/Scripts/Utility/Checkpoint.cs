@@ -10,12 +10,14 @@ namespace Bradley.AlienArk
 		public Transform respawnPoint;
 		Transform hud;
 		GameObject popup;
+		SFXManager audio;
 
 		// Use this for initialization
 		void Start () 
 		{
 			popup = Resources.Load<GameObject>("UI/CheckpointPopup");
 			hud = GameObject.Find("Canvas").transform.GetChild(0);
+			audio = GetComponent<SFXManager>();
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -28,6 +30,7 @@ namespace Bradley.AlienArk
 				player.collectedEgg = false;
 				Transfer();
 				Instantiate(popup, hud);
+				audio.Play("Activated");
 				GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Teleporter Activated");
 				Destroy(this);
 			}

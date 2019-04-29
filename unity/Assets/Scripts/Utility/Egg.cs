@@ -8,6 +8,12 @@ namespace Bradley.AlienArk
 	public class Egg : MonoBehaviour 
 	{
 		public static System.Action<int> EggCollected;
+		GameObject audio;
+
+		private void Start()
+		{
+			audio = Resources.Load<GameObject>("Audio/Egg");
+		}
 
 		void OnTriggerEnter2D(Collider2D other)
 		{
@@ -16,6 +22,7 @@ namespace Bradley.AlienArk
 			{
 				if (EggCollected != null) EggCollected(gameObject.GetInstanceID());
 				player.collectedEgg = true;
+				Instantiate(audio, transform.position, Quaternion.identity, null);
 				gameObject.SetActive(false);
 			}
 		}

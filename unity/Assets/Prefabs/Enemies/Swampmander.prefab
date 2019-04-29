@@ -329,35 +329,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 15
+  maxDistance: 18
   sounds:
   - name: Walk
-    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.04
+    clip: {fileID: 8300000, guid: 679d874be51edb446b8bf520b864db30, type: 3}
+    volume: 0.1
     pitch: 0.5
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Run
-    clip: {fileID: 8300000, guid: 55b0e6e4bcf5de04c98d17d82cc099f1, type: 3}
-    volume: 0.08
+    clip: {fileID: 8300000, guid: 679d874be51edb446b8bf520b864db30, type: 3}
+    volume: 0.2
     pitch: 1
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Cry
     clip: {fileID: 8300000, guid: f132b7bce7446d14e80173d32b9d7c37, type: 3}
-    volume: 0.5
+    volume: 0.1
     pitch: 0.5
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
   - name: Shoot
     clip: {fileID: 8300000, guid: 4693b4540596cf340bc029730eb5e775, type: 3}
-    volume: 1
-    pitch: 2
+    volume: 0.25
+    pitch: 1
     loop: 0
     muted: 0
+    playOnAwake: 0
     source: {fileID: 0}
 --- !u!212 &212158074832049346
 SpriteRenderer:

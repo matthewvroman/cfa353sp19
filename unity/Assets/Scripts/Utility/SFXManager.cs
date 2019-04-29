@@ -22,9 +22,11 @@ namespace Bradley.AlienArk
                 s.source.pitch = s.pitch;
                 s.source.loop = s.loop;
                 s.source.mute = s.muted;
-				s.source.playOnAwake = false;
+				s.source.playOnAwake = s.playOnAwake;
                 s.source.maxDistance = maxDistance;
+                s.source.rolloffMode = AudioRolloffMode.Linear;
                 s.source.spatialBlend = 1;
+                if (s.playOnAwake) s.source.Play();
             }
 		}
 
@@ -34,7 +36,7 @@ namespace Bradley.AlienArk
             {
                 if (s.name == soundName)
                 {
-                    if (!s.source.isPlaying) s.source.Play();
+                    if (!s.source.isPlaying || !s.loop) s.source.Play();
                     return;
                 }
             }
@@ -60,6 +62,20 @@ namespace Bradley.AlienArk
             {
                 if (s.source.isPlaying) s.source.Stop();
             }
+        }
+
+        public bool IsPlaying(string name)
+        {
+            foreach (Sound s in sounds)
+            {
+                if (s.name == name) return s.source.isPlaying;
+            }
+            return false;
+        }
+
+        public bool IsPlaying()
+        {
+            return sounds[0].source.isPlaying;
         }
 	}
 }

@@ -20,6 +20,8 @@ namespace Bradley.AlienArk
         public bool loop = false;
         public bool muted = false;
 
+        public bool playOnAwake = false;
+
         [HideInInspector]
         public AudioSource source;
     }

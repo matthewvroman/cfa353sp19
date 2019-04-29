@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 212933410369549564}
   - component: {fileID: 68205460190099574}
   - component: {fileID: 114010888027699476}
+  - component: {fileID: 114284133779599552}
   m_Layer: 10
   m_Name: Rock Fall Mountain
   m_TagString: Ground
@@ -168,7 +169,28 @@ MonoBehaviour:
   - {fileID: 1012804027234994, guid: e3e71674b1200e342bfd17c81bbbca78, type: 2}
   - {fileID: 1604850926104800, guid: 39572b2e9121a8a4db4bd8fc3e2ba6de, type: 2}
   spawningPoint: {fileID: 4251304758005900}
-  spawnTime: 3
+  spawnTime: 4
+--- !u!114 &114284133779599552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1649779902693604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 15
+  sounds:
+  - name: Rumbling
+    clip: {fileID: 8300000, guid: 9de92d7c5c637424cb944612705e6e93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    muted: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!198 &198219068281216314
 ParticleSystem:
   m_ObjectHideFlags: 1
