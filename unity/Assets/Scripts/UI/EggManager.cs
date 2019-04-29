@@ -8,8 +8,7 @@ namespace Bradley.AlienArk
 	public class EggManager : MonoBehaviour 
 	{
 		public GameObject[] eggs;
-		[HideInInspector]
-		public bool[] collectedEggs;
+		bool[] collectedEggs, transferedEggs;
 		int[] eggIds;
 		Image[] images;
 		int numEggs;
@@ -17,11 +16,15 @@ namespace Bradley.AlienArk
 		private void OnEnable()
 		{
 			Egg.EggCollected += CollectedEgg;
+			Checkpoint.Transfer += TransferEggs;
+			GameScreenManager.RestartLevel += ResetEggs;
 		}
 
 		private void OnDisable()
 		{
 			Egg.EggCollected -= CollectedEgg;
+			Checkpoint.Transfer -= TransferEggs;
+			GameScreenManager.RestartLevel -= ResetEggs;
 		}
 
 		// Use this for initialization
@@ -30,6 +33,7 @@ namespace Bradley.AlienArk
 			numEggs = eggs.Length;
 			images = new Image[numEggs];
 			collectedEggs = new bool[numEggs];
+			transferedEggs = new bool[numEggs];
 			eggIds = new int[numEggs];
 			for (int i = 0; i < numEggs; i++)
 			{
@@ -37,6 +41,7 @@ namespace Bradley.AlienArk
 				images[i].sprite = eggs[i].GetComponent<SpriteRenderer>().sprite;
 				images[i].color = Color.gray;
 				collectedEggs[i] = false;
+				transferedEggs[i] = false;
 				eggIds[i] = eggs[i].GetInstanceID();
 			}
 		}
@@ -50,6 +55,31 @@ namespace Bradley.AlienArk
 					collectedEggs[i] = true;
 					images[i].color = Color.white;
 					return;
+				}
+			}
+		}
+
+		public void TransferEggs()
+		{
+			for (int i = 0; i < collectedEggs.Length; i++)
+			{
+				if (collectedEggs[i])
+				{
+					transferedEggs[i] = true;
+				}
+			}
+		}
+
+		private void ResetEggs()
+		{
+			for(int i = 0; i < transferedEggs.Length; i++)
+			{
+				if (!transferedEggs[i])
+				{
+					Debug.Log("untransfered egg reset");
+					eggs[i].SetActive(true);
+					collectedEggs[i] = false;
+					images[i].color = Color.gray;
 				}
 			}
 		}

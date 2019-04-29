@@ -11,10 +11,12 @@ namespace Bradley.AlienArk
 
 		void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.GetComponent<PlayerController>())
+			PlayerController player = other.GetComponent<PlayerController>();
+			if (player)
 			{
 				if (EggCollected != null) EggCollected(gameObject.GetInstanceID());
-				Destroy(gameObject);
+				player.collectedEgg = true;
+				gameObject.SetActive(false);
 			}
 		}
 	}

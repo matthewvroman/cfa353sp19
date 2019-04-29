@@ -16,7 +16,7 @@ namespace Bradley.AlienArk
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			PlayerController player = other.GetComponent<PlayerController>();
-			if (player)
+			if (player && !player.IsDead())
 			{
 				float dir = (player.GetPosition() - enemy.transform.position).x;
 				dir = (dir > 0 ? 1 : 0);

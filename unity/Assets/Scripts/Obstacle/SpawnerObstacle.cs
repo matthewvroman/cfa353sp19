@@ -23,6 +23,16 @@ namespace Bradley.AlienArk
 			}
 		}
 
+		private void OnEnable()
+		{
+			GameScreenManager.RestartLevel += ResetSpawner;
+		}
+
+		private void OnDisable()
+		{
+			GameScreenManager.RestartLevel -= ResetSpawner;
+		}
+
 		void Start()
 		{
 			init();
@@ -56,6 +66,11 @@ namespace Bradley.AlienArk
 		{
 			int random = Random.Range(0,obstacles.Length);
 			Instantiate(obstacles[random], spawningPoint.position, Quaternion.Euler(0,0, Random.Range(0, 360)), null);
+		}
+
+		private void ResetSpawner()
+		{
+			spawnTimer = Random.Range(0.1f, spawnTime);
 		}
 	}
 }

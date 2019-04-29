@@ -19,6 +19,7 @@ namespace Bradley.AlienArk
 		protected override void OnYesClicked()
 		{
 			screenManager.ResetLevel();
+			Destroy(gameObject);
 		}
 
 		protected override void OnNoClicked()

@@ -18,8 +18,9 @@ namespace Bradley.AlienArk
         [HideInInspector]
         public BoxCollider2D detectionBox;
         [HideInInspector]
-        public bool canClimb = false, canHide = false;
+        public bool canClimb = false, canHide = false, collectedEgg = false;
         public LayerMask Detection;
+        private Vector2 respawnPoint;
 
         public float jumpForce = 6, fallMultiplyer = 3, lowJumpMultiplyer = 2;
         int numBait = 5;
@@ -31,13 +32,23 @@ namespace Bradley.AlienArk
             stateMachine.SetState(new BaseState(stateMachine));
             circleCollider = GetComponent<CircleCollider2D>();
             detectionBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        }
 
+        private void OnEnable()
+        {
+            GameScreenManager.RestartLevel += Respawn;
+        }
+
+        private void OnDisable()
+        {
+            GameScreenManager.RestartLevel -= Respawn;
         }
 
         // Use this for initialization
         void Start()
         {
             init();
+            respawnPoint = transform.position;
         }
 
         // Update is called once per frame
@@ -167,15 +178,42 @@ namespace Bradley.AlienArk
 
         public void Died(int dir)
         {
-            stateMachine.SetState(new DeadState(stateMachine));
+            stateMachine.SetState(new DeadState(stateMachine, dir));
             CheckOrientation(-1*dir);
             m_rigidbody.velocity = new Vector2(dir,1)*3;
+            m_rigidbody.gravityScale = 1;
             PlayerDied();
+        }
+
+        public bool IsDead()
+        {
+            return stateMachine.currentState.CompareState("DeadState");
         }
 
         public Vector3 GetPosition()
         {
             return transform.position + (Vector3)(circleCollider.offset + Vector2.up*circleCollider.radius);
+        }
+
+        public Vector2 GetRespawnPoint()
+        {
+            return respawnPoint;
+        }
+
+        public void SetRespawnPoint(Vector2 newRespawn)
+        {
+            if (newRespawn.x < respawnPoint.x) return;
+            respawnPoint = newRespawn;
+        }
+
+        public void Respawn()
+        {
+            transform.position = respawnPoint;
+            m_boxCollider.offset = new Vector2(0.025f, m_boxCollider.offset.y);
+            circleCollider.offset = new Vector2(0.025f, circleCollider.offset.y);
+            collectedEgg = false;
+            stateMachine.SetState(new BaseState(stateMachine));
+            Camera.main.GetComponent<CameraFollow>().Respawn(respawnPoint);
         }
 
 //================================================================================================================================================================================
@@ -205,6 +243,13 @@ namespace Bradley.AlienArk
         }
 
 //===============================================================================================================================================================================
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            stateMachine.CollisionStayed(other);
+        }
+
+//===============================================================================================================================================================================
         private void OnCollisionExit2D(Collision2D collision)
         {
             stateMachine.CollisionExited(collision);
@@ -214,6 +259,13 @@ namespace Bradley.AlienArk
         private void OnTriggerEnter2D(Collider2D collision)
         {
             stateMachine.TriggerEntered(collision);
+        }
+
+//===============================================================================================================================================================================
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            stateMachine.TriggerStayed(other);
         }
 
 //===============================================================================================================================================================================

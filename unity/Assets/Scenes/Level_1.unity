@@ -12209,12 +12209,12 @@ Prefab:
     - target: {fileID: 68488981916278488, guid: 582accfa68a2b5b47a0026945dddc49b,
         type: 2}
       propertyPath: m_Points.Array.data[0].x
-      value: -4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 68488981916278488, guid: 582accfa68a2b5b47a0026945dddc49b,
         type: 2}
       propertyPath: m_Points.Array.data[1].x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4339334886160504, guid: 582accfa68a2b5b47a0026945dddc49b, type: 2}
       propertyPath: m_LocalScale.x
@@ -13203,7 +13203,6 @@ MonoBehaviour:
   - {fileID: 1455654431}
   - {fileID: 1522089065}
   - {fileID: 892421975}
-  collectedEggs: 
 --- !u!1 &945393488
 GameObject:
   m_ObjectHideFlags: 0
@@ -18489,6 +18488,25 @@ Prefab:
     - target: {fileID: 4186862042829854, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 61450987725403608, guid: 786afb6a911126044a507c2e1959a5dd,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61450987725403608, guid: 786afb6a911126044a507c2e1959a5dd,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 61450987725403608, guid: 786afb6a911126044a507c2e1959a5dd,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186862042829854, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}

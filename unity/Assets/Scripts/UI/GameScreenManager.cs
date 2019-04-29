@@ -8,10 +8,11 @@ namespace Bradley.AlienArk
 {
 	public class GameScreenManager : MonoBehaviour 
 	{
+		public static System.Action RestartLevel;
 		[SerializeField]
 		GameObject pauseScreen;
 		public Button pauseButton, soundButton, quitButton, resumeButton, helpButton;
-		private GameObject overlay, quitConfirm, helpScreen, gameOverScreen, levelCompleteScreen, hud = null;
+		private GameObject overlay, quitConfirm, helpScreen, gameOverScreen, levelCompleteScreen = null;
 		private Text soundButtonText;
 
 
@@ -33,7 +34,6 @@ namespace Bradley.AlienArk
 			soundButton.onClick.AddListener(OnSoundButtonPressed);
 			helpButton.onClick.AddListener(OnHelpButtonPressed);
 			quitButton.onClick.AddListener(OnQuitPressed);
-			hud = transform.GetChild(0).gameObject;
 			quitConfirm = Resources.Load<GameObject>("UI/QuitConfirm");
 			helpScreen = Resources.Load<GameObject>("UI/Help");
 			gameOverScreen = Resources.Load<GameObject>("UI/GameOver");
@@ -67,7 +67,7 @@ namespace Bradley.AlienArk
 		private void ActivateHud(bool value)
 		{
 			PauseGame(value ? 1 : 0);
-			hud.SetActive(value);
+			pauseButton.enabled = value;
 		}
 
 		private void PauseGame(int value = 0)
@@ -136,8 +136,8 @@ namespace Bradley.AlienArk
 
 		public void ResetLevel()
 		{
-			PauseGame(1);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			if (RestartLevel != null) RestartLevel();
+			ActivateOverlay(false);
 		}
 
 		private IEnumerator PlayDeathAnimation(float waitTime)

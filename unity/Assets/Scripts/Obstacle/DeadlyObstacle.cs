@@ -18,7 +18,7 @@ namespace Bradley.AlienArk
 		protected virtual void KillPlayer(GameObject target)
 		{
 			PlayerController player = target.GetComponent<PlayerController>();
-			if (player)
+			if (player && !player.IsDead())
 			{
 				float dir = (player.GetPosition() - transform.position).x;
 				dir = (dir > 0 ? 1 : 0);

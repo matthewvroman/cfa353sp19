@@ -34,6 +34,8 @@ namespace Bradley.AlienArk
         [HideInInspector]
         public GameObject stateIndicator;
         protected StateMachine<Enemy> m_stateMachine;
+        private Vector2 initPos;
+
 
 //=====================================================================================================================================================================================
         protected override void init()
@@ -48,6 +50,7 @@ namespace Bradley.AlienArk
             canvas = GameObject.Find("Canvas").transform;
             NearPatrolPoint += m_boxCollider.bounds.extents.x;
             attackRange += m_boxCollider.bounds.extents.x;
+            initPos = transform.position;
         }
 
         public override void UpdateAnimatorMovement(float input, bool running)
@@ -78,11 +81,13 @@ namespace Bradley.AlienArk
         private void OnEnable()
         {
             PlayerController.PlayerDied += SearchCompleted;
+            GameScreenManager.RestartLevel += ResetEnemy;
         }
 
         private void OnDisable()
         {
             PlayerController.PlayerDied -= SearchCompleted;
+            GameScreenManager.RestartLevel -= ResetEnemy;
         }
 
         private void Update()
@@ -167,6 +172,15 @@ namespace Bradley.AlienArk
         public void SearchCompleted()
         {
             m_stateMachine.SetState(new PatrolState(m_stateMachine));
+        }
+
+        private void ResetEnemy()
+        {
+            transform.position = initPos;
+            CheckOrientation(1);
+            m_killBox.enabled = false;
+            m_stateMachine.SetState(new PatrolState(m_stateMachine));
+            if (stateIndicator != null) Destroy(stateIndicator);
         }
 
 //============================================================================================================================================================================================================

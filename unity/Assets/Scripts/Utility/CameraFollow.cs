@@ -43,6 +43,11 @@ namespace Bradley.AlienArk
             return new Vector3(0.5f + (deadZoneX*0.5f), 0.5f + (deadZoneY*0.5f), -offset.z);
         }
 
+        public void Respawn(Vector2 playerRespawn)
+        {
+            transform.position = (Vector3)playerRespawn + offset;
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
