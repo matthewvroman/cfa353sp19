@@ -4968,7 +4968,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 75, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &363054819
 MonoBehaviour:
@@ -12387,7 +12387,7 @@ EdgeCollider2D:
   m_EdgeRadius: 0.3
   m_Points:
   - {x: 0, y: 0}
-  - {x: 0, y: -0.1}
+  - {x: 0, y: 0.05}
 --- !u!212 &892421979
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18246,7 +18246,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300528091
 MonoBehaviour:
@@ -18459,11 +18459,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4186862042829854, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 144.54
       objectReference: {fileID: 0}
     - target: {fileID: 4186862042829854, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -8.8
+      value: 13.56
       objectReference: {fileID: 0}
     - target: {fileID: 4186862042829854, guid: 786afb6a911126044a507c2e1959a5dd, type: 2}
       propertyPath: m_LocalPosition.z

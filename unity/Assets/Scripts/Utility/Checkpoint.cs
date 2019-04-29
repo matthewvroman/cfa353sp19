@@ -25,9 +25,10 @@ namespace Bradley.AlienArk
 			{
 				if (respawnPoint == null) player.SetRespawnPoint(transform.position);
 				else player.SetRespawnPoint(respawnPoint.position);
-				Instantiate(popup, hud);
 				player.collectedEgg = false;
 				Transfer();
+				Instantiate(popup, hud);
+				GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Teleporter Activated");
 				Destroy(this);
 			}
 		}
