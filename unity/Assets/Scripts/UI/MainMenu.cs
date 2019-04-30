@@ -48,7 +48,7 @@ namespace Bradley.AlienArk
 
         public void OnPlayClicked()
         {
-            SceneManager.LoadScene("Level_1");
+            SceneManager.LoadScene("Story");
         }
 
                 public void OnSoundButtonClicked()

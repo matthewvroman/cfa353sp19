@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dab294d19fd4094fb563f6e2a86dce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 20
+  maxDistance: 15
   sounds:
   - name: Collected
     clip: {fileID: 8300000, guid: d98090f9384fb9945a482e0cd32c0ec5, type: 3}
-    volume: 0.4
+    volume: 0.25
     pitch: 1
     loop: 0
     muted: 0
