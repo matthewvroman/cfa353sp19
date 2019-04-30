@@ -58,7 +58,7 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     muted: 0
-    playOnAwake: 0
+    playOnAwake: 1
     source: {fileID: 0}
   - name: Click
     clip: {fileID: 8300000, guid: d228bd44a708ca34e960e57668d10341, type: 3}

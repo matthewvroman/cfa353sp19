@@ -13,7 +13,7 @@ namespace Bradley.AlienArk
             {
                 if (m_instance == null)
                 {
-                    GameObject prefabs = Resources.Load<GameObject>("Prefabs/Utility/AudioManager");
+                    GameObject prefabs = Resources.Load<GameObject>("Audio/AudioManager");
                     GameObject gameObject = Instantiate(prefabs, null);
                     m_instance = gameObject.GetComponent<AudioManager>();
                 }
@@ -55,6 +55,7 @@ namespace Bradley.AlienArk
                 s.source.loop = s.loop;
                 s.source.playOnAwake = s.playOnAwake;
                 s.source.mute = s.muted;
+                if (s.playOnAwake) s.source.Play();
             }
         }
 

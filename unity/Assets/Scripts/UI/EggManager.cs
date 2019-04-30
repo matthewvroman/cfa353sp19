@@ -66,6 +66,7 @@ namespace Bradley.AlienArk
 				if (collectedEggs[i])
 				{
 					transferedEggs[i] = true;
+					GameManager.instance.TransferEgg(i);
 				}
 			}
 		}

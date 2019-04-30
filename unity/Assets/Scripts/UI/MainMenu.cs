@@ -15,7 +15,6 @@ namespace Bradley.AlienArk
 
         private void Start()
         {
-            AudioManager.Instance.PlaySound("Background Music");
             SetSoundButton();
             SetOverlay();
             exitConfirm = Resources.Load<GameObject>("UI/ExitConfirm");

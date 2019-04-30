@@ -98,17 +98,14 @@ namespace Bradley.AlienArk
 
 		private IEnumerator StartStory()
 		{
-			Debug.Log("Waiting for fade");
 			yield return new WaitForSeconds(fadeTime);
 			BeginWriting();
-			Debug.Log("Starting");
 		}
 
 		private void BeginWriting()
 		{
 			state = StoryState.writing;
 			characterIndex = 0;
-			Debug.Log("Begining writing");
 		}
 
 		private void UpdateStory()

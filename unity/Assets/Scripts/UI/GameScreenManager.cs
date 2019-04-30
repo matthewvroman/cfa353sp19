@@ -29,6 +29,7 @@ namespace Bradley.AlienArk
 
 		private void Start()
 		{
+			GameManager.instance.ResetGame();
 			pauseButton.onClick.AddListener(OnPauseButtonPressed);
 			resumeButton.onClick.AddListener(OnResumeButtonPressed);
 			soundButton.onClick.AddListener(OnSoundButtonPressed);
@@ -124,9 +125,7 @@ namespace Bradley.AlienArk
 
 		public void LevelComplete()
 		{
-			PauseGame();
-			ActivateOverlay(true);
-			Instantiate(levelCompleteScreen, transform);
+			SceneManager.LoadScene("Ending");
 		}
 
 		private void GameOver()

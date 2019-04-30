@@ -20,9 +20,38 @@ namespace Bradley.AlienArk
 			}
 		}
 
+		bool[] eggsCollected = new bool[3];
+
 		public GameManager()
 		{
-			//Do Nothing
+			ResetGame();
+		}
+
+		public void ResetGame()
+		{
+			for(int i = 0; i < eggsCollected.Length; i++)
+			{
+				eggsCollected[i] = false;
+			}
+		}
+
+		public void TransferEgg(int index)
+		{
+			eggsCollected[index] = true;
+		}
+
+		public bool IsEggCollected(int index)
+		{
+			if (index < eggsCollected.Length)
+			{
+				return eggsCollected[index];
+			}
+			return false;
+		}
+
+		public bool[] GetEggsCollected()
+		{
+			return eggsCollected;
 		}
 	}
 }
